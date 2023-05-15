@@ -18,7 +18,7 @@ function App() {
 
   return (
 
-    <Text style={{backgroundColor: 'red'}}> hola  </Text> 
+    <Text style={{backgroundColor: 'blue'}}> hola  </Text> 
 
 )};
 
