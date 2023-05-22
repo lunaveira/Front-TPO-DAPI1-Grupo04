@@ -6,6 +6,10 @@ export default function Login({navigation}) {
       <Text>Login</Text>
       <Button title='atras' onPress={() => navigation.goBack()}></Button>
 
+      
+
+
+
       </View>
 
 
