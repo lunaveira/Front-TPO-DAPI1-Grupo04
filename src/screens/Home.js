@@ -1,5 +1,5 @@
 import { Text, Button, View, StyleSheet } from 'react-native';
-//import Botones from '../components/HomeButton';
+import HomeButton from '../components/HomeButton';
 
 
 export default function Home({navigation}) {
@@ -8,22 +8,25 @@ export default function Home({navigation}) {
   return (
     //tailwind.config.js
 
-
-    <View className='justify-center pt-60' >
-
-
-      <Text className='text-3xl text-center' >¿Querés comprar entradas?</Text>
+    // para hacer una pantalla scrolleable tengo q usar ScrollView
 
 
-      <Button color='#F01313' title='Continuar con Google' onPress={() => navigation.navigate({name:'Login'})}></Button>
+    <View className='justify-center pt-40 bg-gray-900 h-screen' >
 
 
-      <Text className='text-3xl text-center pt-10' >¿Tenes una sala de cine?</Text>
-
-      <Button color='#F01313' title='Iniciar sesion'></Button>
+      <Text className='text-3xl text-center text-white ' >¿Querés comprar entradas?</Text>
 
 
-      <Text className='text-xl text-center pt-10' >¿No tenes cuenta? Creala ahora</Text>
+      <HomeButton color='#FF3131' title='Continuar con Google' > </HomeButton>
+
+
+      <Text className='text-3xl text-center pt-10 text-white' >¿Tenes una sala de cine?</Text>
+  
+
+      <HomeButton color='#FF3131' title='Iniciar sesion' handler={()=>navigation.navigate({name:'Login'})}></HomeButton>
+
+
+      <Text className='text-xl text-center pt-10 text-white' >¿No tenes cuenta? Creala ahora</Text>
 
       
 
