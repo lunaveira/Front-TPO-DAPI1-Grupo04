@@ -14,7 +14,7 @@ export default function Login({navigation}) {
       </View>
 
       
-      <HomeButton title="Ingresar" handler={()=>navigation.navigate({name:'Main Owner'})} />
+      <HomeButton color='#FF3131' title="Ingresar" handler={()=>navigation.navigate({name:'Main Owner'})} />
 
       <TouchableOpacity onPress={() => navigation.navigate({name:'Forgot Password'})}>
       <Text className= "text-white mt-7 text-right "> ¿Olvidaste tu constraseña? </Text>
