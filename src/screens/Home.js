@@ -20,7 +20,7 @@ export default function Home({navigation}) {
       <Text className='text-3xl text-center text-white mx-2.5' >¿Querés comprar entradas?</Text>
 
 
-      <HomeButton color='#FFF' title='Continuar con Google' handler={() => authorize()}> </HomeButton>
+      <HomeButton color='#565656' title='Continuar con Google' handler={() => authorize()}> </HomeButton>
 
       { /*<Button onPress={() => authorize()} title="Log in" /> */ }
 
