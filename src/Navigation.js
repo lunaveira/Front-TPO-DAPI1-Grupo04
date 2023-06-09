@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 function MyTabs() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen options={{headerTintColor: 'red', headerStyle: { backgroundColor: 'tomato' }}} name="Home" component={Home} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Forgot Password" component={ForgotPassword} />
             <Stack.Screen name="Register" component={Register} />

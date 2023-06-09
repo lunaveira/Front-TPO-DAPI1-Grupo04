@@ -1,30 +1,59 @@
-import {Text, Button, View, TextInput, TouchableOpacity} from 'react-native'
+import { Text, Button, View, TextInput, TouchableOpacity } from 'react-native'
 import HomeButton from '../components/HomeButton';
-export default function Login({navigation}) {
-    return (
-     
+import { useState } from 'react';
 
-      <View className=" items-center bg-gray-900 h-screen">
-      <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-60 h-13 mx-2.5">
-        <TextInput className= "text-base text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white"/>
-      </View>
 
-      <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-10 h-13 mx-2.5">
-        <TextInput className= "text-base text-white text-center" placeholder="Ingresa tu contraseña" placeholderTextColor="white" />
-      </View>
+export default function Login({ navigation }) {
 
-      
-      <HomeButton color='#FF3131' title="Ingresar" handler={()=>navigation.navigate({name:'Main Owner'})} />
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-      <TouchableOpacity onPress={() => navigation.navigate({name:'Forgot Password'})}>
-      <Text className= "text-white mt-7 text-right "> ¿Olvidaste tu constraseña? </Text>
+  async function handleLogin() {
+
+    try {
+
+      const response = await fetch("/api/auths", { body: JSON.stringify({ email, password }), headers: { 'Content-Type': 'application/json' }, method: "POST" })
+
+      const json = await response.json()
+
+      console.log(json)
+    }
+
+    catch(err) {
+
+      console.log(err)
+
+    }
+
+
+  }
+
+
+  return (
+
+
+    <View className=" items-center bg-gray-900 h-screen">
+
+      <TextInput value={email} onChangeText={(text) => setEmail(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-10 h-13 mx-2.5 text-base text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white" />
+
+
+
+      <TextInput secureTextEntry value={password} onChangeText={(text) => setPassword(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-10 h-13 mx-2.5 text-base text-white text-center" placeholder="Ingresa tu contraseña" placeholderTextColor="white" />
+
+
+      <HomeButton color='#FF3131' title="Ingresar" handler={handleLogin} />
+
+      <Button onPress={() => navigation.navigate({ name: 'Main Owner' })} title='prueba'></Button>
+
+      <TouchableOpacity onPress={() => navigation.navigate({ name: 'Forgot Password' })}>
+        <Text className="text-white mt-7 text-right "> ¿Olvidaste tu constraseña? </Text>
       </TouchableOpacity>
 
 
-      
+
     </View>
 
 
-   
+
   );
 }
