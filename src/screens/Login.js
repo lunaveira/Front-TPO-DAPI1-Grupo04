@@ -1,6 +1,8 @@
 import { Text, Button, View, TextInput, TouchableOpacity } from 'react-native'
 import HomeButton from '../components/HomeButton';
 import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 export default function Login({ navigation }) {
