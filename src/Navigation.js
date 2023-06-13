@@ -7,6 +7,7 @@ import ForgotPassword from './screens/ForgotPassword';
 import Register from './screens/Register';
 import MainPageOwner from './screens/MainPageOwner';
 import CreateNewBranch from './screens/CreateNewBranch';
+import CreateNewBranch2 from './screens/CreateNewBranch2';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ function MyTabs() {
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Main Owner" component={MainPageOwner} />
             <Stack.Screen name="Create Branch" component={CreateNewBranch} />
+            <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
 
         </Stack.Navigator>
     );
