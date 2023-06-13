@@ -1,4 +1,4 @@
-import { Text, Button, View, TouchableOpacity } from 'react-native';
+import { Text, Button, View, TouchableOpacity, Image } from 'react-native';
 import HomeButton from '../components/HomeButton';
 import {useAuth0} from 'react-native-auth0';
 
@@ -19,8 +19,16 @@ export default function Home({navigation}) {
 
       <Text className='text-3xl text-center text-white mx-2.5' >¿Querés comprar entradas?</Text>
 
+      
 
-      <HomeButton color='#565656' title='Continuar con Google' handler={() => authorize()}> </HomeButton>
+      
+
+      <HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
+      color='#565656' title='Continuar con Google' handler={() => authorize()}> 
+     
+       </HomeButton>
+
+    
 
       { /*<Button onPress={() => authorize()} title="Log in" /> */ }
 

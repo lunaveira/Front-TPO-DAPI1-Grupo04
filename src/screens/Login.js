@@ -1,4 +1,4 @@
-import { Text, Button, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, Button, View, TextInput, TouchableOpacity, Alert } from 'react-native'
 import HomeButton from '../components/HomeButton';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,17 +19,7 @@ export default function Login({ navigation }) {
     }
   };
 
-  const checkToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem('@token');
-      if (token) {
-        // Hay un token almacenado, navegar a la página de Main Owner
-        navigation.navigate('Main Owner');
-      }
-    } catch (e) {
-      // error al leer el token
-    }
-  };
+
 
   async function handleLogin() {
     try {
@@ -54,6 +44,14 @@ export default function Login({ navigation }) {
       } else {
         // Manejar el caso cuando las credenciales son inválidas
         console.log('Credenciales inválidas');
+        Alert.alert('Ingreso inválido', 'El email o la constraseña son incorrectos', [
+          // {
+          //   text: 'Cancel',
+          //   onPress: () => console.log('Cancel Pressed'),
+          //   style: 'cancel',
+          // },
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]);
       }
 
     } catch (err) {
@@ -74,11 +72,13 @@ export default function Login({ navigation }) {
 
       <HomeButton color='#FF3131' title="Ingresar" handler={handleLogin} />
 
-      <Button onPress={() => navigation.navigate({ name: 'Main Owner' })} title='prueba'></Button>
-
+      
       <TouchableOpacity onPress={() => navigation.navigate({ name: 'Forgot Password' })}>
         <Text className="text-white mt-7 text-right "> ¿Olvidaste tu contraseña? </Text>
       </TouchableOpacity>
+
+
+      <Button title= 'logout' onPress={() => navigation.navigate({ name: 'Logout' })} > </Button>
 
 
 
