@@ -10,43 +10,55 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  async function handleLogin() {
-
+ 
+  const storeData = async (value) => {
     try {
+      await AsyncStorage.setItem('@token', value);
+    } catch (e) {
+      // error al guardar
+    }
+  };
 
-      console.log(email)
-      console.log(password)
+  const checkToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      if (token) {
+        // Hay un token almacenado, navegar a la página de Main Owner
+        navigation.navigate('Main Owner');
+      }
+    } catch (e) {
+      // error al leer el token
+    }
+  };
 
-      const response = await fetch("https://backendmobile-production.up.railway.app/api/auths", 
-      { body: JSON.stringify({ email, password }), 
-      headers: { 'Content-Type': 'application/json' }, method: "POST" })
+  async function handleLogin() {
+    try {
+      console.log(email);
+      console.log(password);
 
-      const json = await response.json()
+      const response = await fetch("https://backendmobile-production.up.railway.app/api/auths", {
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        method: "POST"
+      });
 
-      console.log(json)
+      const json = await response.json();
+      console.log(json);
 
-      const storeData = async (value) => {
-        try {
-          await AsyncStorage.setItem('@token', json.token)
-        } catch (e) {
-          // saving error
-        }
+      if (json.token) {
+        // Guardar el token utilizando AsyncStorage
+        await storeData(json.token);
+
+        // Navegar a la página de Main Owner
+        navigation.navigate('Main Owner');
+      } else {
+        // Manejar el caso cuando las credenciales son inválidas
+        console.log('Credenciales inválidas');
       }
 
-
-     
-
-
-
+    } catch (err) {
+      console.log(err);
     }
-
-    catch(err) {
-
-      console.log(err)
-
-    }
-
-
   }
 
   return (
