@@ -4,7 +4,7 @@ import { Text, Pressable, View  } from 'react-native';
 export default function HomeButton(props) {
     
     return (
-      <Pressable style={{backgroundColor: props.color, width: props.icon && 270, 
+      <Pressable style={{backgroundColor: props.color, width: props.icon && 300, 
         height: props.icon && 65, justifyContent: props.icon && 'center', flexDirection: props.icon && 'row',
         }} className="p-4 rounded-lg mx-28 mt-2 h-14 justify-center"  
       onPress={() => props.handler()}>

@@ -11,6 +11,7 @@ import CreateNewBranch2 from './screens/CreateNewBranch2';
 import Logout from './screens/Logout';
 import ProfileLogo from './components/ProfileLogo'
 import MovieLogo from './components/MovieLogo'
+import OwnerProfile from './screens/OwnerProfile'
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ function MyTabs() {
             <Stack.Screen name="Create Branch" component={CreateNewBranch} />
             <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
             <Stack.Screen name="Logout" component={Logout} />
+            <Stack.Screen name="Owner Profile" component={OwnerProfile} />
 
         </Stack.Navigator>
     );

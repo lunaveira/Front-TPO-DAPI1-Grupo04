@@ -13,13 +13,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const MovieLogo = () => {
+export default function MovieLogo({ navigation }) {
   return (
     <View style={styles.container}>
     
-    <Image className='h-11 w-11 mt-2'source={require('../images/MovieIcon.png')}/>
+    <Image  className='h-11 w-11 mt-2'source={require('../images/MovieIcon.png')}/>
     </View>
   );
 };
 
-export default MovieLogo;

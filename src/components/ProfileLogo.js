@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -13,13 +15,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const ProfileLogo = () => {
+
+
+
+export default function ProfileLogo() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-    
+    <TouchableOpacity onPress={() => navigation.navigate({ name: 'Owner Profile' })}>
     <Image className='h-11 w-11 mt-2'source={require('../images/ProfileIcon.png')}/>
+    
+    </TouchableOpacity>
     </View>
   );
+  
 };
 
-export default ProfileLogo;
+
