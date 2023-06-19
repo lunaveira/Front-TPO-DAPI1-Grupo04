@@ -8,10 +8,10 @@ import Register from './screens/Register';
 import MainPageOwner from './screens/MainPageOwner';
 import CreateNewBranch from './screens/CreateNewBranch';
 import CreateNewBranch2 from './screens/CreateNewBranch2';
-import Logout from './screens/Logout';
 import ProfileLogo from './components/ProfileLogo'
 import MovieLogo from './components/MovieLogo'
 import OwnerProfile from './screens/OwnerProfile'
+import CinemaRooms from "./screens/CinemaRooms"
 
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +26,8 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Main Owner" component={MainPageOwner} />
             <Stack.Screen name="Create Branch" component={CreateNewBranch} />
             <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
-            <Stack.Screen name="Logout" component={Logout} />
             <Stack.Screen name="Owner Profile" component={OwnerProfile} />
+            <Stack.Screen name="Cinema Rooms" component={CinemaRooms} /> 
 
         </Stack.Navigator>
     );

@@ -1,26 +1,68 @@
-import {View, Text, TextInput} from 'react-native'
-import HomeButton from '../components/HomeButton';
-import ImageUploader from '../components/ImageUploader';
+import React, { useState } from "react";
+import { View, TextInput, Button } from "react-native";
 
+export default function CreateNewBranch2({ navigation }) {
+  const [functionPrice, setFunctionPrice] = useState("");
+  const [isTemporarilyClosed, setIsTemporarilyClosed] = useState("");
 
-export default function CreateNewBranch2({navigation}) {
+  const handleCreateBranch2 = async () => {
+    try {
+      const response = await fetch("https://backendmobile-production.up.railway.app/api/cinema/:id_cinema/branches", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          precio: functionPrice,
+          cerrado: isTemporarilyClosed,
+        }),
+      });
 
-    return (
-        <View className=" items-center bg-gray-900 h-screen"> 
+      if (response.status === 200) {
+        // La sucursal se creó exitosamente
+        navigation.navigate("Home");
+      } else {
+        console.error("Error al crear la sucursal");
+      }
+    } catch (error) {
+      console.error("Error al conectarse con el servidor:", error);
+    }
+  };
 
-        <TextInput className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
-        h-13 mx-2.5 text-base text-white text-center" 
-        placeholder="Precio de la funcion" placeholderTextColor="white" />
+  return (
+    <View className="items-center bg-gray-900 h-screen">
+      <TextInput
+        style={styles.input}
+        value={functionPrice}
+        onChangeText={setFunctionPrice}
+        placeholder="Precio de la función"
+        placeholderTextColor="white"
+      />
 
-        <TextInput className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center" 
-        placeholder="Cerrado temporalmente / tiene q ser dropdown" placeholderTextColor="white" />
+      <TextInput
+        style={styles.input}
+        value={isTemporarilyClosed}
+        onChangeText={setIsTemporarilyClosed}
+        placeholder="Cerrado temporalmente"
+        placeholderTextColor="white"
+      />
 
-
-        <ImageUploader />
-
-           
-        </View>
-    );
-
+      <Button onPress={handleCreateBranch2} title="Guardar" />
+    </View>
+  );
 }
+
+const styles = {
+  input: {
+    borderWidth: 2,
+    borderColor: "white",
+    borderRadius: 8,
+    padding: 8,
+    marginBottom: 12,
+    width: 320,
+    height: 40,
+    fontSize: 16,
+    color: "white",
+    textAlign: "center",
+  },
+};

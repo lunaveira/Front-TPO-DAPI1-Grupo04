@@ -21,7 +21,7 @@ const renderItem = ({ item }) => {
   );
 };
 
-const GridScreen = () => {
+const FlatlistMovies = () => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GridScreen;
+export default FlatlistMovies;

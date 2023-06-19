@@ -1,11 +1,13 @@
-import {View, Text} from 'react-native'
+import {View, Text, Button} from 'react-native'
 import HomeButton from '../components/HomeButton';
-import GridScreen from '../components/FlatlistMovies'
+import FlatlistMovies from '../components/FlatlistMovies';
 
 export default function MainPageOwner({navigation}) {
 
     return (
         <View className=" items-center bg-gray-900 h-screen"> 
+
+        <Button title='salas' onPress={() => navigation.navigate({ name: 'Cinema Rooms' })}> </Button>
          
 
             <Text className="text-white mt-20 text-base"> ¿Querés crear una nueva sucursal?</Text>
@@ -13,7 +15,9 @@ export default function MainPageOwner({navigation}) {
 
             <Text className="text-white mt-7 text-base"> Tus sucursales </Text>
 
-            <GridScreen />
+            <FlatlistMovies />
+
+            
         </View>
     );
 

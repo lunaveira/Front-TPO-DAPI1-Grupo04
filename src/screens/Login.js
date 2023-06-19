@@ -78,7 +78,7 @@ export default function Login({ navigation }) {
       </TouchableOpacity>
 
 
-      <Button title= 'logout' onPress={() => navigation.navigate({ name: 'Logout' })} > </Button>
+      
 
 
 
