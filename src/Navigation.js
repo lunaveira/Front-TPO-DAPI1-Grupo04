@@ -12,6 +12,8 @@ import ProfileLogo from './components/ProfileLogo'
 import MovieLogo from './components/MovieLogo'
 import OwnerProfile from './screens/OwnerProfile'
 import CinemaRooms from "./screens/CinemaRooms"
+import CinemaRoomDetail from './screens/CinemaRoomDetail';
+import EditCinemaRoom from './screens/EditCinemaRoom';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,8 @@ function MyTabs() {
             <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
             <Stack.Screen name="Owner Profile" component={OwnerProfile} />
             <Stack.Screen name="Cinema Rooms" component={CinemaRooms} /> 
+            <Stack.Screen name="Cinema Room Detail" component={CinemaRoomDetail} />
+            <Stack.Screen name="Edit Cinema Room" component={EditCinemaRoom} />
 
         </Stack.Navigator>
     );
