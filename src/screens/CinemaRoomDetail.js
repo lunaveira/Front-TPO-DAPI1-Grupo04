@@ -11,16 +11,20 @@ export default function CinemaRoomDetail() {
         navigation.navigate("Edit Cinema Room");
     };
 
+    const handlerFunciones= () => {
+        navigation.navigate("Functions");
+    };
+
     return (
 
         <View className=" items-center bg-gray-900 h-screen">
 
             <View className="items-center bg-red-400 w-80 h-20 mt-28 rounded-lg ">
-                <Text className="text-white text-xl mt-4"> Cantidad de filas: </Text>
+                <Text className="text-white text-center text-xl mt-4"> Cantidad de filas: </Text>
             </View>
 
             <View className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5 ">
-                <Text className="text-white text-xl mt-4"> Cantidad de columnas: </Text>
+                <Text className="text-white text-center text-xl mt-4"> Cantidad de columnas: </Text>
             </View>
 
 
@@ -31,6 +35,12 @@ export default function CinemaRoomDetail() {
             <View className="mb-5 mt-5">
             <HomeButton color='#FF3131' title="Eliminar sala"   />
             </View>
+
+            <View className="mb-5 mt-5">
+            <HomeButton color='#FF3131' title="Ver funciones" handler={handlerFunciones}  />
+            </View>
+
+
 
 
         </View>

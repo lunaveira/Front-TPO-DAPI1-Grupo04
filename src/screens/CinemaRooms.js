@@ -1,7 +1,15 @@
 import { View, Text, Button } from "react-native";
 import ListCinemaRoom from "../components/ListCinemaRoom";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CinemaRooms() {
+
+    const navigation = useNavigation();
+
+    const handlePress = () => {
+        navigation.navigate("Cinema Room Detail");
+    };
+
     return (
 
         <View className=" items-center bg-gray-900 h-screen">
@@ -16,7 +24,7 @@ export default function CinemaRooms() {
 
             <Text className="text-center text-lg text-white mt-5"> Tus salas </Text>
 
-            <ListCinemaRoom /> 
+            <ListCinemaRoom title="sala 1" handler={handlePress}/> 
 
 
 

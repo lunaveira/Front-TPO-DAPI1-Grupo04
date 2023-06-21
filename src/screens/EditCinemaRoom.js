@@ -1,26 +1,25 @@
-import { View, Text} from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { View, Text, TextInput} from "react-native";
+
+import HomeButton from "../components/HomeButton";
 
 export default function EditCinemaRoom() {
     return (
 
         <View className=" items-center bg-gray-900 h-screen">
 
-            <TextInput className="items-center bg-red-400 w-80 h-20 mt-28 rounded-lg ">
-                <Text className="text-white text-xl mt-4"> Cantidad de filas: </Text>
+            <TextInput className=" text-lg text-center text-white bg-red-400 w-80 h-20 mt-28 rounded-lg " placeholder="Cantidad de filas" placeholderTextColor={"white"}>
+                
             </TextInput>
 
-            <TextInput className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5 ">
-                <Text className="text-white text-xl mt-4"> Cantidad de columnas: </Text>
+            <TextInput className="text-lg text-center text-white bg-red-400 w-80 h-20 rounded-lg mt-5 " placeholder="Cantidad de columnas" placeholderTextColor={"white"}>
+              
             </TextInput>
 
 
 
+           
             <View className="mb-5 mt-5">
-                <HomeButton color='#FF3131' title="Editar sala" handler={handlerEdit} />
-            </View>
-            <View className="mb-5 mt-5">
-                <HomeButton color='#FF3131' title="Eliminar sala" />
+                <HomeButton color='#FF3131' title="Guardar" />
             </View>
 
 
