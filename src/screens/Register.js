@@ -1,13 +1,13 @@
 import {View, Text, TextInput, TouchableOpacity} from 'react-native'
 import { useState } from 'react';
 import HomeButton from '../components/HomeButton';
-import ImageUploader from '../components/ImageUploader';
+
 
 export default function Register({ navigation }) {
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [image, setImage] = useState('');
+ 
 
   async function handleRegister() {
     try {
@@ -17,7 +17,7 @@ export default function Register({ navigation }) {
 
     
       const response = await fetch("https://backendmobile-production.up.railway.app/api/users", {
-        body: JSON.stringify({ company, email, password, image }),
+        body: JSON.stringify({ company, email, password }),
         headers: { 'Content-Type': 'application/json' },
         method: "POST"
       });
@@ -46,7 +46,7 @@ export default function Register({ navigation }) {
     
         <TextInput secureTextEntry value={password} onChangeText={(text) => setPassword(text)} className= "border-white bg-slate-700 border-2 rounded-lg p-2 mb-5 w-96 mt-5 h-12 mx-2.5 text-lg text-white text-center" placeholder="Ingresa tu contraseña" placeholderTextColor="white" />
 
-        <ImageUploader />
+     
        
 
       <HomeButton color='#FF3131' title="Registrarse" handler={handleRegister} />
