@@ -1,28 +1,44 @@
-import { View, Text, Button} from "react-native";
-import ListCinemaRoom from "../components/ListCinemaRoom";
-import HomeButton from "../components/HomeButton";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button } from 'react-native';
 
+const Functions = () => {
+  const [data, setData] = useState(null);
 
-export default function Functions() {
-    const navigation = useNavigation();
-
-    const handlePress = () => {
-        navigation.navigate("Functions Detail");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://backendmobile-production.up.railway.app/api/functions/:idSala'); 
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    return(
+    fetchData();
+  }, []);
 
-        <View className=" items-center bg-gray-900 h-screen">
+  const handlePress = () => {
+    // Navegar a la página de detalle de funciones
+  };
 
-            <Text className="text-white mt-10 text-lg"> Funciones </Text>
+  return (
+    <View className=" items-center bg-gray-900 h-screen">
+      <Text className="text-white mt-10 text-lg">Funciones</Text>
+      <Button title="Crear función" onPress={() => navigation.navigate({ name: 'Create Function' })} />
 
-            <Button title="Crear funcion" onPress={() => navigation.navigate({ name: 'Create Function' })} />
-
-            <ListCinemaRoom title="funcion 1" handler={handlePress}/>
-
-           
-
+      {data && (
+        <View>
+          {data.sala.map((sala) => (
+            <Text key={sala.id}>Sala: {sala.nombre}</Text>
+          ))}
+          {data.funciones.map((funcion) => (
+            <Text key={funcion.id}>Función: {funcion.nombre}</Text>
+          ))}
         </View>
-    );
-}
+      )}
+    </View>
+  );
+};
+
+export default Functions;

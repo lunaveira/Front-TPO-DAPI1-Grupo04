@@ -1,6 +1,7 @@
-import {View, Text, TextInput, Button} from 'react-native'
+import {View, Text, TextInput, Button, Image} from 'react-native'
 import HomeButton from '../components/HomeButton';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { launchImageLibrary } from 'react-native-image-picker';
 
 
 export default function CreateNewBranch({navigation}) {
@@ -11,6 +12,11 @@ export default function CreateNewBranch({navigation}) {
     const [location, setLocation] = useState("");
     const [street, setStreet] = useState("");
     const [streetNumber, setStreetNumber] = useState("");
+    const [photo64, setPhoto64] = useState("");
+
+  
+  
+
   
     const handleCreateBranch = async () => {
       try {
@@ -77,6 +83,10 @@ export default function CreateNewBranch({navigation}) {
         onChangeText={setStreetNumber} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center" 
         placeholder="Altura" placeholderTextColor="white" />
+
+        <Button title="cargar imagen" onPress={() => launchImageLibrary({mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true}).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
+
+        <Image source={photo64}  />
 
         <Button onPress={() => navigation.navigate({ name: 'Create Branch 2' })} title='Siguiente'></Button>
 

@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import ListCinemaRoom from "../components/ListCinemaRoom";
+import { View, Text } from "react-native";
 import HomeButton from "../components/HomeButton";
 import { useNavigation } from "@react-navigation/native";
+
 
 export default function FunctionDetail() {
 
@@ -15,14 +15,39 @@ export default function FunctionDetail() {
 
         <View className=" items-center bg-gray-900 h-screen">
 
-            <ListCinemaRoom title="Nombre pelicula"/>
+            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+                <Text className="text-white">Titulo</Text>
 
-            <ListCinemaRoom title="Sala"/>
+            </View>
 
-            <ListCinemaRoom title="Duracion"/>
+            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+                <Text className="text-white">Genero</Text>
 
-            <HomeButton color='#FF3131' title="Editar" handler={handlerEdit}/>
-            <HomeButton color='#FF3131' title="Eliminar"/>
+            </View>
+
+            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+                <Text className="text-white">Duracion</Text>
+
+            </View>
+
+            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+                <Text className="text-white">Sinopsis</Text>
+
+            </View>
+
+           
+
+            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+                <Text className="text-white">Agregar imagen</Text>
+
+            </View>
+
+
+
+
+
+            <HomeButton color='#FF3131' title="Editar" handler={handlerEdit} />
+            <HomeButton color='#FF3131' title="Eliminar" />
 
         </View>
     );
