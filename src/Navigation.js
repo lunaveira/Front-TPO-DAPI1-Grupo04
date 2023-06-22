@@ -17,6 +17,8 @@ import EditCinemaRoom from './screens/EditCinemaRoom';
 import Functions from './screens/Functions';
 import FunctionsDetail from './screens/FunctionsDetail';
 import EditFunctions from './screens/EditFunctions';
+import CreateCinemaRoom from './screens/CreateCinemaRoom';
+import CreateFunction from './screens/CreateFunction';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,8 @@ function MyTabs() {
             <Stack.Screen name="Functions" component={Functions} />
             <Stack.Screen name="Functions Detail" component={FunctionsDetail} />
             <Stack.Screen name="Edit Function" component={EditFunctions} />
+            <Stack.Screen name="Create Cinema Room" component={CreateCinemaRoom} />
+            <Stack.Screen name="Create Function" component={CreateFunction} />
 
         </Stack.Navigator>
     );

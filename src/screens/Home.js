@@ -21,12 +21,14 @@ export default function Home({navigation}) {
 
       
 
-      
+      <View className="items-center">
 
       <HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
       color='#565656' title='Continuar con Google' handler={() => authorize()}> 
      
        </HomeButton>
+
+       </View>
 
     
 

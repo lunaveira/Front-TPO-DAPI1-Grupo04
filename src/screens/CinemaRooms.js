@@ -20,7 +20,7 @@ export default function CinemaRooms() {
 
             <Text className="text-white mt-5"> ACA VA EL NOMBRE DE LA SUCURSAL EN LA Q ESTAS</Text>
 
-            <Button title="Crear sala"></Button>
+            <Button title="Crear sala" onPress={() => navigation.navigate({ name: 'Create Cinema Room' })}></Button>
 
             <Text className="text-center text-lg text-white mt-5"> Tus salas </Text>
 
