@@ -1,6 +1,7 @@
 import { Text, Button, View, TouchableOpacity, Image } from 'react-native';
 import HomeButton from '../components/HomeButton';
 import {useAuth0} from 'react-native-auth0';
+import{ ScrollView } from 'react-native';
 
 
 export default function Home({navigation}) {
@@ -14,7 +15,8 @@ export default function Home({navigation}) {
     // para hacer una pantalla scrolleable tengo q usar ScrollView
 
 
-    <View className='justify-center pt-40 bg-gray-900 h-screen' >
+    <ScrollView className='py-5 bg-gray-900 ' >
+      
 
 
       <Text className='text-3xl text-center text-white mx-2.5' >¿Querés comprar entradas?</Text>
@@ -44,13 +46,13 @@ export default function Home({navigation}) {
 
 
 
-      <TouchableOpacity onPress={() => navigation.navigate({name:'Register'})}>
+      <TouchableOpacity className='mb-20' onPress={() => navigation.navigate({name:'Register'})}>
         <Text className='text-xl text-center pt-10 text-white' >¿No tenes cuenta? Creala ahora</Text>
       </TouchableOpacity>
 
       
 
-    </View>
+    </ScrollView>
 
 
   );

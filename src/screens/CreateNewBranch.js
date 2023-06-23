@@ -2,6 +2,7 @@ import {View, Text, TextInput, Button, Image} from 'react-native'
 import HomeButton from '../components/HomeButton';
 import React, { useEffect, useState } from "react";
 import { launchImageLibrary } from 'react-native-image-picker';
+import { ScrollView } from 'react-native';
 
 
 export default function CreateNewBranch({navigation}) {
@@ -13,6 +14,12 @@ export default function CreateNewBranch({navigation}) {
     const [street, setStreet] = useState("");
     const [streetNumber, setStreetNumber] = useState("");
     const [photo64, setPhoto64] = useState("");
+    const [functionPrice, setFunctionPrice]= useState(0);
+    const [isTemporarilyClosed, setIsTemporarilyClosed]= useState(false);
+
+    /*value={isTemporarilyClosed}
+        onChangeText={setIsTemporarilyClosed}*/
+ 
 
   
   
@@ -32,6 +39,9 @@ export default function CreateNewBranch({navigation}) {
             localidad: location,
             calle: street,
             altura: streetNumber,
+            imagen: photo64.base64,
+            precio_por_funcion: functionPrice,
+            cerrado_temporalmente:isTemporarilyClosed
           }),
         });
   
@@ -51,7 +61,7 @@ export default function CreateNewBranch({navigation}) {
   
 
     return (
-        <View className=" items-center bg-gray-900 h-screen"> 
+      <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{alignItems:'center',justifyContent:'center'}}>
           
 
         <TextInput value={branchName}
@@ -84,14 +94,31 @@ export default function CreateNewBranch({navigation}) {
         h-13 mx-2.5 text-base text-white text-center" 
         placeholder="Altura" placeholderTextColor="white" />
 
+        <TextInput
+        value={functionPrice}
+        onChangeText={setFunctionPrice}
+        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
+        h-13 mx-2.5 text-base text-white text-center"
+        placeholder="Precio de la función"
+        placeholderTextColor="white"/>
+
+        <TextInput
+        value={isTemporarilyClosed}
+        onChangeText={setIsTemporarilyClosed}
+        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
+        h-13 mx-2.5 text-base text-white text-center"
+        placeholder="Cerrado temporalmente"
+        placeholderTextColor="white"/>
+
+
         <Button title="cargar imagen" onPress={() => launchImageLibrary({mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true}).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
 
         <Image source={photo64}  />
 
-        <Button onPress={() => navigation.navigate({ name: 'Create Branch 2' })} title='Siguiente'></Button>
+        <Button onPress={ handleCreateBranch } title='Siguiente'></Button>
 
            
-        </View>
+        </ScrollView>
     );
 
 }
