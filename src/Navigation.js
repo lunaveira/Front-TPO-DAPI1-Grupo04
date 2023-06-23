@@ -25,23 +25,48 @@ const Stack = createNativeStackNavigator();
 function MyTabs() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{headerTintColor: 'red', headerStyle: { backgroundColor: 'tomato' }}} name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Forgot Password" component={ForgotPassword} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen options={{headerBackVisible: false, headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+            <Stack.Screen options={{headerStyle: { backgroundColor: '#111827' }, headerTitleStyle: {color: '#111827'}}} name="Home" component={Home} />
+
+            <Stack.Screen options={{headerTitleStyle: {color: '#111827'}, headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827'}, headerTitleAlign: 'center'}} name="Login" component={Login} />
+
+            <Stack.Screen options={{headerTitleStyle: {color: '#111827'}, headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827'}, headerTitleAlign: 'center'}} name="Forgot Password" component={ForgotPassword} />
+
+            <Stack.Screen options={{headerTitleStyle: {color: '#111827'}, headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827'}, headerTitleAlign: 'center'}} name="Register" component={Register} />
+
+            <Stack.Screen options={{headerBackVisible: false, headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827'}, 
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Main Owner" component={MainPageOwner} />
-            <Stack.Screen name="Create Branch" component={CreateNewBranch} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Create Branch" component={CreateNewBranch} />
+
             <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
-            <Stack.Screen name="Owner Profile" component={OwnerProfile} />
-            <Stack.Screen name="Cinema Rooms" component={CinemaRooms} /> 
-            <Stack.Screen name="Cinema Room Detail" component={CinemaRoomDetail} />
-            <Stack.Screen name="Edit Cinema Room" component={EditCinemaRoom} />
-            <Stack.Screen name="Functions" component={Functions} />
-            <Stack.Screen name="Functions Detail" component={FunctionsDetail} />
-            <Stack.Screen name="Edit Function" component={EditFunctions} />
-            <Stack.Screen name="Create Cinema Room" component={CreateCinemaRoom} />
-            <Stack.Screen name="Create Function" component={CreateFunction} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Owner Profile" component={OwnerProfile} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Cinema Rooms" component={CinemaRooms} /> 
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Cinema Room Detail" component={CinemaRoomDetail} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Edit Cinema Room" component={EditCinemaRoom} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Functions" component={Functions} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Functions Detail" component={FunctionsDetail} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Edit Function" component={EditFunctions} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Create Cinema Room" component={CreateCinemaRoom} />
+
+            <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Create Function" component={CreateFunction} />
 
         </Stack.Navigator>
     );
