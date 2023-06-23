@@ -3,6 +3,8 @@ import HomeButton from '../components/HomeButton';
 import {useAuth0} from 'react-native-auth0';
 import{ ScrollView } from 'react-native';
 
+import CineapisLogo from '../components/CineapisLogo';
+
 
 export default function Home({navigation}) {
 
@@ -14,8 +16,14 @@ export default function Home({navigation}) {
 
     // para hacer una pantalla scrolleable tengo q usar ScrollView
 
+    
+
 
     <ScrollView className='py-5 bg-gray-900 ' >
+
+      <CineapisLogo />
+
+      
       
 
 
