@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, Button } from 'react-native';
 
 const data = [
   { id: 1, title: 'Hoyts Caballito' },
@@ -15,21 +15,22 @@ const screenWidth = Dimensions.get('window').width;
 
 const renderItem = ({ item }) => {
   return (
-    <View style={styles.gridItem}>
-      <Text>{item.title}</Text>
-    </View>
+    <Button title='prueba'onPress={() => navigation.navigate({ name: 'Cinema Rooms' })} style={styles.gridItem}>
+      <Text>{item.calle}</Text>
+    </Button>
   );
 };
 
-const FlatlistMovies = () => {
+const FlatlistMovies = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={props.branches}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         numColumns={numColumns}
         contentContainerStyle={styles.contentContainer}
+        
       />
     </View>
   );

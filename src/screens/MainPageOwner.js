@@ -1,11 +1,13 @@
 import { View, Text, Button } from 'react-native'
 import HomeButton from '../components/HomeButton';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import FlatlistMovies from '../components/FlatlistMovies';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { atob } from 'react-native-quick-base64';
 
 export default function MainPageOwner({ navigation }) {
+
+  const [branches, setBranches] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -13,10 +15,10 @@ export default function MainPageOwner({ navigation }) {
             const token = await AsyncStorage.getItem('@token')
             const idSocio = JSON.parse(atob(token.split('.')[1]))
             console.log(idSocio)
-            return 
-            const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${idSocio}/branches`);
+            const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${idSocio.user.id}/branches`);
             const result = await response.json();
-            setData(result.funciones);
+            console.log(result.sucursal)
+            setBranches(result.sucursal);
           } catch (error) {
             console.error(error);
           }
@@ -42,7 +44,7 @@ export default function MainPageOwner({ navigation }) {
 
             <Text className="text-white mt-7 text-base"> Tus sucursales </Text>
 
-            <FlatlistMovies />
+            <FlatlistMovies branches={branches}/>
 
             
 
