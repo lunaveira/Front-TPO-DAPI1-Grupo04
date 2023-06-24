@@ -19,7 +19,7 @@ import FunctionsDetail from './screens/FunctionsDetail';
 import EditFunctions from './screens/EditFunctions';
 import CreateCinemaRoom from './screens/CreateCinemaRoom';
 import CreateFunction from './screens/CreateFunction';
-import Branches from './screens/Branches';
+import BranchesDetail from './screens/BranchesDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,7 +69,7 @@ function MyTabs() {
             <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Create Function" component={CreateFunction} />
 
-            <Stack.Screen name='Branches' component={Branches} />
+            <Stack.Screen name='Branches Detail' component={BranchesDetail} />
 
         </Stack.Navigator>
     );

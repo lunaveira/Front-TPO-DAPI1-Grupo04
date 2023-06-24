@@ -1,27 +1,23 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, Button } from 'react-native';
-
-const data = [
-  { id: 1, title: 'Hoyts Caballito' },
-  { id: 2, title: 'Hoyts Palermo' },
-  { id: 3, title: 'Hoyts Devoto' },
-  { id: 3, title: 'Hoyts Avellaneda' },
-  // Agrega más elementos aquí
-];
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const numColumns = 2;
-const screenWidth = Dimensions.get('window').width;
 
-
-const renderItem = ({ item }) => {
-  return (
-    <Button title='prueba'onPress={() => navigation.navigate({ name: 'Cinema Rooms' })} style={styles.gridItem}>
-      <Text>{item.calle}</Text>
-    </Button>
-  );
-};
 
 const FlatlistMovies = (props) => {
+  const navigation = useNavigation();
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate('Branches Detail')}>
+        <View style={styles.gridItem}>
+          <Text>{item.calle}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -30,7 +26,6 @@ const FlatlistMovies = (props) => {
         keyExtractor={(item) => item.id.toString()}
         numColumns={numColumns}
         contentContainerStyle={styles.contentContainer}
-        
       />
     </View>
   );
@@ -45,7 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   gridItem: {
-   
     marginVertical: 10,
     padding: 10,
     backgroundColor: 'lightgray',
@@ -53,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 20,
     height: 150,
-    width: 140
+    width: 140,
   },
 });
 

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-export default function Branches() {
+export default function BranchesDetail() {
     return(
 
         <View></View>
