@@ -7,7 +7,6 @@ import ForgotPassword from './screens/ForgotPassword';
 import Register from './screens/Register';
 import MainPageOwner from './screens/MainPageOwner';
 import CreateNewBranch from './screens/CreateNewBranch';
-import CreateNewBranch2 from './screens/CreateNewBranch2';
 import ProfileLogo from './components/ProfileLogo'
 import MovieLogo from './components/MovieLogo'
 import OwnerProfile from './screens/OwnerProfile'
@@ -39,8 +38,7 @@ function MyTabs() {
 
             <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Create Branch" component={CreateNewBranch} />
-
-            <Stack.Screen name="Create Branch 2" component={CreateNewBranch2} />
+ 
 
             <Stack.Screen options={{headerTintColor: '#fff', headerRight: () => <ProfileLogo/>,headerStyle: { backgroundColor: '#111827' }, 
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'}} name="Owner Profile" component={OwnerProfile} />
