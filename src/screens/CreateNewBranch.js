@@ -30,7 +30,7 @@ export default function CreateNewBranch({ navigation }) {
       const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]))
       const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_encriptado}`,
         },
       });
       if (responseSocio.ok) {
@@ -49,8 +49,8 @@ export default function CreateNewBranch({ navigation }) {
             calle: street,
             altura: streetNumber,
             imagen: photo64.base64,
-            precio_por_funcion: functionPrice,
-            cerrado_temporalmente: isTemporarilyClosed
+            precio: functionPrice,
+            cerrado: Boolean(isTemporarilyClosed) 
           }),
         });
 
