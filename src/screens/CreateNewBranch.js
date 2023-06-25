@@ -16,6 +16,7 @@ export default function CreateNewBranch({navigation}) {
     const [photo64, setPhoto64] = useState("");
     const [functionPrice, setFunctionPrice]= useState(0);
     const [isTemporarilyClosed, setIsTemporarilyClosed]= useState(false);
+   
 
     /*value={isTemporarilyClosed}
         onChangeText={setIsTemporarilyClosed}*/

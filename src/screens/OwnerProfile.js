@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { atob } from 'react-native-quick-base64';
 
 export default function ProfileLogo({ navigation }) {
     const [nombreEmpresa, setNombreEmpresa] = useState("");
@@ -12,8 +13,10 @@ export default function ProfileLogo({ navigation }) {
 
     async function obtenerDatosSocio() {
         try {
+            const token_encriptado = await AsyncStorage.getItem('@token')
+            const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]))
             const token = await AsyncStorage.getItem("@token");
-            const responseSocio = await fetch("https://backendmobile-production.up.railway.app/api/socios/4", { // Reemplaza '1' con el ID del usuario actual
+            const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, { 
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, ScrollView } from 'react-native'
 import HomeButton from '../components/HomeButton';
 import { useEffect, useState } from 'react';
 import FlatlistMovies from '../components/FlatlistMovies';
@@ -32,7 +32,7 @@ export default function MainPageOwner({ navigation }) {
     }
 
     return (
-        <View className=" items-center bg-gray-900 h-screen">
+        <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
 
             <Button title='salas' onPress={() => navigation.navigate({ name: 'Cinema Rooms' })}> </Button>
 
@@ -49,7 +49,7 @@ export default function MainPageOwner({ navigation }) {
             
 
 
-        </View>
+        </ScrollView>
     );
 
 }

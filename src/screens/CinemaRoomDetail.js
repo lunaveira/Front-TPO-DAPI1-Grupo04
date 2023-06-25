@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import HomeButton from "../components/HomeButton";
 import { useNavigation } from "@react-navigation/native";
 
@@ -17,7 +17,7 @@ export default function CinemaRoomDetail() {
 
     return (
 
-        <View className=" items-center bg-gray-900 h-screen">
+        <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
 
             <View className="items-center bg-red-400 w-80 h-20 mt-28 rounded-lg ">
                 <Text className="text-white text-center text-xl mt-4"> Cantidad de filas: </Text>
@@ -43,7 +43,7 @@ export default function CinemaRoomDetail() {
 
 
 
-        </View>
+        </ScrollView>
 
 
     );
