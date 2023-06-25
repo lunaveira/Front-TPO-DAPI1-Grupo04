@@ -1,34 +1,42 @@
-import {View, Text, TextInput, Button, Image} from 'react-native'
+import { View, Text, TextInput, Button, Image } from 'react-native'
 import HomeButton from '../components/HomeButton';
 import React, { useEffect, useState } from "react";
 import { launchImageLibrary } from 'react-native-image-picker';
 import { ScrollView } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { atob } from 'react-native-quick-base64';
 
 
-export default function CreateNewBranch({navigation}) {
+export default function CreateNewBranch({ navigation }) {
 
-    const [branchName, setBranchName] = useState("");
-    const [country, setCountry] = useState("");
-    const [province, setProvince] = useState("");
-    const [location, setLocation] = useState("");
-    const [street, setStreet] = useState("");
-    const [streetNumber, setStreetNumber] = useState("");
-    const [photo64, setPhoto64] = useState("");
-    const [functionPrice, setFunctionPrice]= useState(0);
-    const [isTemporarilyClosed, setIsTemporarilyClosed]= useState(false);
-   
+  const [branchName, setBranchName] = useState("");
+  const [country, setCountry] = useState("");
+  const [province, setProvince] = useState("");
+  const [location, setLocation] = useState("");
+  const [street, setStreet] = useState("");
+  const [streetNumber, setStreetNumber] = useState("");
+  const [photo64, setPhoto64] = useState("");
+  const [functionPrice, setFunctionPrice] = useState(0);
+  const [isTemporarilyClosed, setIsTemporarilyClosed] = useState(false);
 
-    /*value={isTemporarilyClosed}
-        onChangeText={setIsTemporarilyClosed}*/
- 
 
-  
-  
+  /*value={isTemporarilyClosed}
+      onChangeText={setIsTemporarilyClosed}*/
 
-  
-    const handleCreateBranch = async () => {
-      try {
-        const response = await fetch("https://backendmobile-production.up.railway.app/api/cinema/:id_cinema/branches", {
+
+  const handleCreateBranch = async () => {
+    try {
+      const token_encriptado = await AsyncStorage.getItem('@token')
+      const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]))
+      const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (responseSocio.ok) {
+        const dataSocio = await responseSocio.json();
+        const socio = dataSocio.socio[0]; // Suponemos que el socio se encuentra en la primera posición del arreglo devuelto
+        const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${socio.id_empresa}/branches`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -42,10 +50,10 @@ export default function CreateNewBranch({navigation}) {
             altura: streetNumber,
             imagen: photo64.base64,
             precio_por_funcion: functionPrice,
-            cerrado_temporalmente:isTemporarilyClosed
+            cerrado_temporalmente: isTemporarilyClosed
           }),
         });
-  
+
         if (response.status === 200) {
           // La sucursal se creó exitosamente
           navigation.navigate("Create Branch 2");
@@ -55,71 +63,77 @@ export default function CreateNewBranch({navigation}) {
         } else {
           console.error("Error al crear la sucursal");
         }
-      } catch (error) {
-        console.error("Error al conectarse con el servidor:", error);
+
+      } else {
+        console.error("Error al obtener los datos del socio");
       }
-    };
-  
 
-    return (
-      <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{alignItems:'center',justifyContent:'center'}}>
-          
 
-        <TextInput value={branchName}
+    } catch (error) {
+      console.error("Error al conectarse con el servidor:", error);
+    }
+  };
+
+
+  return (
+    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+
+
+      <TextInput value={branchName}
         onChangeText={setBranchName} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 
-        mx-2.5 text-base text-white text-center " 
+        mx-2.5 text-base text-white text-center "
         placeholder="Nombre de la nueva sucursal" placeholderTextColor="white" />
 
-        <TextInput value={country}
+      <TextInput value={country}
         onChangeText={setCountry} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center" 
+        h-13 mx-2.5 text-base text-white text-center"
         placeholder="Pais / esto tiene q ser dropdown" placeholderTextColor="white" />
 
-        <TextInput value={province}
+      <TextInput value={province}
         onChangeText={setProvince} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
-        h-13 mx-2.5 text-base text-white text-center" 
+        h-13 mx-2.5 text-base text-white text-center"
         placeholder="Provincia / esto tiene q ser dropdown" placeholderTextColor="white" />
 
-        <TextInput value={location}
+      <TextInput value={location}
         onChangeText={setLocation} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
-        h-13 mx-2.5 text-base text-white text-center" 
+        h-13 mx-2.5 text-base text-white text-center"
         placeholder="Localidad" placeholderTextColor="white" />
 
-        <TextInput value={street}
+      <TextInput value={street}
         onChangeText={setStreet} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center" 
+        h-13 mx-2.5 text-base text-white text-center"
         placeholder="Calle" placeholderTextColor="white" />
 
-        <TextInput value={streetNumber}
+      <TextInput value={streetNumber}
         onChangeText={setStreetNumber} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center" 
+        h-13 mx-2.5 text-base text-white text-center"
         placeholder="Altura" placeholderTextColor="white" />
 
-        <TextInput
+      <TextInput
         value={functionPrice}
         onChangeText={setFunctionPrice}
         className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center"
         placeholder="Precio de la función"
-        placeholderTextColor="white"/>
+        placeholderTextColor="white" />
 
-        <TextInput
+      <TextInput
         value={isTemporarilyClosed}
         onChangeText={setIsTemporarilyClosed}
         className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center"
         placeholder="Cerrado temporalmente"
-        placeholderTextColor="white"/>
+        placeholderTextColor="white" />
 
 
-        <Button title="cargar imagen" onPress={() => launchImageLibrary({mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true}).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
+      <Button title="cargar imagen" onPress={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
 
-        <Image source={photo64}  />
+      <Image source={photo64} />
 
-        <Button onPress={ handleCreateBranch } title='Siguiente'></Button>
+      <Button onPress={handleCreateBranch} title='Siguiente'></Button>
 
-           
-        </ScrollView>
-    );
+
+    </ScrollView>
+  );
 
 }

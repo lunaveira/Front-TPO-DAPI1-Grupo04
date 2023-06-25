@@ -15,7 +15,7 @@ export default function ProfileLogo({ navigation }) {
         try {
             const token_encriptado = await AsyncStorage.getItem('@token')
             const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]))
-            const token = await AsyncStorage.getItem("@token");
+            
             const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, { 
                 headers: {
                     Authorization: `Bearer ${token}`,
