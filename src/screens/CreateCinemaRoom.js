@@ -16,10 +16,6 @@ export default function CreateNewCinemaRooom({navigation}) {
         onChangeText={setIsTemporarilyClosed}*/
  
 
-  
-  
-
-  
     const handleCreateCinemaRoom = async () => {
       try {
         const response = await fetch("https://backendmobile-production.up.railway.app/cinema-room/${id_sucursal}", {
