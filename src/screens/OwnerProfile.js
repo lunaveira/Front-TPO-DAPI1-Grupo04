@@ -18,7 +18,7 @@ export default function ProfileLogo({ navigation }) {
             
             const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, { 
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token_encriptado}`,
                 },
             });
 

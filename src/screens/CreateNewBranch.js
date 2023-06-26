@@ -5,7 +5,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { atob } from 'react-native-quick-base64';
-
+import { Picker } from '@react-native-picker/picker';
 
 export default function CreateNewBranch({ navigation }) {
 
@@ -30,7 +30,7 @@ export default function CreateNewBranch({ navigation }) {
       const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]))
       const responseSocio = await fetch(`https://backendmobile-production.up.railway.app/api/socios/${idSocio.user.id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_encriptado}`,
         },
       });
       if (responseSocio.ok) {
@@ -49,14 +49,14 @@ export default function CreateNewBranch({ navigation }) {
             calle: street,
             altura: streetNumber,
             imagen: photo64.base64,
-            precio_por_funcion: functionPrice,
-            cerrado_temporalmente: isTemporarilyClosed
+            precio: functionPrice,
+            cerrado: isTemporarilyClosed
           }),
         });
 
         if (response.status === 200) {
           // La sucursal se creó exitosamente
-          navigation.navigate("Create Branch 2");
+          navigation.navigate("Main Owner");
         } else if (response.status === 400) {
           const errorMessage = await response.text();
           console.error("Error al crear la sucursal:", errorMessage);
@@ -104,26 +104,32 @@ export default function CreateNewBranch({ navigation }) {
         h-13 mx-2.5 text-base text-white text-center"
         placeholder="Calle" placeholderTextColor="white" />
 
-      <TextInput value={streetNumber}
-        onChangeText={setStreetNumber} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
+      <TextInput keyboardType='numeric' value={streetNumber}
+        onChangeText={userInput => setStreetNumber(Number(userInput))} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center"
         placeholder="Altura" placeholderTextColor="white" />
 
-      <TextInput
+
+
+      <TextInput keyboardType='numeric'
         value={functionPrice}
-        onChangeText={setFunctionPrice}
+        onChangeText={userInput => setFunctionPrice(Number(userInput))}
         className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center"
         placeholder="Precio de la función"
         placeholderTextColor="white" />
 
-      <TextInput
-        value={isTemporarilyClosed}
-        onChangeText={setIsTemporarilyClosed}
-        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center"
-        placeholder="Cerrado temporalmente"
-        placeholderTextColor="white" />
+
+      <Picker style={{height: 24, width: '100%', backgroundColor: 'white'}}
+        selectedValue={isTemporarilyClosed}
+        onValueChange={(itemValue, itemIndex) =>
+          setIsTemporarilyClosed(itemValue)
+        }>
+        <Picker.Item className="h-24 w-24 bg-white text-white" label="Si" value={true} />
+        <Picker.Item className="h-24 w-24 bg-white text-white" label="No" value={false} />
+      </Picker>
+
+
 
 
       <Button title="cargar imagen" onPress={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
