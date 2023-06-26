@@ -1,6 +1,7 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { useState } from 'react';
 import HomeButton from '../components/HomeButton';
+import CineapisLogo from '../components/CineapisLogo';
 
 
 export default function Register({ navigation }) {
@@ -36,9 +37,9 @@ export default function Register({ navigation }) {
   }
 
   return (
-    <View className=" items-center bg-gray-900 h-screen ">
-
-      <TextInput value={company} onChangeText={(text) => setCompany(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-60 h-12 mx-2.5 text-lg text-white text-center " placeholder="Ingresa el nombre de tu empresa" placeholderTextColor="white" />
+    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+      <CineapisLogo></CineapisLogo>
+      <TextInput value={company} onChangeText={(text) => setCompany(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-2 h-12 mx-2.5 text-lg text-white text-center " placeholder="Ingresa el nombre de tu empresa" placeholderTextColor="white" />
 
 
       <TextInput value={email} onChangeText={(text) => setEmail(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-5 h-12 mx-2.5 text-lg text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white" />
@@ -53,7 +54,7 @@ export default function Register({ navigation }) {
 
 
 
-    </View>
+    </ScrollView>
 
   );
 

@@ -1,10 +1,11 @@
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
 
 export default function CineapisLogo() {
     return (
-      <View className="h-56 w-80">
+      <View className="h-56 w-80 items-center">
       
-      <Image  className='h-56 w-52'source={require('../images/MovieIcon.png')}/>
+      <Image  className='h-28 w-28'source={require('../images/MovieIcon.png')}/>
+      <Text className='text-red-600 text-6xl'>CineApis </Text>
       </View>
     );
   };

@@ -3,6 +3,7 @@ import HomeButton from '../components/HomeButton';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native';
+import CineapisLogo from '../components/CineapisLogo';
 
 
 
@@ -64,8 +65,8 @@ export default function Login({ navigation }) {
 
 
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{alignItems:'center',justifyContent:'center'}}>
-
-      <TextInput value={email} onChangeText={(text) => setEmail(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-5 h-13 mx-2.5 text-base text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white" />
+      <CineapisLogo></CineapisLogo>
+      <TextInput value={email} onChangeText={(text) => setEmail(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-2 h-13 mx-2.5 text-base text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white" />
 
 
       <TextInput secureTextEntry value={password} onChangeText={(text) => setPassword(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-10 h-13 mx-2.5 text-base text-white text-center" placeholder="Ingresa tu contraseña" placeholderTextColor="white" />
