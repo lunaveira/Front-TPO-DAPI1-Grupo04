@@ -17,9 +17,9 @@ export default function EditCinemaRoom() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fila: fila,
-          columna: columna,
-          numero_sala: numero_sala,
+          fila: parseInt (fila),
+          columna: parseInt (columna),
+          numero_sala: parseInt (numero_sala),
         }),
       });
 
@@ -44,7 +44,7 @@ export default function EditCinemaRoom() {
       <TextInput
         value={fila}
         onChangeText={setFila}
-        className=" text-lg text-center text-white bg-red-400 w-80 h-20 mt-28 rounded-lg "
+        className=" text-lg text-center text-white bg-red-400 w-80 h-30 mt-28 rounded-lg "
         placeholder="Cantidad de filas"
         placeholderTextColor={"white"}
       ></TextInput>
@@ -52,7 +52,7 @@ export default function EditCinemaRoom() {
       <TextInput
         value={columna}
         onChangeText={ setColumna}
-        className="text-lg text-center text-white bg-red-400 w-80 h-20 rounded-lg mt-5 "
+        className="text-lg text-center text-white bg-red-400 w-80 h-30 rounded-lg mt-10 "
         placeholder="Cantidad de columnas"
         placeholderTextColor={"white"}
       ></TextInput>
@@ -60,7 +60,7 @@ export default function EditCinemaRoom() {
       <TextInput
         value={numero_sala}
         onChangeText= {setNumeroSala}
-        className="text-lg text-center text-white bg-red-400 w-80 h-20 rounded-lg mt-5 "
+        className="text-lg text-center text-white bg-red-400 w-80 h-30 rounded-lg mt-10 "
         placeholder="Número de sala"
         placeholderTextColor={"white"}
       ></TextInput>
