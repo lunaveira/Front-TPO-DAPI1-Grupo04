@@ -2,15 +2,22 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useState, useContext } from 'react';
+
+import GeneralContext from '../context/GeneralContext';
+
 
 const ListDetailBranches = (props) => {
   const navigation = useNavigation();
+
+  const [branches, setBranches] = useState([]);
+  const { lastTouchedBranchId, setLastTouchedBranchId } = useContext(GeneralContext);
 
   const renderItem = ({ item }) => {
     return (
 
         <View style={styles.rectangularItem}>
-          <Text>{item.calle}</Text>
+          <Text className="text-white text-lg">{lastTouchedBranchId}</Text>
         </View>
  
     );

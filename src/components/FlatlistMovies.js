@@ -2,29 +2,24 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import GeneralContext from '../context/GeneralContext';
+import { useContext } from 'react';
 
 const numColumns = 2;
 
-
-
-
 const FlatlistMovies = (props) => {
-
   const navigation = useNavigation();
+  const { lastTouchedBranchId, setLastTouchedBranchId } = useContext(GeneralContext);
 
   const renderItem = ({ item }) => {
     async function handler() {
-   
       navigation.navigate('Branches Detail')
-       AsyncStorage.removeItem('click_sucursal')
-       
-       AsyncStorage.setItem('click_sucursal', item[0].id)
-       console.log(item)
     }
+
     return (
-      <TouchableOpacity onPress={handler} >
+      <TouchableOpacity onPress={handler}>
         <View style={styles.gridItem}>
-          <Text>{JSON.stringify(item)}</Text>
+          <Text>{lastTouchedBranchId}</Text>
         </View>
       </TouchableOpacity>
     );
