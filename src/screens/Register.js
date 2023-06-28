@@ -2,7 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-nativ
 import { useState } from 'react';
 import HomeButton from '../components/HomeButton';
 import CineapisLogo from '../components/CineapisLogo';
-import EmailSender from '../util/EmailSender'; // Importa la clase EmailSender desde tu utilidad
+
 
 export default function Register({ navigation }) {
   const [company, setCompany] = useState('');
@@ -16,15 +16,14 @@ export default function Register({ navigation }) {
       console.log(company);
 
       const response = await fetch("https://backendmobile-production.up.railway.app/api/users", {
-        body: JSON.stringify({ company, email, password }),
+        method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        method: "POST"
+        body: JSON.stringify({ company, email, password })
       });
 
       if (response.ok) {
-        // Envío de correo de validación
-        const validationLink = generateValidationLink(); // Genera el enlace de validación específico para tu aplicación
-        EmailSender.sendValidationEmail(email, validationLink); // Llama a la función para enviar el correo de validación
+        const validationLink = generateValidationLink();
+        await sendValidationEmail(email, validationLink);
         navigation.navigate('Login');
       } else {
         console.log('Error en el registro');
@@ -34,16 +33,68 @@ export default function Register({ navigation }) {
     }
   }
 
-  // Función para generar el enlace de validación
-  function generateValidationLink() {
-    // Lógica para generar el enlace de validación
-    // Puedes construir un enlace único con un token o identificador de usuario
-    // y redirigir al usuario a una pantalla de validación en tu aplicación
-    // o a una página web externa para completar el proceso de validación.
-    // Por ejemplo: return `https://example.com/validation/${userId}`;
+  async function sendValidationEmail(email, validationLink) {
+    try {
+      const sendGridAPIKey = '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';
+      const sendGridEndpoint = 'https://api.sendgrid.com/v3/mail/send';
 
-    // En este ejemplo, simplemente se devuelve un mensaje
-    return "¡Enlace de validación generado!";
+      const payload = {
+        personalizations: [
+          {
+            to: [{ email: email }],
+            subject: 'Verificación de correo electrónico',
+          },
+        ],
+        from: { email: 'juangarassino@outlook.es'},
+        content: [
+          {
+            type: 'text/plain',
+            value: `Por favor, haz clic en el siguiente enlace para verificar tu correo electrónico: ${validationLink}`,
+          },
+        ],
+      };
+
+      const response = await fetch(sendGridEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sendGridAPIKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        console.log('Correo de validación enviado');
+      } else {
+        console.log('Error al enviar el correo de validación');
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo de validación:', error);
+    }
+  }
+
+  function generateValidationLink() {
+    // Genera un token único o un identificador de usuario para el enlace de validación
+    const validationToken = generateRandomToken(); // Genera un token aleatorio, puedes implementar tu propia lógica aquí
+    const validationLink = `https://tudominio.com/validate/${validationToken}`;
+
+    return validationLink;
+  }
+
+  function generateRandomToken() {
+    // Genera un token aleatorio utilizando algún algoritmo o librería de generación de tokens
+    // Puedes utilizar Math.random() o una librería como uuid para generar el token
+    // Aquí tienes un ejemplo básico utilizando Math.random()
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const tokenLength = 32; // Longitud del token deseado
+    let token = '';
+
+    for (let i = 0; i < tokenLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+
+    return token;
   }
 
   return (
