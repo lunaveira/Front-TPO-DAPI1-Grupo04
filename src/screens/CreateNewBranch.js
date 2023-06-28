@@ -57,6 +57,10 @@ export default function CreateNewBranch({ navigation }) {
         if (response.status === 200) {
           // La sucursal se creó exitosamente
           navigation.navigate("Main Owner");
+          const nuevaSucursal = await response.json();
+
+          // Agrega la nueva sucursal a la lista existente
+          setBranches(prevBranches => [...prevBranches, nuevaSucursal]);
         } else if (response.status === 400) {
           const errorMessage = await response.text();
           console.error("Error al crear la sucursal:", errorMessage);
@@ -120,7 +124,7 @@ export default function CreateNewBranch({ navigation }) {
         placeholderTextColor="white" />
 
 
-      <Picker style={{height: 24, width: '100%', backgroundColor: 'white'}}
+      <Picker style={{ height: 24, width: '100%', backgroundColor: 'white' }}
         selectedValue={isTemporarilyClosed}
         onValueChange={(itemValue, itemIndex) =>
           setIsTemporarilyClosed(itemValue)
