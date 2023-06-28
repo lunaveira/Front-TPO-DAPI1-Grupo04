@@ -54,7 +54,7 @@ export default function CreateNewBranch({ navigation }) {
           }),
         });
 
-        if (response.status === 200) {
+        if (response.ok) {
           // La sucursal se creó exitosamente
           navigation.navigate("Main Owner");
         } else if (response.status === 400) {
