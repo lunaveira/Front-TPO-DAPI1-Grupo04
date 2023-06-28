@@ -7,6 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { atob } from 'react-native-quick-base64';
 import { Picker } from '@react-native-picker/picker';
 
+
+
 export default function CreateNewBranch({ navigation }) {
 
   const [branchName, setBranchName] = useState("");
@@ -18,6 +20,10 @@ export default function CreateNewBranch({ navigation }) {
   const [photo64, setPhoto64] = useState("");
   const [functionPrice, setFunctionPrice] = useState(0);
   const [isTemporarilyClosed, setIsTemporarilyClosed] = useState(false);
+
+
+
+
 
 
   /*value={isTemporarilyClosed}
@@ -56,8 +62,10 @@ export default function CreateNewBranch({ navigation }) {
 
         if (response.status === 200) {
           // La sucursal se creó exitosamente
-          navigation.navigate("Main Owner");
+
           const nuevaSucursal = await response.json();
+          navigation.navigate("Main Owner", { nuevaSucursal });
+
 
           // Agrega la nueva sucursal a la lista existente
           setBranches(prevBranches => [...prevBranches, nuevaSucursal]);
