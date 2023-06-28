@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 
+=======
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 import { useState } from 'react';
 
 import HomeButton from '../components/HomeButton';
 
 import CineapisLogo from '../components/CineapisLogo';
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 
 export default function Register({ navigation }) {
 
@@ -37,6 +44,7 @@ export default function Register({ navigation }) {
 
 
       const response = await fetch("https://backendmobile-production.up.railway.app/api/users", {
+<<<<<<< HEAD
 
         body: JSON.stringify({ company, email, password }),
 
@@ -44,6 +52,11 @@ export default function Register({ navigation }) {
 
         method: "POST"
 
+=======
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company, email, password })
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
       });
 
 
@@ -51,10 +64,15 @@ export default function Register({ navigation }) {
 
 
       if (response.ok) {
+<<<<<<< HEAD
 
 
 
 
+=======
+        const validationLink = generateValidationLink();
+        await sendValidationEmail(email, validationLink);
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
         navigation.navigate('Login');
 
       } else {
@@ -74,8 +92,74 @@ export default function Register({ navigation }) {
 
   }
 
+<<<<<<< HEAD
 
 
+=======
+  async function sendValidationEmail(email, validationLink) {
+    try {
+      const sendGridAPIKey = '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';
+      const sendGridEndpoint = 'https://api.sendgrid.com/v3/mail/send';
+
+      const payload = {
+        personalizations: [
+          {
+            to: [{ email: email }],
+            subject: 'Verificación de correo electrónico',
+          },
+        ],
+        from: { email: 'juangarassino@outlook.es'},
+        content: [
+          {
+            type: 'text/plain',
+            value: `Por favor, haz clic en el siguiente enlace para verificar tu correo electrónico: ${validationLink}`,
+          },
+        ],
+      };
+
+      const response = await fetch(sendGridEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sendGridAPIKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        console.log('Correo de validación enviado');
+      } else {
+        console.log('Error al enviar el correo de validación');
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo de validación:', error);
+    }
+  }
+
+  function generateValidationLink() {
+    // Genera un token único o un identificador de usuario para el enlace de validación
+    const validationToken = generateRandomToken(); // Genera un token aleatorio, puedes implementar tu propia lógica aquí
+    const validationLink = `https://tudominio.com/validate/${validationToken}`;
+
+    return validationLink;
+  }
+
+  function generateRandomToken() {
+    // Genera un token aleatorio utilizando algún algoritmo o librería de generación de tokens
+    // Puedes utilizar Math.random() o una librería como uuid para generar el token
+    // Aquí tienes un ejemplo básico utilizando Math.random()
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const tokenLength = 32; // Longitud del token deseado
+    let token = '';
+
+    for (let i = 0; i < tokenLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+
+    return token;
+  }
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 
   return (
 
@@ -116,8 +200,12 @@ export default function Register({ navigation }) {
 
 
   );
+<<<<<<< HEAD
 
 
 
 
 }
+=======
+}
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f

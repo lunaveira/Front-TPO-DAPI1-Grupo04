@@ -60,10 +60,14 @@ export default function CreateNewBranch({ navigation }) {
           }),
         });
 
+<<<<<<< HEAD
         console.log("Estado de respuesta:", response.status);
         console.log("Respuesta completa:", response);
 
         if (response.status === 200) {
+=======
+        if (response.ok) {
+>>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
           // La sucursal se creó exitosamente
 
          
