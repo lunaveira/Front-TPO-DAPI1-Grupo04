@@ -9,34 +9,23 @@ export default function MainPageOwner({ navigation }) {
 
   const [branches, setBranches] = useState([]);
 
-  useEffect(() => {
-    if (route.params && route.params.nuevaSucursal) {
-      const { nuevaSucursal } = route.params;
-      setBranches(prevBranches => [...prevBranches, nuevaSucursal]);
+  const fetchData = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token')
+      const idSocio = JSON.parse(atob(token.split('.')[1]))
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${idSocio.user.id}/branches`);
+      const result = await response.json();
+      setBranches(result.sucursal);
+    } catch (error) {
+      console.error(error);
     }
-  }, [route.params]);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem('@token')
-        const idSocio = JSON.parse(atob(token.split('.')[1]))
-        console.log(idSocio)
-        const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${idSocio.user.id}/branches`);
-        const result = await response.json();
-        console.log(result.sucursal)
-        setBranches(result.sucursal);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
   }, []);
 
   function getBranches() {
-
-    return branches;
 
   }
 

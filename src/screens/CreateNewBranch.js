@@ -60,15 +60,15 @@ export default function CreateNewBranch({ navigation }) {
           }),
         });
 
+        console.log("Estado de respuesta:", response.status);
+        console.log("Respuesta completa:", response);
+
         if (response.status === 200) {
           // La sucursal se creó exitosamente
 
-          const nuevaSucursal = await response.json();
-          navigation.navigate("Main Owner", { nuevaSucursal });
+         
+          navigation.replace("Main Owner");
 
-
-          // Agrega la nueva sucursal a la lista existente
-          setBranches(prevBranches => [...prevBranches, nuevaSucursal]);
         } else if (response.status === 400) {
           const errorMessage = await response.text();
           console.error("Error al crear la sucursal:", errorMessage);

@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import GeneralContext from '../context/GeneralContext';
 import { useContext } from 'react';
+import GeneralContext from '../context/GeneralContext';
 
 const numColumns = 2;
 
@@ -13,13 +12,15 @@ const FlatlistMovies = (props) => {
 
   const renderItem = ({ item }) => {
     async function handler() {
-      navigation.navigate('Branches Detail')
+      setLastTouchedBranchId(item.id); // Guarda el ID de la sucursal tocada
+      navigation.navigate('Branches Detail');
     }
 
     return (
       <TouchableOpacity onPress={handler}>
         <View style={styles.gridItem}>
-          <Text>{lastTouchedBranchId}</Text>
+          <Text>{item.nombre}</Text>
+          <Image source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} style={styles.image}  />
         </View>
       </TouchableOpacity>
     );
@@ -51,10 +52,16 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'lightgray',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20,
+    justifyContent: 'space-between',
     height: 150,
     width: 140,
+    margin: 2,
+
+  },
+  image: {
+    width: '100%',
+    height: '70%',
+    resizeMode: 'cover'
   },
 });
 
