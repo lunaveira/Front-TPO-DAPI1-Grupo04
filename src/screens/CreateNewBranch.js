@@ -56,7 +56,6 @@ export default function CreateNewBranch({ navigation }) {
 
         if (response.status === 200) {
           // La sucursal se creó exitosamente
-          updateBranches();
           navigation.navigate("Main Owner");
         } else if (response.status === 400) {
           const errorMessage = await response.text();
