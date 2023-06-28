@@ -1,101 +1,38 @@
-<<<<<<< HEAD
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-
-=======
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 import { useState } from 'react';
-
 import HomeButton from '../components/HomeButton';
-
 import CineapisLogo from '../components/CineapisLogo';
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 
 export default function Register({ navigation }) {
-
   const [company, setCompany] = useState('');
-
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
 
-
-
-
-
   async function handleRegister() {
-
     try {
-
       console.log(email);
-
       console.log(password);
-
       console.log(company);
 
-
-
-
-
       const response = await fetch("https://backendmobile-production.up.railway.app/api/users", {
-<<<<<<< HEAD
-
-        body: JSON.stringify({ company, email, password }),
-
-        headers: { 'Content-Type': 'application/json' },
-
-        method: "POST"
-
-=======
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ company, email, password })
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
       });
 
-
-
-
-
       if (response.ok) {
-<<<<<<< HEAD
-
-
-
-
-=======
         const validationLink = generateValidationLink();
         await sendValidationEmail(email, validationLink);
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
         navigation.navigate('Login');
-
       } else {
-
-
-
-
         console.log('Error en el registro');
-
       }
-
     } catch (err) {
-
       console.log(err);
-
     }
-
   }
 
-<<<<<<< HEAD
-
-
-=======
   async function sendValidationEmail(email, validationLink) {
     try {
       const sendGridAPIKey = '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';
@@ -159,53 +96,14 @@ export default function Register({ navigation }) {
 
     return token;
   }
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
 
   return (
-
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
-
       <CineapisLogo></CineapisLogo>
-
       <TextInput value={company} onChangeText={(text) => setCompany(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-2 h-12 mx-2.5 text-lg text-white text-center " placeholder="Ingresa el nombre de tu empresa" placeholderTextColor="white" />
-
-
-
-
-
       <TextInput value={email} onChangeText={(text) => setEmail(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-5 h-12 mx-2.5 text-lg text-white text-center " placeholder="Ingresa tu email" placeholderTextColor="white" />
-
-
-
-
-
       <TextInput secureTextEntry value={password} onChangeText={(text) => setPassword(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-5 w-96 mt-5 h-12 mx-2.5 text-lg text-white text-center" placeholder="Ingresa tu contraseña" placeholderTextColor="white" />
-
-
-
-
-
-
-
       <HomeButton color='#FF3131' title="Registrarse" handler={handleRegister} />
-
-
-
-
-
-
     </ScrollView>
-
-
-
-
   );
-<<<<<<< HEAD
-
-
-
-
 }
-=======
-}
->>>>>>> 6235555bf30d0a7090a15fbd1351ef0296942b9f
