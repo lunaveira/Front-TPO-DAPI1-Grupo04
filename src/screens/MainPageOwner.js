@@ -28,6 +28,24 @@ export default function MainPageOwner({ navigation }) {
       }, []);
 
     function getBranches() {
+      const updateBranches = async () => {
+        try {
+          const token = await AsyncStorage.getItem('@token');
+          const idSocio = JSON.parse(atob(token.split('.')[1]));
+          const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema/${idSocio.user.id}/branches`);
+          const result = await response.json();
+          setBranches(result.sucursal);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+      // ...
+    
+      
+        // ...
+        <HomeButton color="red" title="Crear nueva sucursal" handler={() => navigation.navigate({ name: 'Create Branch', params: { updateBranches } })} />
+      
        
     }
 
@@ -40,7 +58,7 @@ export default function MainPageOwner({ navigation }) {
 
 
             <Text className="text-white mt-20 text-base"> ¿Querés crear una nueva sucursal?</Text>
-            <HomeButton color="red" title="Crear nueva sucursal" handler={() => navigation.navigate({ name: 'Create Branch' })} />
+            <HomeButton color="red" title="Crear nueva sucursal" handler={() => navigation.navigate({ name: 'Create Branch', params: { updateBranches } })} />
 
             <Text className="text-white mt-7 text-base"> Tus sucursales </Text>
 
