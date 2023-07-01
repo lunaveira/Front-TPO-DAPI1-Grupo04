@@ -20,7 +20,7 @@ const FlatlistMovies = (props) => {
       <TouchableOpacity onPress={handler}>
         <View style={styles.gridItem}>
           <Text>{item.nombre}</Text>
-          <Image source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} style={styles.image}  />
+          <Image source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} style={styles.image} />
         </View>
       </TouchableOpacity>
     );
@@ -52,16 +52,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'lightgray',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    margin: 2,
     height: 150,
     width: 140,
-    margin: 2,
-
   },
   image: {
     width: '100%',
-    height: '70%',
-    resizeMode: 'cover'
+    height: '100%',
+    
   },
 });
 
