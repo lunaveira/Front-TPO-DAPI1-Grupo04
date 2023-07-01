@@ -13,7 +13,7 @@ const FlatlistMovies = (props) => {
   const renderItem = ({ item }) => {
     async function handler() {
       setLastTouchedBranchId(item.id); // Guarda el ID de la sucursal tocada
-      navigation.navigate('Branches Detail');
+      navigation.navigate('Branches Detail', { sucursalId: item.id }); // Pasa el ID de la sucursal en la navegación
     }
 
     return (
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    
   },
 });
 

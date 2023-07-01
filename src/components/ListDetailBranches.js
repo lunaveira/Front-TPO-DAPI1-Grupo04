@@ -1,25 +1,35 @@
-
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useContext } from 'react';
-
-import GeneralContext from '../context/GeneralContext';
-
 
 const ListDetailBranches = (props) => {
   const navigation = useNavigation();
 
-  const [branches, setBranches] = useState([]);
-  const { lastTouchedBranchId, setLastTouchedBranchId } = useContext(GeneralContext);
-
   const renderItem = ({ item }) => {
     return (
-
-        <View style={styles.rectangularItem}>
-          <Text className="text-white text-lg">{lastTouchedBranchId}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Branches Detail', { sucursalId: item.id })}>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.nombre}</Text>
         </View>
- 
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.pais}</Text>
+        </View>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.provincia}</Text>
+        </View>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.localidad}</Text>
+        </View>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.calle} {item.altura}</Text>
+        </View>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.precio_por_funcion}</Text>
+        </View>
+        <View className="h-11 w-72 border-white border-2 rounded-lg mb-5">
+          <Text className="text-base text-center text-white justify-center mt-1">{item.cerrado_temporalmente ? 'Cerrado temporalmente' : 'Abierto'}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -39,16 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  rectangularItem: {
-    height: 12,
-    width: 60,
-    borderRadius: 5,
-    backgroundColor: 'lightgray',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-    paddingHorizontal: 10,
-  },
+
 });
 
 export default ListDetailBranches;
