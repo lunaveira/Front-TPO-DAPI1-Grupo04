@@ -21,7 +21,7 @@ export default function Home({navigation}) {
 
     <ScrollView className='py-5 bg-gray-900 ' >
 
-      <CineapisLogo />
+      <CineapisLogo/>
 
       
       
@@ -48,7 +48,8 @@ export default function Home({navigation}) {
 
 
       <Text className='text-3xl text-center pt-10 text-white' >¿Tenes una sala de cine?</Text>
-  
+
+      <Button onPress={() => navigation.navigate({name:'Main User'})} title='Usuarios'></Button>
 
       <HomeButton color='#FF3131' title='Iniciar sesion' handler={()=>navigation.navigate({name:'Login'})}></HomeButton>
 
