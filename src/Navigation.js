@@ -20,6 +20,7 @@ import CreateCinemaRoom from './screens/CreateCinemaRoom';
 import CreateFunction from './screens/CreateFunction';
 import BranchesDetail from './screens/BranchesDetail';
 import EditBranches from './screens/EditBranches';
+import MainPageUser from './screens/MainPageUser';
 
 const Stack = createNativeStackNavigator();
 
@@ -99,6 +100,11 @@ function MyTabs() {
                 headerTintColor: '#fff', headerRight: () => <ProfileLogo />, headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Edit Branches' component={EditBranches} />
+
+            <Stack.Screen options={{
+                headerTintColor: '#fff', headerRight: () => <ProfileLogo />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
+            }} name='Main User' component={MainPageUser}/>
 
         </Stack.Navigator>
     );
