@@ -34,7 +34,7 @@ export default function MainPageOwner({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
-      <Button title='salas' onPress={() => navigation.navigate('Cinema Rooms')} />
+      
 
       <Text className="text-white mt-20 text-base"> ¿Querés crear una nueva sucursal?</Text>
       <HomeButton color="red" title="Crear nueva sucursal" handler={() => navigation.navigate('Create Branch')} />

@@ -1,7 +1,4 @@
 
-
-
-
 import React, { useState } from 'react';
 import { ScrollView, TextInput, Button, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';

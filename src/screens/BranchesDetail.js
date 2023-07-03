@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, Alert } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Alert, Button } from 'react-native';
 import ListDetailBranches from '../components/ListDetailBranches';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { atob } from 'react-native-quick-base64';
@@ -10,6 +10,8 @@ export default function BranchesDetail({ route }) {
   const [branches, setBranches] = useState([]);
   const [token, setToken] = useState('');
   const navigation = useNavigation();
+
+  const { id_sucursal } = route.params;
 
   useEffect(() => {
     fetchData();
@@ -83,6 +85,12 @@ export default function BranchesDetail({ route }) {
 
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
+
+      <Button
+        onPress={() => navigation.navigate('Cinema Rooms', { id_sucursal: route.params.sucursalId })}
+        title="Ver salas"
+      />
+
       <Text className="text-white text-center text-lg mt-5">Detalle de la sucursal </Text>
       <ListDetailBranches branches={branches} />
       <View className="flex-row mt-2">
