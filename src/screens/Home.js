@@ -20,9 +20,9 @@ export default function Home({navigation}) {
 
 
     <ScrollView className='py-5 bg-gray-900 ' >
-
+      <View className="items-center">
       <CineapisLogo/>
-
+      </View>
       
       
 

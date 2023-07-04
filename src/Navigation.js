@@ -8,6 +8,7 @@ import Register from './screens/Register';
 import MainPageOwner from './screens/MainPageOwner';
 import CreateNewBranch from './screens/CreateNewBranch';
 import ProfileLogo from './components/ProfileLogo'
+import FilterButton from './components/FilterButton';
 import MovieLogo from './components/MovieLogo'
 import OwnerProfile from './screens/OwnerProfile'
 import CinemaRooms from "./screens/CinemaRooms"
@@ -102,9 +103,9 @@ function MyTabs() {
             }} name='Edit Branches' component={EditBranches} />
 
             <Stack.Screen options={{
-                headerTintColor: '#fff', headerRight: () => <ProfileLogo />, headerStyle: { backgroundColor: '#111827' },
-                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
-            }} name='Main User' component={MainPageUser}/>
+                headerTintColor: '#fff', headerLeft: () => <ProfileLogo />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerRight: () => <FilterButton/>            
+                }} name='Main User' component={MainPageUser}/>
 
         </Stack.Navigator>
     );
