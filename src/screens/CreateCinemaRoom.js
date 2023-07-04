@@ -5,11 +5,12 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
   const [fila, setFila] = useState("");
   const [columna, setColumna] = useState("");
   const [numero_sala, setNumeroSala] = useState("");
-  const {id_sucursal} = route.params;
+  const { id_sucursal } = route.params;
+  const sucursal=parseInt(id_sucursal);
 
   const handleCreateCinemaRoom = async () => {
     try {
-      const response = await fetch(`https://backendmobile-production.up.railway.app/cinema-room/${route.params.id_sucursal}`, {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/cinema-room/${id_sucursal}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,14 +18,13 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
         body: JSON.stringify({
           fila: parseInt(fila),
           columna: parseInt(columna),
-          numero_sala: parseInt(numero_sala),
+          numero_sala: parseInt(numero_sala)
         }),
       });
       console.log('id_sucursal:', id_sucursal);
       console.log('fila:', fila);
       console.log('columna:', columna);
       console.log('numero_sala:', numero_sala);
-  
 
       if (response.ok) {
         // La sala se creó exitosamente
