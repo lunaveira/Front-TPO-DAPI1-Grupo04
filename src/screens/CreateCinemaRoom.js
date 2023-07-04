@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert } from 'react-native';
 
 export default function CreateNewCinemaRoom({ navigation, route }) {
-  const [fila, setFila] = useState('');
-  const [columna, setColumna] = useState('');
-  const [numero_sala, setNumeroSala] = useState('');
-  const id_sucursal = route.params.id_sucursal;
+  const [fila, setFila] = useState("");
+  const [columna, setColumna] = useState("");
+  const [numero_sala, setNumeroSala] = useState("");
+  const {id_sucursal} = route.params;
 
   const handleCreateCinemaRoom = async () => {
     try {
-      const response = await fetch(`https://backendmobile-production.up.railway.app/cinema-room/${id_sucursal}`, {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/cinema-room/${route.params.id_sucursal}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,6 +20,11 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
           numero_sala: parseInt(numero_sala),
         }),
       });
+      console.log('id_sucursal:', id_sucursal);
+      console.log('fila:', fila);
+      console.log('columna:', columna);
+      console.log('numero_sala:', numero_sala);
+  
 
       if (response.ok) {
         // La sala se creó exitosamente
@@ -40,19 +45,21 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
       <TextInput
         value={fila}
         onChangeText={setFila}
-        placeholder="Cantidad de filas"
+        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        placeholder="Cantidad de filas" placeholderTextColor="white"
       />
       <TextInput
         value={columna}
         onChangeText={setColumna}
-        placeholder="Cantidad de columnas"
+        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        placeholder="Cantidad de columnas" placeholderTextColor="white"
       />
       <TextInput
         value={numero_sala}
         onChangeText={setNumeroSala}
-        placeholder="Número de sala"
+        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        placeholder="Número de sala" placeholderTextColor="white"
       />
-   
       <Button onPress={handleCreateCinemaRoom} title="Crear sala" />
     </View>
   );
