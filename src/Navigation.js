@@ -102,9 +102,9 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Edit Branches' component={EditBranches} />
 
-            <Stack.Screen options={{
-                headerTintColor: '#fff', headerLeft: () => <ProfileLogo />, headerStyle: { backgroundColor: '#111827' },
-                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerRight: () => <FilterButton/>            
+            <Stack.Screen options={{ headerBackVisible: false,
+                headerTintColor: '#fff', headerLeft: () => <FilterButton/> , headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerRight: () => <ProfileLogo />            
                 }} name='Main User' component={MainPageUser}/>
 
         </Stack.Navigator>

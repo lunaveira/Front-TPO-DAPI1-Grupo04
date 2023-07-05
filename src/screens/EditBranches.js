@@ -35,6 +35,10 @@ export default function EditBranches({ route }) {
         }),
       });
 
+      const responseText = await response.text();
+      console.log(responseText);
+
+
       if (response.ok) {
         Alert.alert('Sucursal actualizada', 'La sucursal se ha actualizado correctamente.');
         // Realizar la navegación a la página principal del propietario
