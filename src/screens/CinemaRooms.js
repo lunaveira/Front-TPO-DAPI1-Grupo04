@@ -13,9 +13,10 @@ export default function CinemaRooms({ route }) {
 
   const { id_sucursal } = route.params;
   const navigation = useNavigation();
-
-  const handlePress = (numeroSala) => {
-    navigation.navigate("Cinema Room Detail", { numeroSala });
+  console.log('id_sucursal:', id_sucursal);
+  
+  const handlePress = (numero_sala,id_sucursal) => {
+    navigation.navigate("Cinema Room Detail", { numero_sala:numero_sala, id_sucursal:route.params.id_sucursal });
   };
 
   useEffect(() => {
