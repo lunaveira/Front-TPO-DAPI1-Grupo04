@@ -22,18 +22,10 @@ export default function CinemaRooms({ route }) {
     fetchData();
     fetchSucursal();
   }, []);
-
+  console.log('id_sucursal:', id_sucursal);
   const fetchData = async () => {
     try {
-      const token_encriptado = await AsyncStorage.getItem('@token');
-      const idSocio = JSON.parse(atob(token_encriptado.split('.')[1]));
-      setToken(token_encriptado);
-
-      const response = await fetch(`https://backendmobile-production.up.railway.app/api/cinema-room/${id_sucursal}/getall`, {
-        headers: {
-          Authorization: `Bearer ${token_encriptado}`,
-        },
-      });
+      const response = await fetch(`https://backendmobile-production.up.railway.app/${id_sucursal}/cinema-room/getall`);
 
       if (response.ok) {
         const result = await response.json();
