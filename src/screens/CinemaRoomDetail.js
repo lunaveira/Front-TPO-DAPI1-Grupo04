@@ -1,11 +1,18 @@
 import React from "react";
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, ScrollView,useEffect } from "react-native";
 import HomeButton from "../components/HomeButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function CinemaRoomDetail() {
   const navigation = useNavigation();
+  const route = useRoute();
 
+  const { id_sucursal, numero_sala } = route.params;
+
+  
+    console.log('id_sucursal:', id_sucursal);
+    console.log('numero_sala:', numero_sala);
+  
   const handlerEdit = () => {
     navigation.navigate("Edit Cinema Room");
   };
@@ -16,12 +23,11 @@ export default function CinemaRoomDetail() {
 
   const handleDeleteCinemaRoom = async () => {
     try {
-      const response = await fetch("https://backendmobile-production.up.railway.app/:idsucursal/:cinema-room/deletecinemaroom", {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/${id_sucursal}/${numero_sala}/deletecinemarooms`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        
       });
 
       if (response.status === 200) {
