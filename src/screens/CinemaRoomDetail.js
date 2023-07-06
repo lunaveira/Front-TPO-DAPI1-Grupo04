@@ -35,6 +35,7 @@ export default function CinemaRoomDetail() {
       if (response.status === 200) {
         // La sala se eliminó exitosamente
         console.log("Sala eliminada");
+        navigation.replace("Cinema Rooms",{ id_sucursal: id_sucursal });
       } else if (response.status === 400) {
         const errorMessage = await response.text();
         console.error("Error al eliminar la sala:", errorMessage);

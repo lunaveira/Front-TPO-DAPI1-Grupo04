@@ -26,7 +26,7 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
       if (response.ok) {
         // La sala se creó exitosamente
         Alert.alert('Éxito', 'Sala de cine creada exitosamente');
-        navigation.goBack(); // Regresar a la pantalla anterior
+        navigation.replace("Cinema Rooms",{ id_sucursal: id_sucursal }); // Regresar a la pantalla anterior
       } else {
         // Ocurrió un error al crear la sala
         const errorMessage = await response.text();
