@@ -21,10 +21,7 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
           numero_sala: parseInt(numero_sala)
         }),
       });
-      console.log('id_sucursal:', id_sucursal);
-      console.log('fila:', fila);
-      console.log('columna:', columna);
-      console.log('numero_sala:', numero_sala);
+    
 
       if (response.ok) {
         // La sala se creó exitosamente
@@ -38,6 +35,7 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
     } catch (error) {
       console.error('Error al conectarse con el servidor:', error);
     }
+    
   };
 
   return (
