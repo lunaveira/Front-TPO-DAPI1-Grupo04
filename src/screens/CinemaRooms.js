@@ -70,6 +70,6 @@ export default function CinemaRooms({ route }) {
       <Button title="Crear sala" onPress={() => navigation.navigate('Create Cinema Room', { id_sucursal: id_sucursal })} />
       <Text className="text-center text-lg text-white mt-5">Tus salas</Text>
       <ListCinemaRoom cinemaRooms={cinemaRooms} handler={handlePress} />
-    </View>
+    </ScrollView>
   );
 }
