@@ -29,6 +29,8 @@ export default function CinemaRoomDetail() {
           "Content-Type": "application/json",
         },
       });
+      console.log('id_sucursal:', id_sucursal);
+      console.log('numero_sala:', numero_sala);
 
       if (response.status === 200) {
         // La sala se eliminó exitosamente
