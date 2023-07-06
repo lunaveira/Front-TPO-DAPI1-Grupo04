@@ -22,11 +22,11 @@ export default function FilterButton() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-    {/* <TouchableOpacity onPress={() => navigation.navigate({ name: 'Owner Profile' })}>
-    <Image className='h-11 w-11 mt-2'source={require('../images/ProfileIcon.png')}/>
-    
-    </TouchableOpacity> */}
-     <Image className='h-11 w-11 mt-2'source={require('../images/filterIcon.png')}/>
+
+    <TouchableOpacity onPress={() => navigation.navigate({ name: 'Filters Movies' })}>
+    <Image className='h-11 w-11 mt-2'source={require('../images/filterIcon.png')}/>    
+    </TouchableOpacity>
+
 
     </View>
   );
