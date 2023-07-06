@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ScrollView, TextInput, Button, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-export default function EditBranches({ route }) {
+export default function EditBranches({ route, navigation }) {
   const { sucursal } = route.params;
   const [nombre, setNombre] = useState(sucursal.nombre);
   const [pais, setPais] = useState(sucursal.pais);
@@ -16,7 +16,17 @@ export default function EditBranches({ route }) {
 
   const handleUpdate = async () => {
     try {
-      // Realizar la solicitud PUT al endpoint de actualización de sucursal
+      console.log('Valores antes de la solicitud PUT:');
+      console.log('ID:', sucursal.id);
+      console.log('Nombre:', nombre);
+      console.log('País:', pais);
+      console.log('Provincia:', provincia);
+      console.log('Localidad:', localidad);
+      console.log('Calle:', calle);
+      console.log('Altura:', altura);
+      console.log('Precio por función:', precioPorFuncion);
+      console.log('Cerrado temporalmente:', isTemporarilyClosed);
+
       const response = await fetch('https://backendmobile-production.up.railway.app/api/cinema/branches/update', {
         method: 'PUT',
         headers: {
@@ -36,12 +46,10 @@ export default function EditBranches({ route }) {
       });
 
       const responseText = await response.text();
-      console.log(responseText);
-
+      console.log('Respuesta del servidor:', responseText);
 
       if (response.ok) {
         Alert.alert('Sucursal actualizada', 'La sucursal se ha actualizado correctamente.');
-        // Realizar la navegación a la página principal del propietario
         navigation.replace('Main Owner');
       } else {
         Alert.alert('Error', 'Hubo un problema al actualizar la sucursal. Por favor, intenta nuevamente.');
@@ -51,7 +59,6 @@ export default function EditBranches({ route }) {
       Alert.alert('Error', 'Hubo un problema al actualizar la sucursal. Por favor, intenta nuevamente.');
     }
   };
-
   return (
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
       <TextInput
