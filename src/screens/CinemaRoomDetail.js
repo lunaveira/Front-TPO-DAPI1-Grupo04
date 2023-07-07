@@ -13,9 +13,10 @@ export default function CinemaRoomDetail() {
     console.log('id_sucursal:', id_sucursal);
     console.log('numero_sala:', numero_sala);
   
-  const handlerEdit = () => {
-    navigation.navigate("Edit Cinema Room");
+  const handlerEdit = (numero_sala,id_sucursal) => {
+    navigation.navigate("Edit Cinema Room", { numero_sala:route.params.numero_sala, id_sucursal:route.params.id_sucursal });
   };
+ 
 
   const handlerFunciones = () => {
     navigation.navigate("Functions");
