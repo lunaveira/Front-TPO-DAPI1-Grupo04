@@ -1,6 +1,5 @@
-import { View, Text, TextInput, Button, Image } from 'react-native'
-import HomeButton from '../components/HomeButton';
-import React, { useEffect, useState } from "react";
+import { TextInput, Button, Image } from 'react-native'
+import React, { useState } from "react";
 import { launchImageLibrary } from 'react-native-image-picker';
 import { ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -132,7 +131,7 @@ export default function CreateNewBranch({ navigation }) {
         placeholderTextColor="white" />
 
 
-      <Picker style={{ height: 24, width: '100%', backgroundColor: 'white' }}
+      <Picker style={{ height: 24, width: '100%', backgroundColor: '#324255', itemColor: 'white' }} 
         selectedValue={isTemporarilyClosed}
         onValueChange={(itemValue, itemIndex) =>
           setIsTemporarilyClosed(itemValue)
@@ -144,11 +143,12 @@ export default function CreateNewBranch({ navigation }) {
 
 
 
-      <Button title="cargar imagen" onPress={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
+      <Button color='#FF3131' title="cargar imagen" classsName="mt-2"
+      onPress={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
 
-      <Image source={photo64} />
+      <Image source={photo64}/>
 
-      <Button onPress={handleCreateBranch} title='Siguiente'></Button>
+      <Button color='#FF3131' onPress={handleCreateBranch} title='Siguiente'></Button>
 
 
     </ScrollView>
