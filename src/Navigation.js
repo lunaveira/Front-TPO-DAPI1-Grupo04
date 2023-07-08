@@ -111,12 +111,13 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerLeft: () => <UserProfileLogo/>            
             }} name='Main User' component={MainPageUser}/>
 
-            <Stack.Screen options={{
+
+            <Stack.Screen options={{ 
                 headerTintColor: '#fff', headerRight: () => <UserProfileLogo/>, headerStyle: { backgroundColor: '#1E1E1E' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='User Profile' component={UserProfile} />
 
-            <Stack.Screen options={{
+            <Stack.Screen options={{ headerBackVisible: true,
                 headerTintColor: '#fff', headerRight: () => <FilterButton/> , headerStyle: { backgroundColor: '#3C3B3B' },
                 headerTitleColor: '#3C3B3B'}} name='Filters Movies' component={FiltersMovies}/>
 
