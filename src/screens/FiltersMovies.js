@@ -1,4 +1,4 @@
-import { Text, ScrollView, TextInput, View} from "react-native"
+import { Text, ScrollView, TextInput, View, } from "react-native"
 import { useState } from 'react';
 import MoviesGrid from "../components/MoviesGrid";
 

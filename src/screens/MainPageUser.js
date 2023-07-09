@@ -1,10 +1,12 @@
-import { Text, ScrollView, TextInput, View, Image } from "react-native"
+import { Text, ScrollView, TextInput, View, Image, TouchableOpacity } from "react-native"
 import { useState } from 'react';
 import MoviesGrid from "../components/MoviesGrid";
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function MainPageUser() {
-    const [Busqueda, setBusqueda] = useState('')
+    const [Busqueda, setBusqueda] = useState('');
+    const navigation = useNavigation();
 
     return (
         <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
@@ -19,9 +21,9 @@ export default function MainPageUser() {
                     placeholderTextColor="white"
                 />
             </View>
-            
-            <Image className='h-194 w-148 mt-2'source={require('../images/theDarkKnight.jpeg')} onPress={() => navigation.navigate({ name: 'Movie Details' })} />
-
+            <TouchableOpacity onPress={() => navigation.navigate({ name: 'Movie Details' })}>
+                <Image className='h-60 w-48 mt-2'source={require('../images/theDarkKnight.jpeg')} />
+            </TouchableOpacity>
             <MoviesGrid />
            
          
