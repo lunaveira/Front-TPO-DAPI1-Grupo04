@@ -1,10 +1,9 @@
-import { Text, ScrollView, TextInput, View, Button } from "react-native"
+import { Text, ScrollView, TextInput, View, Image } from "react-native"
 import { useState } from 'react';
 import MoviesGrid from "../components/MoviesGrid";
-import { useNavigation } from '@react-navigation/native';
+
 
 export default function MainPageUser() {
-    const navigation = useNavigation();
     const [Busqueda, setBusqueda] = useState('')
 
     return (
@@ -20,8 +19,6 @@ export default function MainPageUser() {
                     placeholderTextColor="white"
                 />
             </View>
-
-            <Button color='#FF3131' title="PELICULA"  onPress={() => navigation.navigate({ name: 'Movie Details' })}/>
             
             <Image className='h-194 w-148 mt-2'source={require('../images/theDarkKnight.jpeg')} onPress={() => navigation.navigate({ name: 'Movie Details' })} />
 

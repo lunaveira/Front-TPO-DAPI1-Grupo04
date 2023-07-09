@@ -25,7 +25,6 @@ import EditBranches from './screens/EditBranches';
 import MainPageUser from './screens/MainPageUser';
 import FiltersMovies from './screens/FiltersMovies';
 import UserProfile from './screens/UserProfile';
-import MovieDetails from './screens/MovieDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -111,7 +110,6 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerLeft: () => <UserProfileLogo/>            
             }} name='Main User' component={MainPageUser}/>
 
-
             <Stack.Screen options={{ 
                 headerTintColor: '#fff', headerRight: () => <UserProfileLogo/>, headerStyle: { backgroundColor: '#1E1E1E' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
@@ -120,11 +118,6 @@ function MyTabs() {
             <Stack.Screen options={{ headerBackVisible: true,
                 headerTintColor: '#fff', headerRight: () => <FilterButton/> , headerStyle: { backgroundColor: '#3C3B3B' },
                 headerTitleColor: '#3C3B3B'}} name='Filters Movies' component={FiltersMovies}/>
-
-            <Stack.Screen options={{ 
-                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#443D3D' },
-                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
-            }} name="Movie Details" component={MovieDetails} />
 
         </Stack.Navigator>
     );
