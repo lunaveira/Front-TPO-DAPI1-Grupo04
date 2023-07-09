@@ -4,9 +4,14 @@ import MoviesGrid from "../components/MoviesGrid";
 
 
 export default function MovieDetails() {
-    <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: '#1E1E1E', flex: 1 }}>
+    return(
+    <ScrollView
+      contentContainerStyle={{ alignItems: "center" }}
+      style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
+    >
 
 
     </ScrollView>
+    );
 
 }

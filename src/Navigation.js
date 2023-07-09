@@ -106,23 +106,29 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Edit Branches' component={EditBranches} />
 
-            <Stack.Screen options={{ headerBackVisible: false,
-                headerTintColor: '#fff', headerRight: () => <FilterButton/> , headerStyle: { backgroundColor: '#111827' },
-                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerLeft: () => <UserProfileLogo/>            
-            }} name='Main User' component={MainPageUser}/>
+            <Stack.Screen options={{
+                headerBackVisible: false,
+                headerTintColor: '#fff', headerLeft: () => <FilterButton />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerRight: () => <UserProfileLogo />
+            }} name='Main User' component={MainPageUser} />
 
-            <Stack.Screen options={{ 
-                headerTintColor: '#fff', headerRight: () => <UserProfileLogo/>, headerStyle: { backgroundColor: '#1E1E1E' },
+            <Stack.Screen options={{
+                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#1E1E1E' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='User Profile' component={UserProfile} />
 
-            <Stack.Screen options={{ headerBackVisible: true,
-                headerTintColor: '#fff', headerRight: () => <FilterButton/> , headerStyle: { backgroundColor: '#3C3B3B' },
-                headerTitleColor: '#3C3B3B'}} name='Filters Movies' component={FiltersMovies}/>
+            <Stack.Screen options={{
+                headerBackVisible: true,
+                headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827' },
+                headerTitleColor: '#111827'
+            }} name='Filters Movies' component={FiltersMovies} />
 
-            <Stack.Screen options={{ headerBackVisible: true, headerRight: () => <UserProfileLogo/>,
-                headerTitle: () => <MovieLogo />, headerTintColor: '#fff', headerStyle: { backgroundColor: '#1E1E1E' },
-                headerTitleColor: '#3C3B3B'}} name='Movie Details' component={MovieDetails}/>
+
+
+            <Stack.Screen options={{
+                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
+            }} name='Movie Details' component={MovieDetails} />
 
         </Stack.Navigator>
     );
