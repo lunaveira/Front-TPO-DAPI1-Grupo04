@@ -1,8 +1,7 @@
-import { Text, ScrollView, TextInput, View} from "react-native"
+import { Text, ScrollView, TextInput, View } from "react-native"
 import { useState } from 'react';
 import MoviesGrid from "../components/MoviesGrid";
 import { Picker } from '@react-native-picker/picker';
-
 
 export default function FiltersMovies() {
     const [branch, setBranch] = useState("Sucursal");
@@ -11,50 +10,48 @@ export default function FiltersMovies() {
     const [rating, setRating] = useState("Calificacion");
 
     return (
-
-        
-
-        <ScrollView contentContainerStyle={{ alignItems: "center" }}
-        style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
-
-
-            <Picker style={{ height: 24, width: '50%', backgroundColor: '#FFFFFF', itemColor: 'white',  }}   
+        <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Picker
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, marginTop: 60, color: 'white', borderRadius: 10 }}
                 selectedValue={branch}
-                onValueChange={(itemValue, itemIndex) =>
-                setBranch(itemValue)
-            }>
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="sucursal 1" value="sucursal 1" />
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="sucursal 2" value="sucursal 2" />
+                onValueChange={(itemValue, itemIndex) => setBranch(itemValue)}
+            >
+                <Picker.Item label="Sucursal" />
+                <Picker.Item label="sucursal 1" value="sucursal 1" />
+                <Picker.Item label="sucursal 2" value="sucursal 2" />
             </Picker>
 
-            
-            <Picker style={{ height: 24, width: '50%', backgroundColor: '#FFFFFF', itemColor: 'white' }}   
+            <Picker
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
                 selectedValue={title}
-                onValueChange={(itemValue, itemIndex) =>
-                    setTitle(itemValue)
-            }>
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="La sirenita" value="La sirenita" />
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="El Caballero Oscuro" value="El Caballero Oscuro" />
+                onValueChange={(itemValue, itemIndex) => setTitle(itemValue)}
+            >
+                <Picker.Item label="Titulo" />
+                <Picker.Item label="La sirenita" value="La sirenita" />
+                <Picker.Item label="El Caballero Oscuro" value="El Caballero Oscuro" />
             </Picker>
 
-            <Picker style={{ height: 24, width: '100%', backgroundColor: '#FFFFFF', itemColor: 'white' }}   
-                selectedValue={genre}
-                onValueChange={(itemValue, itemIndex) =>
-                setGenre(itemValue)
-            }>
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="acción" value="acción" />
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="fantasía" value="fantasía" />
-            </Picker>
-
-            <Picker style={{ height: 24, width: '50%', backgroundColor: '#FFFFFF', itemColor: 'white' }}   
+            <Picker
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
                 selectedValue={rating}
-                onValueChange={(itemValue, itemIndex) =>
-                setRating(itemValue)
-            }>
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="menor a 3" value="menor a 3" />
-                <Picker.Item className="h-24 w-24 bg-white text-white" label="mayor a 3" value="mayor a 3" />
+                onValueChange={(itemValue, itemIndex) => setRating(itemValue)}
+            >
+                <Picker.Item label="Calificacion"  />
+                <Picker.Item label="menor a 3" value="menor a 3" />
+                <Picker.Item label="mayor a 3" value="mayor a 3" />
             </Picker>
 
+            <Picker
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
+                selectedValue={genre}
+                onValueChange={(itemValue, itemIndex) => setGenre(itemValue)}
+            >
+                <Picker.Item label="Genero"  />
+                <Picker.Item label="acción" value="acción" />
+                <Picker.Item label="fantasía" value="fantasía" />
+            </Picker>
+
+           
         </ScrollView>
-      
-)}
+    )
+}

@@ -113,7 +113,7 @@ function MyTabs() {
             }} name='Main User' component={MainPageUser} />
 
             <Stack.Screen options={{
-                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#1E1E1E' },
+                headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='User Profile' component={UserProfile} />
 
