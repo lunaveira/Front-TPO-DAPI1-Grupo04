@@ -22,6 +22,8 @@ export default function MainPageUser() {
             </View>
 
             <Button color='#FF3131' title="PELICULA"  onPress={() => navigation.navigate({ name: 'Movie Details' })}/>
+            
+            <Image className='h-194 w-148 mt-2'source={require('../images/theDarkKnight.jpeg')} onPress={() => navigation.navigate({ name: 'Movie Details' })} />
 
             <MoviesGrid />
            
