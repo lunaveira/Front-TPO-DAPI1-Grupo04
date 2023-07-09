@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { atob } from 'react-native-quick-base64';
+import HomeButton from "../components/HomeButton";
 
 export default function ProfileLogo({ navigation }) {
     const [nombreEmpresa, setNombreEmpresa] = useState("");
@@ -60,7 +61,7 @@ export default function ProfileLogo({ navigation }) {
 
 
 
-            <Button onPress={handleLogout} title='logout'></Button>
+            <HomeButton color='#FF3131' handler={handleLogout} title='logout'></HomeButton>
         </View>
     );
 }

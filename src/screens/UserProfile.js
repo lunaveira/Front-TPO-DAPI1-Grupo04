@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
+import HomeButton from "../components/HomeButton";
 
 
-export default function UserProfile() {
+export default function UserProfile({navigation}) {
     const [Name, setName] = useState('');
     const [Surname, setSurname] = useState('');
 
@@ -21,11 +22,7 @@ export default function UserProfile() {
             <TextInput value={Surname} onChangeText={(text) => setSurname(text)} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-1 w-96 mt-5 h-12 mx-2.5 text-lg text-white text-center " 
             placeholder="Apellido" placeholderTextColor="white" />
 
-            <View contentContainerStyle={{ alignItems: 'stretch'}} style={{ backgroundColor: '#1E1E1E', flex: 1, flexDirection:"row", 
-            justifyContent:"space-between", flexWrap:"wrap-reverse", alignItems:"stretch" }}>
-                <Text className="text-white text-base text-left ">Atras</Text>
-                <Text className="text-white text-base text-right ">Dar de baja cuenta</Text>
-            </View>
+            <HomeButton color='#FF3131' title='Logout' handler={()=>navigation.navigate({name:'Home'})} />
 
         </ScrollView>
 
