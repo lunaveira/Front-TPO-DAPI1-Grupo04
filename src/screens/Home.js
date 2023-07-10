@@ -31,14 +31,23 @@ export default function Home({navigation}) {
 
       
 
-      <View className="items-center">
+      {/* <View className="items-center">
 
       <HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
       color='#565656' title='Continuar con Google' handler={() => authorize()}> 
      
        </HomeButton>
 
-       </View>
+       </View> */}
+
+<View className="items-center">
+
+<HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
+color='#565656' title='Continuar con Google' handler={()=>navigation.navigate({name:'Main User'})}> 
+
+ </HomeButton>
+
+ </View>
 
     
 
@@ -49,7 +58,7 @@ export default function Home({navigation}) {
 
       <Text className='text-3xl text-center pt-10 text-white' >¿Tenes una sala de cine?</Text>
 
-      <Button onPress={() => navigation.navigate({name:'Main User'})} title='Usuarios'></Button>
+      {/* <Button onPress={() => navigation.navigate({name:'Main User'})} title='Usuarios'></Button> */}
 
       <HomeButton color='#FF3131' title='Iniciar sesion' handler={()=>navigation.navigate({name:'Login'})}></HomeButton>
 

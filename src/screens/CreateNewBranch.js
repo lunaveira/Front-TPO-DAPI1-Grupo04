@@ -99,12 +99,12 @@ export default function CreateNewBranch({ navigation }) {
       <TextInput value={country}
         onChangeText={setCountry} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
         h-13 mx-2.5 text-base text-white text-center"
-        placeholder="Pais / esto tiene q ser dropdown" placeholderTextColor="white" />
+        placeholder="Pais" placeholderTextColor="white" />
 
       <TextInput value={province}
         onChangeText={setProvince} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
         h-13 mx-2.5 text-base text-white text-center"
-        placeholder="Provincia / esto tiene q ser dropdown" placeholderTextColor="white" />
+        placeholder="Provincia" placeholderTextColor="white" />
 
       <TextInput value={location}
         onChangeText={setLocation} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
