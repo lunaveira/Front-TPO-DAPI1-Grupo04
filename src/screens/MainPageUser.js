@@ -22,7 +22,7 @@ export default function MainPageUser() {
                 />
             </View>
             <TouchableOpacity onPress={() => navigation.navigate({ name: 'Movie Details' })}>
-                <Image className='h-60 w-48 mt-2'source={require('../images/theDarkKnight.jpeg')} />
+                <Image className='h-48 w-36 mt-2 mr-28'source={require('../images/theDarkKnight.jpeg')} />
             </TouchableOpacity>
             <MoviesGrid />
            

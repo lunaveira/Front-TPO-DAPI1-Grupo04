@@ -124,7 +124,7 @@ function MyTabs() {
                 headerBackVisible: true,
                 headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827' },
                 headerTitleColor: '#111827'
-            }} name='Filters Movies' component={FiltersMovies} />
+            }} name='Filtros' component={FiltersMovies} />
 
 
 
