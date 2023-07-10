@@ -26,6 +26,7 @@ import MainPageUser from './screens/MainPageUser';
 import FiltersMovies from './screens/FiltersMovies';
 import UserProfile from './screens/UserProfile';
 import MovieDetails from './screens/MovieDetails';
+import BuyTickets from './screens/BuyTickets';
 
 const Stack = createNativeStackNavigator();
 
@@ -129,6 +130,12 @@ function MyTabs() {
                 headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Movie Details' component={MovieDetails} />
+            
+            
+            <Stack.Screen options={{
+                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
+            }} name='Buy Tickets' component={BuyTickets} />
 
         </Stack.Navigator>
     );

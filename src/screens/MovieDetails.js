@@ -1,13 +1,10 @@
-import { Text, ScrollView, TextInput, View, Image } from "react-native";
-import { useState } from 'react';
-import MoviesGrid from "../components/MoviesGrid";
-import { Image } from "react-native";
+import { Text, ScrollView, View, Image } from "react-native";
 
 export default function MovieDetails() {
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
       <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}>
-        <Image source={require("../components/movie-poster.jpg")} style={{ width: 200, height: 300 }} />
+        <Image source={require("../images/theDarkKnight.jpg")} style={{ width: 200, height: 300 }} /> 
         <View style={{ marginLeft: 20 }}>
           <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>El caballero de la noche</Text>
           <Text style={{ color: "white", fontSize: 16, textAlign: "left", marginTop: 10 }}>
