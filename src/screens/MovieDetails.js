@@ -1,13 +1,14 @@
 import { Text, ScrollView, View, Image } from "react-native";
+import HomeButton from "../components/HomeButton";
 
-export default function MovieDetails() {
+export default function MovieDetails({navigation}) {
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
-      <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", marginTop: 5 }}>
 
         <View style={{ width: "80%", marginLeft: "5%" }}>
 
-          <Image source={require("../images/theDarkKnight.jpeg")} style={{ width: "100%", height: "50%", aspectRatio: 2/3, resizeMode: "contain" }} />
+          <Image source={require("../images/theDarkKnight.jpeg")} style={{ width: "100%", height: "45%", aspectRatio: 2/3, resizeMode: "contain" }} />
 
           <View className= 'flex-row-reverse'>
 
@@ -18,6 +19,8 @@ export default function MovieDetails() {
             <View style={{width: 80, height: 80, borderRadius: 45, backgroundColor: "white" }}> 
             <Text className='text-black text-sm text-center mt-4'>Duracion 120'</Text>
             </View>
+
+           
           </View>
 
           </View>
@@ -34,11 +37,18 @@ export default function MovieDetails() {
               Puntuación: 5.0
             </Text>
 
+             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
+              Ver comentarios (2)
+            </Text>
+
           </View>
+
         
         </View>
 
       </View>
+
+      <HomeButton color='#FF3131' title='Comprar entradas' handler={()=>navigation.navigate({name:'Buy Tickets'})}></HomeButton>
     </ScrollView>
   );
 }
