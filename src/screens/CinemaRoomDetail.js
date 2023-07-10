@@ -98,16 +98,20 @@ export default function CinemaRoomDetail() {
         </Text>
       </View>
 
-      <View className="mb-5 mt-5">
+      <View className='flex-row mt-4'>
+
+      <View className="mr-4">
         <HomeButton color="#FF3131" title="Editar sala" handler={handlerEdit} />
       </View>
 
-      <View className="mb-5 mt-5">
+      <View>
         <HomeButton
           color="#FF3131"
           title="Eliminar sala"
           handler={handleDeleteCinemaRoom}
         />
+      </View>
+
       </View>
 
       <View className="mb-5 mt-5">

@@ -51,7 +51,7 @@ export default function ProfileLogo({ navigation }) {
         <View className=" items-center bg-gray-900 h-screen">
 
 
-            <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-10 h-14 mx-2.5 text-base text-white text-center " >
+            <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-40 h-14 mx-2.5 text-base text-white text-center " >
                 <Text className="text-white text-base text-center ">{nombreEmpresa && nombreEmpresa}</Text>
             </View>
 

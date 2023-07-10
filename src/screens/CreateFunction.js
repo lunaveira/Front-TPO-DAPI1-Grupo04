@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker";
 import { ScrollView } from "react-native";
+import HomeButton from "../components/HomeButton";
 
 export default function CreateFunction({ navigation }) {
   const [dia, setDia] = useState("");
@@ -58,7 +59,7 @@ export default function CreateFunction({ navigation }) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.replace("Functions",idSala);
+        navigation.replace("Functions", idSala);
       } else {
         console.error("Error al crear la función");
       }
@@ -80,7 +81,7 @@ export default function CreateFunction({ navigation }) {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "#000", flex: 1 }}
+      style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
       contentContainerStyle={{ alignItems: "center", justifyContent: "center", padding: 20 }}
     >
       <TextInput
@@ -107,10 +108,10 @@ export default function CreateFunction({ navigation }) {
         onChangeText={setGenero}
       />
 
-      <Button title="Cargar Imagen" onPress={cargarImagen} />
+      <HomeButton color='#565656' title="Cargar Imagen" handler={cargarImagen} />
 
       <TextInput
-        style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
+        style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff", marginTop: 10 }}
         placeholder="Día (Día/Mes/Año)"
         placeholderTextColor="#888"
         value={dia}
@@ -133,7 +134,7 @@ export default function CreateFunction({ navigation }) {
         onChangeText={setIdSala}
       />
 
-      <Button title="Crear Función" onPress={crearFuncion} />
+      <HomeButton color='#FF3131' title="Crear Función" handler={crearFuncion} />
     </ScrollView>
   );
 }
