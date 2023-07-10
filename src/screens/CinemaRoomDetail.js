@@ -41,7 +41,10 @@ export default function CinemaRoomDetail() {
   };
 
   const handlerFunciones = () => {
-    navigation.navigate("Functions");
+    navigation.navigate("Functions",{
+      numero_sala: numero_sala,
+      id_sucursal: id_sucursal,
+    });
   };
 
   const handleDeleteCinemaRoom = async () => {

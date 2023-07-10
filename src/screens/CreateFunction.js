@@ -43,14 +43,12 @@ export default function CreateFunction({ navigation }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            titulo: titulo,
+            descripcion: descripcion,
+            genero: genero,
+            imagen: imagen,
             dia: fechaFormateada,
             horario: horario,
-            pelicula: {
-              titulo: titulo,
-              descripcion: descripcion,
-              genero: genero,
-              imagen: imagen,
-            },
             id_sala: idSala,
           }),
         }
@@ -60,7 +58,7 @@ export default function CreateFunction({ navigation }) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.navigate("Functions");
+        navigation.replace("Functions",idSala);
       } else {
         console.error("Error al crear la función");
       }
