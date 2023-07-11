@@ -1,16 +1,20 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 
-export default function ListFunctions(props) {
+const ListFunctions = ({ funciones }) => {
   return (
-    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
-      {props.funcion.map((funciones) => (
-        <TouchableOpacity key={funciones.id} onPress={() => props.handler(funciones.id)}>
-          <View style={{ width: 250, backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}>
-            <Text className="text-white text-lg text-center">{funciones.id_pelicula}</Text>
+    <ScrollView contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }} style={{ paddingHorizontal: 5, backgroundColor: '#000' }}>
+      {funciones.map((funcion) => (
+        <TouchableOpacity key={funcion.id} onPress={() => {/* Acciones al hacer clic en una función */}}>
+          <View style={{ width: 250, backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10 }}>
+            <Text style={{ color: "#fff", fontSize: 16, textAlign: 'center' }}>{funcion.id_pelicula}</Text>
+            <Text style={{ color: "#fff", fontSize: 16, textAlign: 'center' }}>Día: {funcion.dia}</Text>
+            <Text style={{ color: "#fff", fontSize: 16, textAlign: 'center' }}>Horario: {funcion.horario}</Text>
           </View>
         </TouchableOpacity>
       ))}
     </ScrollView>
   );
-}
+};
+
+export default ListFunctions;
