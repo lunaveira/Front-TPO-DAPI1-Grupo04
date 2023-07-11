@@ -59,6 +59,7 @@ export default function CreateFunction({ navigation,route }) {
 
       
       if (response.status === 201) {
+        console.log
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
