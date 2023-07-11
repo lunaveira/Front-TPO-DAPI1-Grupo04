@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native";
+import ListFunctions from '../components/ListFunctions';
 
 const Functions = ({ navigation, route }) => {
   const [data, setData] = useState([]);
   const [idSala, setIdSala] = useState([]);
+  const [funcion, setFuncion] = useState([]);
   const { id_sucursal, numero_sala } = route.params;
-  const id_sala=idSala.id;
+  const id_sala = idSala.id;
+
+ 
 
   useEffect(() => {
     const fetchCinemaRoomById = async () => {
@@ -31,7 +35,7 @@ const Functions = ({ navigation, route }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${idSala.id}`);
+        const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${id_sala}`);
         const result = await response.json();
         console.log('Datos de la funcion:', result);
         setData(result);
@@ -46,9 +50,9 @@ const Functions = ({ navigation, route }) => {
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
-      <Button title="Crear función" onPress={() => navigation.navigate('Create Function',{id_sala:id_sala} )} />
+      <Button title="Crear función" onPress={() => navigation.navigate('Create Function', { id_sala: id_sala })} />
 
-
+      {/* 
       {data && (
         <View>
           {data.map((funcion) => (
@@ -69,7 +73,9 @@ const Functions = ({ navigation, route }) => {
             </View>
           ))}
         </View>
-      )}
+      )} */}
+
+      <ListFunctions funcion={funcion} />
     </ScrollView>
   );
 };
