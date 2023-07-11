@@ -3,14 +3,15 @@ import { View, Text, TextInput, Button } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker";
 import { ScrollView } from "react-native";
 
-export default function CreateFunction({ navigation }) {
+export default function CreateFunction({ navigation,route }) {
   const [dia, setDia] = useState("");
   const [horario, setHorario] = useState("");
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [genero, setGenero] = useState("");
   const [imagen, setImagen] = useState("");
-  const [idSala, setIdSala] = useState("");
+  const { id_sala } = route.params;
+  console.log(id_sala);
 
   const crearFuncion = async () => {
     try {
@@ -31,13 +32,12 @@ export default function CreateFunction({ navigation }) {
           descripcion: descripcion,
           genero: genero,
           imagen: imagen,
-        },
-        id_sala: idSala,
+        },idSala:id_sala
+        
       });
 
-      const response = await fetch(
-        "https://backendmobile-production.up.railway.app/api/funciones",
-        {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/funciones${id_sala}/create`, {
+        
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -48,17 +48,17 @@ export default function CreateFunction({ navigation }) {
             genero: genero,
             imagen: imagen,
             dia: fechaFormateada,
-            horario: horario,
-            id_sala: idSala,
+            horario: horario
           }),
         }
       );
 
+      
       if (response.status === 201) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.replace("Functions",idSala);
+        navigation.replace("Functions",id_sala);
       } else {
         console.error("Error al crear la función");
       }
@@ -125,13 +125,6 @@ export default function CreateFunction({ navigation }) {
         onChangeText={setHorario}
       />
 
-      <TextInput
-        style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
-        placeholder="ID de Sala"
-        placeholderTextColor="#888"
-        value={idSala}
-        onChangeText={setIdSala}
-      />
 
       <Button title="Crear Función" onPress={crearFuncion} />
     </ScrollView>
