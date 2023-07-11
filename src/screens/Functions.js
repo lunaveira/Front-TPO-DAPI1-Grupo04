@@ -80,4 +80,6 @@ const Functions = ({ navigation, route }) => {
   );
 };
 
+
+// hola esto es para poder pushear
 export default Functions;
