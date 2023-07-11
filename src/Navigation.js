@@ -28,7 +28,6 @@ import UserProfile from './screens/UserProfile';
 import MovieDetails from './screens/MovieDetails';
 import BuyTickets from './screens/BuyTickets';
 import SelectSeats from './screens/SelectSeats';
-import Comments from './screens/Comments';
 
 const Stack = createNativeStackNavigator();
 
@@ -124,7 +123,7 @@ function MyTabs() {
                 headerBackVisible: true,
                 headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827' },
                 headerTitleColor: '#111827'
-            }} name='Filtros' component={FiltersMovies} />
+            }} name='Filters Movies' component={FiltersMovies} />
 
 
 
@@ -143,11 +142,6 @@ function MyTabs() {
                 headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Select Seats' component={SelectSeats} />
-
-            <Stack.Screen options={{
-                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
-                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
-            }} name='Comentarios' component={Comments} />
 
         </Stack.Navigator>
     );

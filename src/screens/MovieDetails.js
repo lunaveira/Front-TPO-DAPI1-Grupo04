@@ -1,4 +1,4 @@
-import { Text, ScrollView, View, Image, TouchableOpacity } from "react-native";
+import { Text, ScrollView, View, Image } from "react-native";
 import HomeButton from "../components/HomeButton";
 
 export default function MovieDetails({navigation}) {
@@ -37,13 +37,9 @@ export default function MovieDetails({navigation}) {
               Puntuación: 5.0
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate({name:'Comentarios'})}>
-
              <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
               Ver comentarios (2)
             </Text>
-
-            </TouchableOpacity>
 
           </View>
 

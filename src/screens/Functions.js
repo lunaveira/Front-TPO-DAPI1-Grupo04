@@ -7,6 +7,7 @@ const Functions = ({ navigation, route }) => {
   const [data, setData] = useState([]);
   const [idSala, setIdSala] = useState([]);
   const { id_sucursal, numero_sala } = route.params;
+  const id_sala=idSala.id;
 
   useEffect(() => {
     const fetchCinemaRoomById = async () => {
@@ -45,7 +46,8 @@ const Functions = ({ navigation, route }) => {
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
-      <Button title="Crear función" onPress={() => navigation.navigate({ name: 'Create Function' })} />
+      <Button title="Crear función" onPress={() => navigation.navigate('Create Function',{id_sala:id_sala} )} />
+
 
       {data && (
         <View>

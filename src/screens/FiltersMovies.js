@@ -12,7 +12,7 @@ export default function FiltersMovies() {
     return (
         <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
             <Picker
-                style={{ height: 40, width: '90%', backgroundColor: 'gray', marginBottom: 10, marginTop: 60, color: 'white', borderRadius: 10 }}
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, marginTop: 60, color: 'white', borderRadius: 10 }}
                 selectedValue={branch}
                 onValueChange={(itemValue, itemIndex) => setBranch(itemValue)}
             >
@@ -22,7 +22,7 @@ export default function FiltersMovies() {
             </Picker>
 
             <Picker
-                style={{ height: 40, width: '90%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
                 selectedValue={title}
                 onValueChange={(itemValue, itemIndex) => setTitle(itemValue)}
             >
@@ -32,7 +32,7 @@ export default function FiltersMovies() {
             </Picker>
 
             <Picker
-                style={{ height: 40, width: '90%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
                 selectedValue={rating}
                 onValueChange={(itemValue, itemIndex) => setRating(itemValue)}
             >
@@ -42,7 +42,7 @@ export default function FiltersMovies() {
             </Picker>
 
             <Picker
-                style={{ height: 40, width: '90%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
+                style={{ height: 40, width: '80%', backgroundColor: 'gray', marginBottom: 10, color: 'white', borderRadius: 10 }}
                 selectedValue={genre}
                 onValueChange={(itemValue, itemIndex) => setGenre(itemValue)}
             >
