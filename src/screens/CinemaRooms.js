@@ -4,6 +4,7 @@ import ListCinemaRoom from "../components/ListCinemaRoom";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { atob } from 'react-native-quick-base64';
+import HomeButton from '../components/HomeButton';
 
 export default function CinemaRooms({ route }) {
   const [cinemaRooms, setCinemaRooms] = useState([]);
@@ -60,8 +61,8 @@ export default function CinemaRooms({ route }) {
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ color: 'white', fontSize: 16 }}>Estás en la sucursal {nombreSucursal}</Text>
   
-      <Button title="Crear sala" onPress={() => navigation.navigate('Create Cinema Room', { id_sucursal: id_sucursal })} />
-      <Text className="text-center text-lg text-white mt-5">Tus salas</Text>
+      <HomeButton color='red' title="Crear sala" handler={() => navigation.navigate('Create Cinema Room', { id_sucursal: id_sucursal })} />
+      <Text className="text-center text-lg text-white mt-5 mb-5">Tus salas</Text>
       <ListCinemaRoom cinemaRooms={cinemaRooms} handler={handlePress} />
     </ScrollView>
   );

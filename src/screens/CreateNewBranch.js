@@ -66,7 +66,7 @@ export default function CreateNewBranch({ navigation }) {
         if (response.status === 200) {
           // La sucursal se creó exitosamente
 
-         
+
           navigation.replace("Main Owner");
 
         } else if (response.status === 400) {
@@ -92,33 +92,27 @@ export default function CreateNewBranch({ navigation }) {
 
 
       <TextInput value={branchName}
-        onChangeText={setBranchName} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 
-        mx-2.5 text-base text-white text-center "
+        onChangeText={setBranchName} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Nombre de la nueva sucursal" placeholderTextColor="white" />
 
       <TextInput value={country}
-        onChangeText={setCountry} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center"
+        onChangeText={setCountry} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Pais" placeholderTextColor="white" />
 
       <TextInput value={province}
-        onChangeText={setProvince} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
-        h-13 mx-2.5 text-base text-white text-center"
+        onChangeText={setProvince} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Provincia" placeholderTextColor="white" />
 
       <TextInput value={location}
-        onChangeText={setLocation} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5
-        h-13 mx-2.5 text-base text-white text-center"
+        onChangeText={setLocation} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Localidad" placeholderTextColor="white" />
 
       <TextInput value={street}
-        onChangeText={setStreet} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center"
+        onChangeText={setStreet} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Calle" placeholderTextColor="white" />
 
       <TextInput keyboardType='numeric' value={streetNumber}
-        onChangeText={userInput => setStreetNumber(Number(userInput))} className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center"
+        onChangeText={userInput => setStreetNumber(Number(userInput))} style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Altura" placeholderTextColor="white" />
 
 
@@ -126,29 +120,31 @@ export default function CreateNewBranch({ navigation }) {
       <TextInput keyboardType='numeric'
         value={functionPrice}
         onChangeText={userInput => setFunctionPrice(Number(userInput))}
-        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 
-        h-13 mx-2.5 text-base text-white text-center"
+        style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Precio de la función"
         placeholderTextColor="white" />
 
 
-      <Picker style={{ height: 24, width: '100%', backgroundColor: 'white' }}
+      <Picker style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         selectedValue={isTemporarilyClosed}
         onValueChange={(itemValue, itemIndex) =>
           setIsTemporarilyClosed(itemValue)
         }>
+        <Picker.Item className="h-24 w-24 bg-white text-white" label="Cerrado temporalmente" />
         <Picker.Item className="h-24 w-24 bg-white text-white" label="Si" value={true} />
         <Picker.Item className="h-24 w-24 bg-white text-white" label="No" value={false} />
       </Picker>
 
 
+      <View>
 
+        <HomeButton color='#333' title="cargar imagen" handler={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></HomeButton>
 
-      <Button title="cargar imagen" onPress={() => launchImageLibrary({ mediaType: 'photo', maxWidth: 10, maxHeight: 10, includeBase64: true }).then(res => setPhoto64(res.assets[0])).catch(err => console.log(err))}></Button>
+        <Image source={photo64} />
 
-      <Image source={photo64} />
+      </View>
 
-      <Button onPress={handleCreateBranch} title='Siguiente'></Button>
+      <HomeButton color='#FF3131' handler={handleCreateBranch} title='Siguiente'></HomeButton>
 
 
     </ScrollView>

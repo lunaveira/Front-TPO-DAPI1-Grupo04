@@ -6,8 +6,8 @@ export default function ListCinemaRoom(props) {
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
       {props.cinemaRooms.map((cinemaRoom) => (
         <TouchableOpacity key={cinemaRoom.id} onPress={() => props.handler(cinemaRoom.numero_sala)}>
-          <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-            <Text className="text-white">{cinemaRoom.numero_sala}</Text>
+          <View style={{ width: 250, backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}>
+            <Text className="text-white text-lg text-center">{cinemaRoom.numero_sala}</Text>
           </View>
         </TouchableOpacity>
       ))}

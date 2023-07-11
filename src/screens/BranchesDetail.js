@@ -86,10 +86,6 @@ export default function BranchesDetail({ route }) {
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
 
-      <Button
-        onPress={() => navigation.navigate('Cinema Rooms', { id_sucursal: route.params.sucursalId })}
-        title="Ver salas"
-      />
 
       <Text className="text-white text-center text-lg mt-5">Detalle de la sucursal </Text>
       <ListDetailBranches branches={branches} />
@@ -100,7 +96,12 @@ export default function BranchesDetail({ route }) {
         <View className="mx-2">
           <HomeButton color="red" title="Eliminar" handler={handleDelete} />
         </View>
+
       </View>
+      <HomeButton color='red'
+        handler={() => navigation.navigate('Cinema Rooms', { id_sucursal: route.params.sucursalId })}
+        title="Ver salas"
+      />
     </ScrollView>
   );
 }
