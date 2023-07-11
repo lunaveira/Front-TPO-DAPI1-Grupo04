@@ -53,7 +53,7 @@ const Functions = ({ navigation, route }) => {
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
 
       <View className='mb-10 mt-5'>
-      <HomeButton color='red' title="Crear función" handler={() => navigation.navigate('Create Function', { id_sala: idSala?.id })} />
+      <HomeButton color='red' title="Crear función" handler={() => navigation.navigate('Create Function', { id_sala: idSala?.id, id_sucursal, numero_sala })} />
 
       </View>
 

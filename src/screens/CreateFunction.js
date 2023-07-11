@@ -10,8 +10,10 @@ export default function CreateFunction({ navigation,route }) {
   const [descripcion, setDescripcion] = useState("");
   const [genero, setGenero] = useState("");
   const [imagen, setImagen] = useState("");
-  const { id_sala } = route.params;
+  const { id_sala, id_sucursal, numero_sala } = route.params;
   console.log(id_sala);
+  console.log (id_sucursal);
+  console.log(numero_sala);
 
 
   //S
@@ -63,7 +65,7 @@ export default function CreateFunction({ navigation,route }) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.replace("Functions",id_sala);
+        navigation.replace("Functions",{id_sucursal:id_sucursal, numero_sala:numero_sala});
       } else {
         console.error("Error al crear la función");
       }
