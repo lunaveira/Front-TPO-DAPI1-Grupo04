@@ -9,6 +9,7 @@ const FunctionDetail = () => {
   const navigation = useNavigation();
   const { functionId } = useRoute().params;
   const [functionData, setFunctionData] = useState(null);
+  console.log("id funcion:",functionId);
 
   useEffect(() => {
     const fetchFunctionData = async () => {

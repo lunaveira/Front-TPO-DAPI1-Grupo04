@@ -49,12 +49,14 @@ const Functions = () => {
   }, [idSala]);
 
   const handleFunctionPress = (functionId) => {
+    console.log('ID de la función:', functionId);
     setSelectedFunctionId(functionId);
     navigation.navigate('Functions Detail', { functionId });
   };
 
   console.log('id_sala:', idSala?.id);
-
+  const functionIds = funciones.map((funcion) => funcion.id);
+  console.log('IDs de las funciones:', functionIds);
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
