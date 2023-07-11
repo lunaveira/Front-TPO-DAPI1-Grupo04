@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import ListFunctions from '../components/ListFunctions';
+import HomeButton from '../components/HomeButton';
 
 const Functions = ({ navigation, route }) => {
   const { id_sucursal, numero_sala } = route.params;
@@ -50,7 +51,11 @@ const Functions = ({ navigation, route }) => {
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
-      <Button title="Crear función" onPress={() => navigation.navigate('Create Function', { id_sala: idSala?.id })} />
+
+      <View className='mb-10 mt-5'>
+      <HomeButton color='red' title="Crear función" handler={() => navigation.navigate('Create Function', { id_sala: idSala?.id })} />
+
+      </View>
 
       {funciones.length > 0 ? (
         <ListFunctions funciones={funciones} idSala={idSala?.id} />
