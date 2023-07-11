@@ -84,7 +84,7 @@ export default function CreateFunction({ navigation,route }) {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "#000", flex: 1 }}
+      style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}
       contentContainerStyle={{ alignItems: "center", justifyContent: "center", padding: 20 }}
     >
       <TextInput
