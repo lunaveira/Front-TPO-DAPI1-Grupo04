@@ -12,6 +12,7 @@ export default function CreateFunction({ navigation,route }) {
   const [imagen, setImagen] = useState("");
   const { id_sala } = route.params;
   console.log(id_sala);
+  //S
 
   const crearFuncion = async () => {
     try {
