@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import ListFunctions from '../components/ListFunctions';
 import HomeButton from '../components/HomeButton';
 
-const Functions = ({ navigation, route }) => {
-  const { id_sucursal, numero_sala } = route.params;
+const Functions = () => {
+  const navigation = useNavigation();
+  const { id_sucursal, numero_sala } = useRoute().params;
   const [idSala, setIdSala] = useState(null);
   const [funciones, setFunciones] = useState([]);
+  const [selectedFunctionId, setSelectedFunctionId] = useState(null);
 
   useEffect(() => {
     const fetchCinemaRoomById = async () => {
@@ -46,6 +48,11 @@ const Functions = ({ navigation, route }) => {
     fetchData();
   }, [idSala]);
 
+  const handleFunctionPress = (functionId) => {
+    setSelectedFunctionId(functionId);
+    navigation.navigate('Functions Detail', { functionId });
+  };
+
   console.log('id_sala:', idSala?.id);
 
   return (
@@ -53,12 +60,11 @@ const Functions = ({ navigation, route }) => {
       <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Funciones</Text>
 
       <View className='mb-10 mt-5'>
-      <HomeButton color='red' title="Crear función" handler={() => navigation.navigate('Create Function', { id_sala: idSala?.id, id_sucursal, numero_sala })} />
-
+        <HomeButton color='red' title="Crear función" handler={() => navigation.navigate('Create Function', { id_sala: idSala?.id, id_sucursal, numero_sala })} />
       </View>
 
       {funciones.length > 0 ? (
-        <ListFunctions funciones={funciones} idSala={idSala?.id} />
+        <ListFunctions funciones={funciones} idSala={idSala?.id} onFunctionPress={handleFunctionPress} />
       ) : (
         <Text style={{ color: 'white' }}>No se encontraron funciones</Text>
       )}

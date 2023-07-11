@@ -1,54 +1,53 @@
-import { View, Text, ScrollView } from "react-native";
-import HomeButton from "../components/HomeButton";
-import { useNavigation } from "@react-navigation/native";
+// Pantalla FunctionDetail
 
+import React, { useEffect, useState } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import HomeButton from '../components/HomeButton';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function FunctionDetail() {
+const FunctionDetail = () => {
+  const navigation = useNavigation();
+  const { functionId } = useRoute().params;
+  const [functionData, setFunctionData] = useState(null);
 
-    const navigation = useNavigation();
-
-    const handlerEdit = () => {
-        navigation.navigate("Edit Function");
+  useEffect(() => {
+    const fetchFunctionData = async () => {
+      try {
+        const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${functionId}/getbyid`);
+        if (response.ok) {
+          const data = await response.json();
+          setFunctionData(data);
+        } else {
+          console.error('Error al obtener los datos de la función:', response.status);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
     };
 
-    return (
+    fetchFunctionData();
+  }, [functionId]);
 
-        <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+  const handleEdit = () => {
+    navigation.navigate('Edit Function');
+  };
 
-            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-                <Text className="text-white">Titulo</Text>
+  return (
+    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+      <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+        <Text className="text-white">Titulo: {functionData?.titulo}</Text>
+      </View>
 
-            </View>
+      <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+        <Text className="text-white">Sinopsis: {functionData?.descripcion}</Text>
+      </View>
 
-            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-                <Text className="text-white">Genero</Text>
+      <HomeButton color="#FF3131" title="Editar" handler={handleEdit} />
+      <HomeButton color="#FF3131" title="Eliminar" />
+    </ScrollView>
+  );
+};
 
-            </View>
-
-            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-                <Text className="text-white">Duracion</Text>
-
-            </View>
-
-            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-                <Text className="text-white">Sinopsis</Text>
-
-            </View>
-
-           
-
-            <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
-                <Text className="text-white">Agregar imagen</Text>
-
-            </View>
+export default FunctionDetail;
 
 
-
-
-
-            <HomeButton color='#FF3131' title="Editar" handler={handlerEdit} />
-            <HomeButton color='#FF3131' title="Eliminar" />
-
-        </ScrollView>
-    );
-}
