@@ -12,6 +12,8 @@ export default function CreateFunction({ navigation,route }) {
   const [imagen, setImagen] = useState("");
   const { id_sala } = route.params;
   console.log(id_sala);
+
+
   //S
 
   const crearFuncion = async () => {
@@ -37,7 +39,7 @@ export default function CreateFunction({ navigation,route }) {
         
       });
 
-      const response = await fetch(`https://backendmobile-production.up.railway.app/api/funciones${id_sala}/create`, {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/funciones/${id_sala}/create`, {
         
           method: "POST",
           headers: {
@@ -53,6 +55,7 @@ export default function CreateFunction({ navigation,route }) {
           }),
         }
       );
+      console.log(id_sala)
 
       
       if (response.status === 201) {
