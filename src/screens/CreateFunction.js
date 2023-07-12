@@ -65,7 +65,7 @@ export default function CreateFunction({ navigation,route }) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.replace("Functions",{id_sucursal:id_sucursal, numero_sala:numero_sala});
+        navigation.navigate("Functions",{id_sucursal:id_sucursal, numero_sala:numero_sala});
       } else {
         console.error("Error al crear la función");
       }

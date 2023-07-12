@@ -1,13 +1,13 @@
 // Pantalla FunctionDetail
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 import HomeButton from '../components/HomeButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const FunctionDetail = () => {
   const navigation = useNavigation();
-  const { functionId } = useRoute().params;
+  const { functionId, id_sucursal } = useRoute().params;
   const [functionData, setFunctionData] = useState(null);
   console.log("id funcion:",functionId);
 
@@ -33,6 +33,26 @@ const FunctionDetail = () => {
     navigation.navigate('Edit Function');
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/funciones/${functionId}/deletebyid`, {
+        method: 'DELETE',
+      });
+
+      if (response.status === 204) {
+        // Función eliminada exitosamente
+        Alert.alert('Eliminación exitosa', 'La función se ha eliminado correctamente');
+        navigation.goBack();
+      } else if (response.status === 404) {
+        console.error('No se encontró la función');
+      } else {
+        console.error('Error al eliminar la función:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
+
   return (
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
       <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
@@ -44,7 +64,7 @@ const FunctionDetail = () => {
       </View>
 
       <HomeButton color="#FF3131" title="Editar" handler={handleEdit} />
-      <HomeButton color="#FF3131" title="Eliminar" />
+      <HomeButton color="#FF3131" title="Eliminar" handler={handleDelete} />
     </ScrollView>
   );
 };
