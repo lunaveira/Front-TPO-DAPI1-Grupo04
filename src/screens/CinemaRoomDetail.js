@@ -8,8 +8,9 @@ export default function CinemaRoomDetail() {
   const route = useRoute();
 
   const { id_sucursal, numero_sala } = route.params;
-  const [filas, setFilas] = useState(0);
-  const [columnas, setColumnas] = useState(0);
+
+
+  const [totalAsientos, setTotalAsientos] = useState(0);
 
   useEffect(() => {
     fetchCinemaRoomDetails();
@@ -23,8 +24,14 @@ export default function CinemaRoomDetail() {
 
       if (response.ok) {
         const sala = await response.json();
-        setFilas(sala.cantidad_filas);
-        setColumnas(sala.cantidad_columnas);
+        const cantidad_filas = sala.fila;
+        const cantidad_columnas = sala.columna;
+        if (cantidad_filas && cantidad_columnas) {
+          const total = cantidad_filas * cantidad_columnas;
+          setTotalAsientos(total);
+        } else {
+          console.log("Datos de cantidad de filas o columnas faltantes");
+        }
       } else {
         console.log("Error al obtener el detalle de la sala de cine");
       }
@@ -41,7 +48,7 @@ export default function CinemaRoomDetail() {
   };
 
   const handlerFunciones = () => {
-    navigation.navigate("Functions",{
+    navigation.navigate("Functions", {
       numero_sala: numero_sala,
       id_sucursal: id_sucursal,
     });
@@ -80,15 +87,11 @@ export default function CinemaRoomDetail() {
       contentContainerStyle={{ alignItems: "center" }}
       style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
     >
-      <View className="items-center bg-red-400 w-80 h-20 mt-28 rounded-lg">
-        <Text className="text-white text-center text-xl mt-4">
-          Cantidad de filas: {filas}
-        </Text>
-      </View>
+
 
       <View className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5">
         <Text className="text-white text-center text-xl mt-4">
-          Cantidad de columnas: {columnas}
+          Total de asientos: {totalAsientos}
         </Text>
       </View>
 
