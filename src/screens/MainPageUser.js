@@ -4,9 +4,11 @@ import MoviesGrid from "../components/MoviesGrid";
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function MainPageUser() {
+export default function MainPageUser({ route }) {
     const [Busqueda, setBusqueda] = useState('');
     const navigation = useNavigation();
+    const {user_email}=route.params;
+    console.log(user_email);
 
     return (
         <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>

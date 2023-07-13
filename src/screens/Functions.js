@@ -59,9 +59,9 @@ const Functions = () => {
     navigation.navigate('Functions Detail', { functionId, id_sucursal });
   };
 
-  console.log('id_sala:', idSala?.id);
-  const functionIds = funciones.map((funcion) => funcion.id);
-  console.log('IDs de las funciones:', functionIds);
+  //console.log('id_sala:', idSala?.id);
+  //const functionIds = funciones.map((funcion) => funcion.id);
+  //console.log('IDs de las funciones:', functionIds);
 
   return (
     <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
