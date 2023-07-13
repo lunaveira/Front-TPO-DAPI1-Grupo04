@@ -21,7 +21,10 @@ export default function Home({ navigation }) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('Usuario firmado:', userInfo.user);
-      navigation.navigate('Main User');
+      console.log(userInfo.user.id);
+      handleCreateUser(userInfo);
+      navigation.navigate('Main User',{user_email: userInfo.user.email});
+
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // El usuario canceló el inicio de sesión
@@ -35,6 +38,38 @@ export default function Home({ navigation }) {
       }
     }
   };
+  const handleCreateUser = async (userInfo) => {
+    try {
+      console.log(userInfo.user.id);
+      console.log(userInfo.user.givenName);
+      console.log(userInfo.user.familyName);
+  const response=await fetch('https://backendmobile-production.up.railway.app/api/createuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: userInfo.user.givenName,
+          apellido: userInfo.user.familyName,
+          imagen: userInfo.user.photo,
+          mail:userInfo.user.email
+        }),
+      });
+      if (response.ok) {
+        // La sala se creó exitosamente
+        console.log('Éxito', 'el usuario fue creado exitosamente');
+      } else {
+        // Ocurrió un error al crear la sala
+        const errorMessage = await response.text();
+        console.log('Error', 'Error al crear al usuario: ' + errorMessage);
+      }
+    } catch (error) {
+      console.error('Error al conectarse con el servidor:', error);
+    }
+    
+
+  };
+
 
   return (
     <ScrollView className='py-5 bg-gray-900'>
