@@ -65,7 +65,11 @@ export default function CreateFunction({ navigation,route }) {
         const nuevaFuncion = await response.json();
         console.log("Respuesta del servidor:", nuevaFuncion);
 
-        navigation.navigate("Functions",{id_sucursal:id_sucursal, numero_sala:numero_sala});
+        setTimeout(() => {
+          navigation.navigate('Functions',{id_sucursal:id_sucursal, numero_sala:numero_sala});
+        }, 2000);
+
+        
       } else {
         console.error("Error al crear la función");
       }
