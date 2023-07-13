@@ -9,13 +9,11 @@ export default function EditFunctions() {
             
         </TextInput>
 
-        <TextInput className="text-lg text-center text-white w-80 h-12 border-white border rounded-lg mt-5 " placeholder="Sala" placeholderTextColor={"white"}>
+        <TextInput className="text-lg text-center text-white w-80 h-12 border-white border rounded-lg mt-5 " placeholder="Sinopsis" placeholderTextColor={"white"}>
           
         </TextInput>
 
-        <TextInput className="text-lg text-center text-white w-80 h-12 border-white border rounded-lg mt-5 " placeholder="Duracion" placeholderTextColor={"white"}>
-          
-        </TextInput>
+       
 
 
 

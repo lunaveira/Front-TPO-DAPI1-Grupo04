@@ -30,7 +30,7 @@ const FunctionDetail = () => {
   }, [functionId]);
 
   const handleEdit = () => {
-    navigation.navigate('Edit Function');
+    navigation.navigate('Edit Function', {functionId});
   };
 
   const handleDelete = async () => {
