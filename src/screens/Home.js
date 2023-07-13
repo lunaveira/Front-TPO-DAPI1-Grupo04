@@ -1,80 +1,67 @@
-import { Text, Button, View, TouchableOpacity, Image } from 'react-native';
+import { Text, Button, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import HomeButton from '../components/HomeButton';
-import {useAuth0} from 'react-native-auth0';
-import{ ScrollView } from 'react-native';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
+import { useEffect } from 'react';
+import React, { useState } from "react";
 
 import CineapisLogo from '../components/CineapisLogo';
 
+export default function Home({ navigation }) {
+  const [isSignInInProgress, setIsSignInInProgress] = useState(false);
 
-export default function Home({navigation}) {
+  useEffect(() => {
+    GoogleSignin.configure({
+      androidClientId: '30707864319-t052p1ge67gqfjnq53a55mmont2617kr.apps.googleusercontent.com'
+    });
+  }, []);
+  
 
-  const {authorize} = useAuth0();
-
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('Usuario firmado:', userInfo.user);
+      navigation.navigate('Main User');
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // El usuario canceló el inicio de sesión
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // Hay una operación en progreso, como un inicio de sesión en curso
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // Los servicios de Google Play no están disponibles o están desactualizados
+      } else {
+        // Ocurrió otro error
+        console.error('Error al iniciar sesión:', error);
+      }
+    }
+  };
 
   return (
-    //tailwind.config.js
-
-    // para hacer una pantalla scrolleable tengo q usar ScrollView
-
-    
-
-
-    <ScrollView className='py-5 bg-gray-900 ' >
+    <ScrollView className='py-5 bg-gray-900'>
       <View className="items-center">
-      <CineapisLogo/>
+        <CineapisLogo/>
       </View>
-      
-      
 
+      <Text className='text-3xl text-center text-white mx-2.5'>¿Querés comprar entradas?</Text>
 
-      <Text className='text-3xl text-center text-white mx-2.5' >¿Querés comprar entradas?</Text>
+      <View className="items-center">
+        <HomeButton icon={<Image className='h-10 w-10' source={require('../images/iconoGoogle.png')} />} color='#565656' title='Continuar con Google' handler={signIn} />
+      </View>
 
-      
+      <Text className='text-3xl text-center pt-10 text-white'>¿Tenés una sala de cine?</Text>
 
-      {/* <View className="items-center">
+      <HomeButton color='#FF3131' title='Iniciar sesión' handler={() => navigation.navigate({ name: 'Login' })} />
+      <GoogleSigninButton
+        style={{ width: 230, height: 48, alignSelf: 'center', marginTop: 20 }}
+        size={GoogleSigninButton.Size.Standard}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={signIn}
+        disabled={isSignInInProgress}
+      />
 
-      <HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
-      color='#565656' title='Continuar con Google' handler={() => authorize()}> 
-     
-       </HomeButton>
-
-       </View> */}
-
-<View className="items-center">
-
-<HomeButton icon= {<Image className='h-10 w-10'source={require('../images/iconoGoogle.png')}/> }
-color='#565656' title='Continuar con Google' handler={()=>navigation.navigate({name:'Main User'})}> 
-
- </HomeButton>
-
- </View>
-
-    
-
-      { /*<Button onPress={() => authorize()} title="Log in" /> */ }
-
-      
-
-
-      <Text className='text-3xl text-center pt-10 text-white' >¿Tenes una sala de cine?</Text>
-
-      {/* <Button onPress={() => navigation.navigate({name:'Main User'})} title='Usuarios'></Button> */}
-
-      <HomeButton color='#FF3131' title='Iniciar sesion' handler={()=>navigation.navigate({name:'Login'})}></HomeButton>
-
-
-
-      <TouchableOpacity className='mb-20' onPress={() => navigation.navigate({name:'Register'})}>
-        <Text className='text-xl text-center pt-10 text-white' >¿No tenes cuenta? Creala ahora</Text>
+      <TouchableOpacity className='mb-20' onPress={() => navigation.navigate({ name: 'Register' })}>
+        <Text className='text-xl text-center pt-10 text-white'>¿No tenés cuenta? Creala ahora</Text>
       </TouchableOpacity>
-
-      
-
     </ScrollView>
-
-
   );
 }
-
-
-
