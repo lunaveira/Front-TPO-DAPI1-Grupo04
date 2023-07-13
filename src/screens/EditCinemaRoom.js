@@ -1,41 +1,38 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
+import { ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import HomeButton from "../components/HomeButton";
-import { ScrollView } from "react-native";
-import { useNavigation } from '@react-navigation/native';
 
 export default function EditCinemaRoom({ navigation, route }) {
-  const [fila, setFila] = useState(0);
-  const [columna, setColumna] = useState(0);
-  const [numero_sala_nuevo, setNumeroSala] = useState(0);
-  
+  const [fila, setFila] = useState('');
+  const [columna, setColumna] = useState('');
+  const [numero_sala_nuevo, setNumeroSala] = useState('');
 
   const { id_sucursal, numero_sala } = route.params;
 
-  
-    console.log('id_sucursal:', id_sucursal);
-    console.log('numero_sala:', numero_sala);
-  
-
   const handleUpdateCinemaRoom = async () => {
     try {
-       const response = await fetch(`https://backendmobile-production.up.railway.app/${id_sucursal}/${numero_sala}/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fila: parseInt (fila),
-          columna: parseInt (columna),
-          numero_sala: parseInt (numero_sala_nuevo),
-        }),
-      });
+      const response = await fetch(
+        `https://backendmobile-production.up.railway.app/${id_sucursal}/${numero_sala}/update`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fila: parseInt(fila),
+            columna: parseInt(columna),
+            numero_sala_nuevo: parseInt(numero_sala_nuevo),
+          }),
+        }
+      );
 
       if (response.status === 200) {
         // La sala se actualizó exitosamente
         console.log("Sala actualizada");
-        navigation.replace("Cinema Rooms",{ id_sucursal: id_sucursal }); // Regresar a la pantalla anterior
+        navigation.goBack(); // Regresar a la pantalla anterior
       } else if (response.status === 400) {
         const errorMessage = await response.text();
         console.error("Error al actualizar la sala:", errorMessage);
@@ -50,32 +47,66 @@ export default function EditCinemaRoom({ navigation, route }) {
   };
 
   return (
-    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{alignItems:'center',justifyContent:'center'}}>
+    <ScrollView
+      contentContainerStyle={{ alignItems: "center" }}
+      style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
+    >
       <TextInput
-        value={fila}
-        onChangeText={setFila}
-        className=" text-lg text-center text-white bg-red-400 w-80 h-30 mt-28 rounded-lg "
+        value={fila.toString()}
+        onChangeText={text => setFila(parseInt(text))}
+        style={{
+          color: "white",
+          fontSize: 16,
+          backgroundColor: "#FF3131",
+          width: 250,
+          height: 50,
+          marginTop: 28,
+          borderRadius: 10,
+          textAlign: "center",
+        }}
         placeholder="Cantidad de filas"
-        placeholderTextColor={"white"}
-      ></TextInput>
+        placeholderTextColor="white"
+        keyboardType="numeric"
+      />
 
       <TextInput
-        value={columna}
-        onChangeText={ setColumna}
-        className="text-lg text-center text-white bg-red-400 w-80 h-30 rounded-lg mt-10 "
+        value={columna.toString()}
+        onChangeText={text => setColumna(parseInt(text))}
+        style={{
+          color: "white",
+          fontSize: 16,
+          backgroundColor: "#FF3131",
+          width: 250,
+          height: 50,
+          marginTop: 10,
+          borderRadius: 10,
+          textAlign: "center",
+        }}
         placeholder="Cantidad de columnas"
-        placeholderTextColor={"white"}
-      ></TextInput>
+        placeholderTextColor="white"
+        keyboardType="numeric"
+      />
 
       <TextInput
-        value={numero_sala_nuevo}
-        onChangeText= {setNumeroSala}
-        className="text-lg text-center text-white bg-red-400 w-80 h-30 rounded-lg mt-10 "
+        value={numero_sala_nuevo.toString()}
+        onChangeText={text => setNumeroSala(parseInt(text))}
+        style={{
+          color: "white",
+          fontSize: 16,
+          backgroundColor: "#FF3131",
+          width: 250,
+          height: 50,
+          marginTop: 10,
+          borderRadius: 10,
+          textAlign: "center",
+        }}
         placeholder="Número de sala"
-        placeholderTextColor={"white"}
-      ></TextInput>
+        placeholderTextColor="white"
+        keyboardType="numeric"
+      />
 
-      <Button onPress={handleUpdateCinemaRoom} title="Guardar"></Button>
+      <Button onPress={handleUpdateCinemaRoom} title="Guardar" />
+
     </ScrollView>
   );
 }

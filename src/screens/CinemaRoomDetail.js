@@ -9,12 +9,7 @@ export default function CinemaRoomDetail() {
 
   const { id_sucursal, numero_sala } = route.params;
 
-
   const [totalAsientos, setTotalAsientos] = useState(0);
-
-  useEffect(() => {
-    fetchCinemaRoomDetails();
-  }, []);
 
   const fetchCinemaRoomDetails = async () => {
     try {
@@ -39,6 +34,10 @@ export default function CinemaRoomDetail() {
       console.error("Error al conectarse con el servidor:", error);
     }
   };
+
+  useEffect(() => {
+    fetchCinemaRoomDetails();
+  }, [id_sucursal, numero_sala]); // Volver a llamar fetchCinemaRoomDetails cuando id_sucursal o numero_sala cambien
 
   const handlerEdit = () => {
     navigation.navigate("Edit Cinema Room", {
@@ -87,8 +86,6 @@ export default function CinemaRoomDetail() {
       contentContainerStyle={{ alignItems: "center" }}
       style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
     >
-
-
       <View className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5">
         <Text className="text-white text-center text-xl mt-4">
           Total de asientos: {totalAsientos}
