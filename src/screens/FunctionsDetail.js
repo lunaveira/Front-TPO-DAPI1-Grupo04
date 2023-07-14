@@ -30,7 +30,7 @@ const FunctionDetail = () => {
   }, [functionId]);
 
   const handleEdit = () => {
-    navigation.navigate('Edit Function', {functionId});
+    navigation.navigate('Edit Function', { functionId: functionId, functionData: functionData });
   };
 
   const handleDelete = async () => {
@@ -61,6 +61,18 @@ const FunctionDetail = () => {
 
       <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
         <Text className="text-white">Sinopsis: {functionData?.descripcion}</Text>
+      </View>
+
+      <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+        <Text className="text-white">Género: {functionData?.genero}</Text>
+      </View>
+
+      <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+        <Text className="text-white">Día: {functionData?.dia}</Text>
+      </View>
+
+      <View className="rounded-lg border-white place-items-start ml-2 border-2 w-60 h-12 mt-10">
+        <Text className="text-white">Horario: {functionData?.horario}</Text>
       </View>
 
       <HomeButton color="#FF3131" title="Editar" handler={handleEdit} />
