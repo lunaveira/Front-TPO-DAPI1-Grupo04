@@ -29,9 +29,14 @@ import MovieDetails from './screens/MovieDetails';
 import BuyTickets from './screens/BuyTickets';
 import SelectSeats from './screens/SelectSeats';
 
+
+
 const Stack = createNativeStackNavigator();
 
 function MyTabs() {
+
+    
+
     return (
         <Stack.Navigator>
             <Stack.Screen options={{ headerStyle: { backgroundColor: '#111827' }, headerTitleStyle: { color: '#111827' } }} name="Home" component={Home} />
@@ -114,10 +119,13 @@ function MyTabs() {
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center', headerRight: () => <UserProfileLogo />
             }} name='Main User' component={MainPageUser} />
 
+
+
             <Stack.Screen options={{
                 headerTintColor: '#fff', headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='User Profile' component={UserProfile} />
+
 
             <Stack.Screen options={{
                 headerBackVisible: true,
@@ -154,3 +162,4 @@ export default function Navigation() {
         </NavigationContainer>
     );
 }
+
