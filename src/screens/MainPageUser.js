@@ -31,7 +31,7 @@ export default function MainPageUser({ route }) {
   const renderFuncionItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
       <View style={styles.funcionContainer}>
-        <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="stretch" />
+        <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="contain" />
         <Text style={styles.funcionText}>{item.pelicula}</Text>
 
       </View>

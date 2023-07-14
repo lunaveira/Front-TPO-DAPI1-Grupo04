@@ -79,13 +79,6 @@ export default function Home({ navigation }) {
 
       <Text className='text-3xl text-center text-white mx-2.5'>¿Querés comprar entradas?</Text>
 
-      <View className="items-center">
-        <HomeButton icon={<Image className='h-10 w-10' source={require('../images/iconoGoogle.png')} />} color='#565656' title='Continuar con Google' handler={signIn} />
-      </View>
-
-      <Text className='text-3xl text-center pt-10 text-white'>¿Tenés una sala de cine?</Text>
-
-      <HomeButton color='#FF3131' title='Iniciar sesión' handler={() => navigation.navigate({ name: 'Login' })} />
       <GoogleSigninButton
         style={{ width: 230, height: 48, alignSelf: 'center', marginTop: 20 }}
         size={GoogleSigninButton.Size.Standard}
@@ -93,6 +86,11 @@ export default function Home({ navigation }) {
         onPress={signIn}
         disabled={isSignInInProgress}
       />
+
+      <Text className='text-3xl text-center pt-10 text-white'>¿Tenés una sala de cine?</Text>
+
+      <HomeButton color='#FF3131' title='Iniciar sesión' handler={() => navigation.navigate({ name: 'Login' })} />
+
 
       <TouchableOpacity className='mb-20' onPress={() => navigation.navigate({ name: 'Register' })}>
         <Text className='text-xl text-center pt-10 text-white'>¿No tenés cuenta? Creala ahora</Text>

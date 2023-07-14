@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { ScrollView, View,  StyleSheet } from 'react-native';
+import { ScrollView, View,  StyleSheet, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
 
 export default function FiltersMovies() {
   const [branch, setBranch] = useState("Sucursal");
   const [title, setTitle] = useState("Titulo");
   const [genre, setGenre] = useState("Género");
   const [rating, setRating] = useState("Calificacion");
+  const navigation = useNavigation();
 
   return (
     <ScrollView  className="px-5 bg-gray-900 h-screen" contentContainerStyle={styles.container}>
@@ -49,6 +51,17 @@ export default function FiltersMovies() {
         <Picker.Item label="Acción" value="Acción" />
         <Picker.Item label="Fantasía" value="Fantasía" />
       </Picker>
+
+      <Button
+        title="Aplicar"
+        buttonStyle={{
+          backgroundColor: 'red',
+          borderRadius: 10
+        }}
+        handler={() => navigation.navigate({ name: 'Main User' })} 
+      />
+
+
     </ScrollView>
   );
 }
