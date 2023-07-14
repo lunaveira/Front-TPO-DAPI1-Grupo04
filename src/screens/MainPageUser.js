@@ -31,8 +31,9 @@ export default function MainPageUser({ route }) {
   const renderFuncionItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate({ name: 'Movie Details' })}>
       <View style={styles.funcionContainer}>
-        <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} />
-        <Text style={styles.funcionText}>{item.titulo}</Text>
+        <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="stretch" />
+        <Text style={styles.funcionText}>{item.pelicula}</Text>
+
       </View>
     </TouchableOpacity>
   );
@@ -98,12 +99,15 @@ const styles = StyleSheet.create({
     height: 150,
     width: 130,
     marginRight: 5,
-    resizeMode: 'cover'
+    
   },
   funcionText: {
     color: 'white',
-    marginTop: 5,
-  },
+    fontSize: 16,
+    textAlign: 'center',
+  }
+  
+
 });
 
 
