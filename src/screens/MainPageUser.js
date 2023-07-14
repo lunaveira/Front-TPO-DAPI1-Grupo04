@@ -8,6 +8,7 @@ export default function MainPageUser({ route }) {
   const navigation = useNavigation();
   const { user_email } = route.params;
   console.log(user_email);
+  
 
   useEffect(() => {
     fetchFunciones();
@@ -19,7 +20,6 @@ export default function MainPageUser({ route }) {
       if (response.ok) {
         const data = await response.json();
         setFunciones(data);
-        console.log(data);
       } else {
         console.error('Error al obtener las funciones:', response.status);
       }
@@ -27,9 +27,9 @@ export default function MainPageUser({ route }) {
       console.error('Error en la solicitud:', error);
     }
   };
-
+  
   const renderFuncionItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate({ name: 'Movie Details' })}>
+    <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
       <View style={styles.funcionContainer}>
         <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} />
         <Text style={styles.funcionText}>{item.titulo}</Text>

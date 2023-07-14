@@ -1,7 +1,10 @@
 import { Text, ScrollView, View, Image } from "react-native";
 import HomeButton from "../components/HomeButton";
 
-export default function MovieDetails({navigation}) {
+export default function MovieDetails({navigation, route}) {
+  const { mail,id_funcion } = route.params;
+  console.log("mail:",mail);
+  console.log("id_funcion:",id_funcion);
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
       <View style={{ flexDirection: "row", alignItems: "center", marginTop: 5 }}>
