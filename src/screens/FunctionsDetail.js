@@ -7,9 +7,10 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 const FunctionDetail = () => {
   const navigation = useNavigation();
-  const { functionId, id_sucursal } = useRoute().params;
+  const { functionId, id_sucursal,id_sala } = useRoute().params;
   const [functionData, setFunctionData] = useState(null);
   console.log("id funcion:",functionId);
+  console.log("id:sala",id_sala);
 
   useEffect(() => {
     const fetchFunctionData = async () => {
@@ -17,6 +18,7 @@ const FunctionDetail = () => {
         const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${functionId}/getbyid`);
         if (response.ok) {
           const data = await response.json();
+          console.log("datos funcion?",data);
           setFunctionData(data);
         } else {
           console.error('Error al obtener los datos de la función:', response.status);
@@ -30,7 +32,7 @@ const FunctionDetail = () => {
   }, [functionId]);
 
   const handleEdit = () => {
-    navigation.navigate('Edit Function', { functionId: functionId, functionData: functionData });
+    navigation.navigate('Edit Function', { functionId: functionId, functionData: functionData,id_sala:id_sala, id_pelicula:functionData.id_pelicula,id_sucursal:id_sucursal });
   };
 
   const handleDelete = async () => {

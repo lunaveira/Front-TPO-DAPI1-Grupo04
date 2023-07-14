@@ -56,7 +56,7 @@ const Functions = () => {
 
   const handleFunctionPress = (functionId) => {
     console.log('ID de la función:', functionId);
-    navigation.navigate('Functions Detail', { functionId, id_sucursal });
+    navigation.navigate('Functions Detail', { functionId, id_sucursal,id_sala:idSala.id });
   };
 
   //console.log('id_sala:', idSala?.id);

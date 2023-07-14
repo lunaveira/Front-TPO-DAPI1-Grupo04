@@ -7,7 +7,7 @@ import { launchImageLibrary } from "react-native-image-picker";
 import HomeButton from "../components/HomeButton";
 
 export default function EditFunction({ navigation, route }) {
-    const { functionId, functionData } = route.params;
+    const { functionId, functionData,id_sala,id_pelicula,id_sucursal } = route.params;
 
     const [dia, setDia] = useState(functionData?.dia || "");
     const [horario, setHorario] = useState(functionData?.horario || "");
@@ -15,13 +15,19 @@ export default function EditFunction({ navigation, route }) {
     const [descripcion, setDescripcion] = useState(functionData?.descripcion || "");
     const [genero, setGenero] = useState(functionData?.genero || "");
     const [imagen, setImagen] = useState(functionData?.imagen || "");
+    console.log("functionid:",functionId);
+    console.log("function data",functionData);//peliculas data en realidad
+    console.log("function data.id",functionData.id);//peliculas data en realidad
+    console.log("sala id",id_sala);//peliculas data en realidad
+    console.log("Valores a actualizar:", dia, horario, titulo, descripcion, genero, imagen);
+    console.log("id_pelicula:",id_pelicula);
 
     const handleUpdateFunction = async () => {
         try {
-            console.log("Valores a actualizar:", dia, horario, titulo, descripcion, genero, imagen);
+            console.log("Valores a actualizar x:",functionId,id_pelicula,id_sala, dia, horario, titulo, descripcion, genero, imagen);
 
             const response = await fetch(
-                `https://backendmobile-production.up.railway.app/api/funciones/${functionId}`,
+                `https://backendmobile-production.up.railway.app/api/funciones/${functionId}/${id_pelicula}/${id_sala}`,
                 {
                     method: "PUT",
                     headers: {
@@ -40,7 +46,7 @@ export default function EditFunction({ navigation, route }) {
             if (response.status === 200) {
                 // La función se actualizó exitosamente
                 console.log("Función actualizada");
-                navigation.goBack(); // Regresar a la pantalla anterior
+                navigation.replace('Functions Detail',{ functionId:functionId, id_sucursal:id_sucursal,id_sala:id_sala}); // Regresar a la pantalla anterior
             } else if (response.status === 400) {
                 const errorMessage = await response.text();
                 console.error("Error al actualizar la función:", errorMessage);
