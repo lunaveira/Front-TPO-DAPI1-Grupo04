@@ -12,36 +12,20 @@ export default function MovieDetails({ navigation,route }) {
     const [branch, setBranch] = useState("Sucursal");
     const [day, setDay] = useState("Dia");
     const [amount, setAmount] = useState("Cantidad");
-    const { mail, id_funcion } = route.params;
+    const { mail, id_funcion,movieDetails } = route.params;
   console.log("mail:", mail);
   console.log("id_funcion:", id_funcion);
-  const [movieDetails, setMovieDetails] = useState(null);
   const [sucursales, setSucursales] = useState([]);
 
   useEffect(() => {
-    fetchMovieDetails();
     fetchSucursales();
   }, []);
-
-  const fetchMovieDetails = async () => {
-    try {
-      const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${id_funcion}/getbyid`);
-      if (response.ok) {
-        const data = await response.json();
-        setMovieDetails(data);
-      } else {
-        console.error('Error al obtener los detalles de la película:', response.status);
-      }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
-    }
-  };
-  console.log(movieDetails);
+  console.log("movies detail.",movieDetails);
 
   const fetchSucursales = async () => {
     try {
         console.log("titulo sin codear:",movieDetails.titulo);
-      const titulo = encodeURIComponent(movieDetails?.titulo);
+      const titulo = encodeURIComponent(movieDetails.titulo);
       console.log("titulo codeado?",titulo);
       const response = await fetch(`https://backendmobile-production.up.railway.app/api/sucursales/${titulo}/getsucursalesbypelicula`);
       if (response.ok) {
