@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View,  StyleSheet, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,39 @@ export default function FiltersMovies() {
   const [genre, setGenre] = useState("Género");
   const [rating, setRating] = useState("Calificacion");
   const navigation = useNavigation();
+  const [funciones, setFunciones] = useState([]);
+
+  useEffect(() => {
+    fetchFunciones();
+  }, []);
+
+  const fetchFunciones = async () => {
+    try {
+      const response = await fetch('https://backendmobile-production.up.railway.app/api/functions');
+      if (response.ok) {
+        const data = await response.json();
+        setFunciones(data);
+      } else {
+        console.error('Error al obtener las funciones:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
+  
+
+  // Extraer atributo "pelicula" sin repetir
+  const peliculasUnicas = Array.from(new Set(funciones.map(item => item.pelicula)));
+
+  // Imprimir el resultado
+  console.log(peliculasUnicas);
+
+
+//necesitamos que nos traiga todas las sucursales posibles
+//todas las peliculas que hay
+//todas las calificaciones que tienen
+//todos los generos que hay
+// y eso ponerlo en los pickers
 
   return (
     <ScrollView  className="px-5 bg-gray-900 h-screen" contentContainerStyle={styles.container}>
@@ -27,9 +60,10 @@ export default function FiltersMovies() {
         selectedValue={title}
         onValueChange={(itemValue, itemIndex) => setTitle(itemValue)}
       >
-        <Picker.Item label="Titulo" value="Titulo" />
-        <Picker.Item label="La Sirenita" value="La Sirenita" />
-        <Picker.Item label="El Caballero Oscuro" value="El Caballero Oscuro" />
+        <Picker.Item label={title} value={title} />
+        {peliculasUnicas.map((pelicula, index) => (
+          <Picker.Item key={index} label={pelicula} value={pelicula} />
+        ))}
       </Picker>
 
       <Picker
@@ -58,7 +92,7 @@ export default function FiltersMovies() {
           backgroundColor: 'red',
           borderRadius: 10
         }}
-        handler={() => navigation.navigate({ name: 'Main User' })} 
+        onPress={() => navigation.navigate('Main User', {title})} 
       />
 
 
