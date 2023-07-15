@@ -13,6 +13,7 @@ export default function MovieDetails({ navigation, route }) {
   }, []);
 
   const fetchMovieDetails = async () => {
+    console.log('Tipo de id_funcion:', typeof id_funcion);
     try {
       const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${id_funcion}/getbyid`);
       if (response.ok) {
@@ -60,7 +61,7 @@ export default function MovieDetails({ navigation, route }) {
               Puntuación: 5.0
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_pelicula: id_funcion, id_user: mail })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_funcion: id_funcion, mail: mail })}>
              <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
               Ver comentarios (2)
             </Text>
