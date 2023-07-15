@@ -2,15 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const Comments = ({ route }) => {
-  const { id_pelicula, id_user } = route.params;
+  const { id_pelicula, user_email } = route.params;
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [rating, setRating] = useState(0);
-  const [currentUser, setCurrentUser] = useState(id_user);
+  const [currentUser, setCurrentUser] = useState('');
 
   useEffect(() => {
+    fetchUserId();
     fetchComments();
   }, []);
+
+  const fetchUserId = async () => {
+    try {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/usuarios/${user_email}`);
+      if (response.ok) {
+        const data = await response.json();
+        setCurrentUser(data.id_user.toString());
+      } else {
+        console.error('Error al obtener el ID del usuario:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
 
   const fetchComments = async () => {
     try {
@@ -30,7 +45,7 @@ const Comments = ({ route }) => {
     if (newComment.trim() !== '') {
       const commentObj = { comentario: newComment, rating: rating, id_user: currentUser };
       try {
-        const response = await fetch(`https://backendmobile-production.up.railway.app/peliculas/${id_pelicula}/comentarios/${currentUser}`, {
+        const response = await fetch(`https://backendmobile-production.up.railway.app/peliculas/${id_pelicula}/comentarios`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
