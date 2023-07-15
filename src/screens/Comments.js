@@ -1,35 +1,18 @@
+// Comments.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const Comments = ({ route }) => {
-  const { id_funcion, mail } = route.params;
+  const { id_funcion, mail, peliculaId } = route.params;
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [rating, setRating] = useState(0);
   const [currentUser, setCurrentUser] = useState('');
-  const [peliculaId, setPeliculaId] = useState('');
 
   useEffect(() => {
     fetchUserId();
-    fetchPeliculaId();
     fetchComments();
   }, []);
-
-  const fetchPeliculaId = async () => {
-    try {
-      const response = await fetch(`https://backendmobile-production.up.railway.app/funciones/${id_funcion}/pelicula`);
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Data:', data);
-        setPeliculaId(data.peliculaId);
-        console.log('peliculaId:', data.peliculaId);
-      } else {
-        console.error('Error al obtener el ID de la película:', response.status);
-      }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
-    }
-  };
 
   const fetchUserId = async () => {
     try {
@@ -37,7 +20,6 @@ const Comments = ({ route }) => {
       if (response.ok) {
         const data = await response.json();
         setCurrentUser(data.id.toString());
-        console.log('usuario:', data.id.toString())
       } else {
         console.error('Error al obtener el ID del usuario:', response.status);
       }
@@ -48,13 +30,20 @@ const Comments = ({ route }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios`);
+      if (!peliculaId) {
+        console.error('ID de película inválido');
+        return;
+      }
+
+      const response = await fetch(
+        `https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios/obtenercomentarios`
+      );
       if (response.ok) {
         const data = await response.json();
         setComments(data);
-        console.log(data)
       } else {
         console.error('Error al obtener los comentarios:', response.status);
+        console.log('Contenido de la respuesta:', await response.text());
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -65,13 +54,16 @@ const Comments = ({ route }) => {
     if (newComment.trim() !== '') {
       const commentObj = { comentario: newComment, rating: rating, id_user: currentUser };
       try {
-        const response = await fetch(`https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios/${currentUser}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(commentObj),
-        });
+        const response = await fetch(
+          `https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios/${currentUser}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(commentObj),
+          }
+        );
         if (response.ok) {
           setNewComment('');
           fetchComments();
@@ -204,4 +196,3 @@ const styles = StyleSheet.create({
 });
 
 export default Comments;
-

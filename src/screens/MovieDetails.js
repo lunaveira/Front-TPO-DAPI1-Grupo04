@@ -7,18 +7,20 @@ export default function MovieDetails({ navigation, route }) {
   console.log("mail:", mail);
   console.log("id_funcion:", id_funcion);
   const [movieDetails, setMovieDetails] = useState(null);
+  const [peliculaId, setPeliculaId] = useState('');
 
   useEffect(() => {
     fetchMovieDetails();
   }, []);
 
   const fetchMovieDetails = async () => {
-    console.log('Tipo de id_funcion:', typeof id_funcion);
     try {
       const response = await fetch(`https://backendmobile-production.up.railway.app/api/functions/${id_funcion}/getbyid`);
       if (response.ok) {
         const data = await response.json();
         setMovieDetails(data);
+
+        fetchPeliculaId();
       } else {
         console.error('Error al obtener los detalles de la película:', response.status);
       }
@@ -26,7 +28,28 @@ export default function MovieDetails({ navigation, route }) {
       console.error('Error en la solicitud:', error);
     }
   };
+
   console.log(movieDetails);
+
+  const fetchPeliculaId = async () => {
+    try {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/funciones/${id_funcion}/pelicula`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.peliculaId) {
+          setPeliculaId(data.peliculaId);
+        } else {
+          console.error('ID de película inválido');
+        }
+      } else {
+        console.error('Error al obtener el ID de la película:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
+
+
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
       <View style={{ flexDirection: "row", alignItems: "center", marginTop: 5 }}>
@@ -61,7 +84,10 @@ export default function MovieDetails({ navigation, route }) {
               Puntuación: 5.0
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_funcion: id_funcion, mail: mail })}>
+            
+
+            <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_funcion: id_funcion, mail: mail, peliculaId: peliculaId })}>
+            
              <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
               Ver comentarios (2)
             </Text>
