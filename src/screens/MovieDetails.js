@@ -1,4 +1,4 @@
-import { Text, ScrollView, View, Image } from "react-native";
+import { Text, ScrollView, View, Image, TouchableOpacity } from "react-native";
 import HomeButton from "../components/HomeButton";
 import { useEffect, useState } from 'react';
 
@@ -32,7 +32,7 @@ export default function MovieDetails({ navigation, route }) {
 
         <View style={{ width: "80%", marginLeft: "5%" }}>
 
-          <Image source={{ uri: `data:image/jpeg;base64,${movieDetails?.imagen}` }} style={{ width: "100%", height: "45%", aspectRatio: 2/3, resizeMode: "contain" }} />
+          <Image source={{ uri: `data:image/jpeg;base64,${movieDetails?.imagen}` }} style={{ width: "100%", height: "45%", aspectRatio: 2/3, resizeMode: "stretch" }} />
 
           <View className= 'flex-row-reverse'>
 
@@ -53,16 +53,18 @@ export default function MovieDetails({ navigation, route }) {
             <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>{movieDetails?.titulo}</Text>
 
             <Text style={{ color: "white", fontSize: 16, textAlign: "left", marginTop: 10 }}>
-            Sinopsis de la película: {movieDetails?.descripcion}
+            Sinopsis: {movieDetails?.descripcion}
             </Text>
 
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
               Puntuación: 5.0
             </Text>
 
+            <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_pelicula: id_funcion, id_user: mail })}>
              <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
               Ver comentarios (2)
             </Text>
+            </TouchableOpacity>
 
           </View>
 

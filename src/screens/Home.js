@@ -14,7 +14,7 @@ export default function Home({ navigation }) {
       androidClientId: '30707864319-t052p1ge67gqfjnq53a55mmont2617kr.apps.googleusercontent.com'
     });
   }, []);
-  
+
 
   const signIn = async () => {
     try {
@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
       console.log('Usuario firmado:', userInfo.user);
       console.log(userInfo.user.id);
       handleCreateUser(userInfo);
-      navigation.navigate('Main User',{user_email: userInfo.user.email});
+      navigation.navigate('Main User', { user_email: userInfo.user.email });
 
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -43,7 +43,7 @@ export default function Home({ navigation }) {
       console.log(userInfo.user.id);
       console.log(userInfo.user.givenName);
       console.log(userInfo.user.familyName);
-  const response=await fetch('https://backendmobile-production.up.railway.app/api/createuser', {
+      const response = await fetch('https://backendmobile-production.up.railway.app/api/createuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
           nombre: userInfo.user.givenName,
           apellido: userInfo.user.familyName,
           imagen: userInfo.user.photo,
-          mail:userInfo.user.email
+          mail: userInfo.user.email
         }),
       });
       if (response.ok) {
@@ -66,7 +66,7 @@ export default function Home({ navigation }) {
     } catch (error) {
       console.error('Error al conectarse con el servidor:', error);
     }
-    
+
 
   };
 
@@ -74,18 +74,22 @@ export default function Home({ navigation }) {
   return (
     <ScrollView className='py-5 bg-gray-900'>
       <View className="items-center">
-        <CineapisLogo/>
+        <CineapisLogo />
       </View>
 
       <Text className='text-3xl text-center text-white mx-2.5'>¿Querés comprar entradas?</Text>
-
+{/* 
       <GoogleSigninButton
         style={{ width: 230, height: 48, alignSelf: 'center', marginTop: 20 }}
         size={GoogleSigninButton.Size.Standard}
         color={GoogleSigninButton.Color.Dark}
         onPress={signIn}
         disabled={isSignInInProgress}
-      />
+      /> */}
+
+      <View className="items-center">
+        <HomeButton icon={<Image className='h-10 w-10' source={require('../images/iconoGoogle.png')} />} color='#565656' title='Continuar con Google' handler={signIn} />
+      </View>
 
       <Text className='text-3xl text-center pt-10 text-white'>¿Tenés una sala de cine?</Text>
 
