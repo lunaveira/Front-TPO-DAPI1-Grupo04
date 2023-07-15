@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function MainPageUser({ route }) {
   const [Busqueda, setBusqueda] = useState('');
   const [funciones, setFunciones] = useState([]);
+  const [filtroTitle, setFiltroTitle] = useState('');
   const navigation = useNavigation();
   const title = route.params;
   const { user_email } = route.params;
@@ -43,7 +44,7 @@ export default function MainPageUser({ route }) {
   //este es el renderFuncionItem que filtra pero solo retorna listas en blanco, pse a recibir el titulo desde filter movies ACA ESTA EL ERROR PORQUE SE PUEDE VER EN EL CONSOLE LOG
   //QUE EL DATO DEL FILTRO LLEGA BIEN
   /* const renderFuncionItem = ({ item }) => {
-    if (item.title === filtroTitle || filtroTitle === '') {
+    if (item.title === filtroTitle || filtroTitle === ''  ) {
       return (
         <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
           <View style={styles.funcionContainer}>
@@ -56,6 +57,7 @@ export default function MainPageUser({ route }) {
     return null;
   }; */
  
+  
   return (
     <View style={styles.container}>
       <View style={styles.headingContainer}>
