@@ -5,13 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 export default function MainPageUser({ route }) {
   const [Busqueda, setBusqueda] = useState('');
   const [funciones, setFunciones] = useState([]);
-  const [filtroTitle, setFiltroTitle] = useState('');
   const navigation = useNavigation();
   const title = route.params;
   const { user_email } = route.params;
   console.log(user_email);
   console.log(title)
-
+ 
   useEffect(() => {
     fetchFunciones();
   }, []);
@@ -30,7 +29,7 @@ export default function MainPageUser({ route }) {
     }
   };
   
-  const renderFuncionItem = ({ item }) => (
+/*   const renderFuncionItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
       <View style={styles.funcionContainer}>
         <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="stretch" />
@@ -38,13 +37,13 @@ export default function MainPageUser({ route }) {
 
       </View>
     </TouchableOpacity>
-  );
+  ); */
 
 
   //este es el renderFuncionItem que filtra pero solo retorna listas en blanco, pse a recibir el titulo desde filter movies ACA ESTA EL ERROR PORQUE SE PUEDE VER EN EL CONSOLE LOG
   //QUE EL DATO DEL FILTRO LLEGA BIEN
-  /* const renderFuncionItem = ({ item }) => {
-    if (item.title === filtroTitle || filtroTitle === ''  ) {
+  const renderFuncionItem = ({ item }) => {
+    if (item.title === title || title === '' || title === null ) {
       return (
         <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
           <View style={styles.funcionContainer}>
@@ -55,8 +54,9 @@ export default function MainPageUser({ route }) {
       );
     }
     return null;
-  }; */
+  };
  
+  
   
   return (
     <View style={styles.container}>
