@@ -73,7 +73,7 @@ export default function MovieDetails({ navigation, route }) {
 
       </View>
 
-      <HomeButton color='#FF3131' title='Comprar entradas' handler={()=>navigation.navigate({name:'Buy Tickets'})}></HomeButton>
+      <HomeButton color='#FF3131' title='Comprar entradas' handler={()=>navigation.navigate('Buy Tickets',{ mail:mail, id_funcion:id_funcion })}></HomeButton>
     </ScrollView>
   );
 }
