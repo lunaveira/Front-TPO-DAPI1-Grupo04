@@ -8,11 +8,27 @@ const SelectSeats = ({ route, navigation }) => {
   const [numColumns, setNumColumns] = useState(0);
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [userId, setUserId] = useState(null); 
 
 
   useEffect(() => {
+    fetchUserId();
     fetchFilaColumna();
   }, []);
+  const fetchUserId = async () => {
+    try {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/user/${mail}/getuserbymail`);
+      if (response.ok) {
+        const data = await response.json();
+        const userId = data[0].id; // Obtener el ID del usuario desde la respuesta
+        setUserId(userId);
+      } else {
+        console.error('Error al obtener el ID del usuario:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
 
   const fetchFilaColumna = async () => {
     try {
@@ -81,7 +97,41 @@ const SelectSeats = ({ route, navigation }) => {
         })}
       </View>
     ));
+
   };
+
+  const handleConfirm = async () => {
+    try {
+      const response = await fetch('https://backendmobile-production.up.railway.app/api/reservas/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id_funcion: id_funcion,
+          id_user: userId,
+          cantidad_entradas: cantidad,
+          id_sala: id_sala,
+          nro_asiento: selectedSeats.join(','), // Convertir los asientos seleccionados en una cadena separada por comas
+        }),
+      });
+
+      if (response.ok) {
+        // La reserva se creó correctamente
+        const reservaCreada = await response.json();
+        console.log('Reserva creada:', reservaCreada);
+        // Restablecer los asientos seleccionados
+        setSelectedSeats([]);
+        // Navegar a la página de Reservations
+        navigation.navigate('Reservations');
+      } else {
+        console.error('Error al crear la reserva:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
+
   
 
   return (
@@ -91,7 +141,7 @@ const SelectSeats = ({ route, navigation }) => {
       <View style={styles.seatingPlan}>{renderSeats()}</View>
     </View>
 
-    <HomeButton title='Confirmar' handler={() => navigation.navigate({ name: 'Reservations' })} color='#FF3131'> </HomeButton>
+    <HomeButton title='Confirmar' handler={handleConfirm} color='#FF3131'> </HomeButton>
     </ScrollView>
   );
 };
