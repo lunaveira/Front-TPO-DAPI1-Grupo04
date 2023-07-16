@@ -120,6 +120,8 @@ const SelectSeats = ({ route, navigation }) => {
         // La reserva se creó correctamente
         const reservaCreada = await response.json();
         console.log('Reserva creada:', reservaCreada);
+        navigation.navigate('Select Seats', { mail, id_funcion, sucursal, cantidad, dia, id_sala });
+
         // Restablecer los asientos seleccionados
         setSelectedSeats([]);
         // Navegar a la página de Reservations
