@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import HomeButton from '../components/HomeButton';
 
 const SelectSeats = ({ route, navigation }) => {
@@ -119,6 +119,7 @@ const SelectSeats = ({ route, navigation }) => {
       if (response.ok) {
         // La reserva se creó correctamente
         const reservaCreada = await response.json();
+        Alert.alert('Compra confirmada', 'Podrás ver tus entradas en tus reservas');
         console.log('Reserva creada:', reservaCreada);
         //navigation.navigate('Select Seats', { mail, id_funcion, sucursal, cantidad, dia, id_sala });
 

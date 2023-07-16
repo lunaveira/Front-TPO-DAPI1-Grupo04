@@ -1,4 +1,3 @@
-// Comments.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
@@ -7,7 +6,7 @@ const Comments = ({ route }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [rating, setRating] = useState(0);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     fetchUserId();
@@ -19,9 +18,9 @@ const Comments = ({ route }) => {
       const response = await fetch(`https://backendmobile-production.up.railway.app/usuarios/${mail}`);
       if (response.ok) {
         const data = await response.json();
-        setCurrentUser(data.id.toString());
+        setCurrentUser(data);
       } else {
-        console.error('Error al obtener el ID del usuario:', response.status);
+        console.error('Error al obtener los datos del usuario:', response.status);
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -40,10 +39,14 @@ const Comments = ({ route }) => {
       );
       if (response.ok) {
         const data = await response.json();
-        setComments(data);
+        const commentsWithUserEmail = data.map((comment) => ({
+          ...comment,
+          userEmail: comment.useremail, // Ajusta el nombre del campo según corresponda en tu API
+        }));
+        setComments(commentsWithUserEmail);
       } else {
-        console.error('Error al obtener los comentarios:', response.status);
         console.log('Contenido de la respuesta:', await response.text());
+        console.error('Error al obtener los comentarios:', response.status);
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -52,10 +55,10 @@ const Comments = ({ route }) => {
 
   const handleAddComment = async () => {
     if (newComment.trim() !== '') {
-      const commentObj = { comentario: newComment, rating: rating, id_user: currentUser };
+      const commentObj = { comentario: newComment, rating: rating, id_user: currentUser.id };
       try {
         const response = await fetch(
-          `https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios/${currentUser}`,
+          `https://backendmobile-production.up.railway.app/peliculas/${peliculaId.toString()}/comentarios/${currentUser.id}`,
           {
             method: 'POST',
             headers: {
@@ -87,7 +90,8 @@ const Comments = ({ route }) => {
       <View style={styles.commentsContainer}>
         {comments.map((comment, index) => (
           <View key={index} style={styles.comment}>
-            <Text style={styles.commentUser}>{comment.usuario}</Text>
+            <Text style={styles.commentUser}>{comment.userEmail}</Text>
+            <Text style={styles.commentRating}>Rating: {comment.rating} /5</Text>
             <Text style={styles.commentText}>{comment.comentario}</Text>
           </View>
         ))}
@@ -143,6 +147,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     color: '#fff',
+    fontSize: 16,
+  },
+  commentRating: {
+    color: '#fff',
+    fontSize: 16,
   },
   commentText: {
     fontSize: 16,

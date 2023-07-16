@@ -89,7 +89,7 @@ export default function MovieDetails({ navigation, route }) {
             <TouchableOpacity onPress={() => navigation.navigate('Comments', { id_funcion: id_funcion, mail: mail, peliculaId: peliculaId })}>
             
              <Text style={{ color: "white", fontSize: 18, fontWeight: "bold", textAlign: "left", marginTop: 10 }}>
-              Ver comentarios (2)
+              Ver comentarios 
             </Text>
             </TouchableOpacity>
 
