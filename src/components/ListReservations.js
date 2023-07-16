@@ -1,10 +1,9 @@
 
-
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ListFunctions = ({ funciones, idSala, onFunctionPress }) => {
+const ListReservations = ({ funciones, idSala, onFunctionPress }) => {
   const navigation = useNavigation();
 
   return (
@@ -22,6 +21,4 @@ const ListFunctions = ({ funciones, idSala, onFunctionPress }) => {
   );
 };
 
-export default ListFunctions;
-
-
+export default ListReservations;

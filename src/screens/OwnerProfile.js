@@ -51,11 +51,11 @@ export default function ProfileLogo({ navigation }) {
         <View className=" items-center bg-gray-900 h-screen">
 
 
-            <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-10 h-14 mx-2.5 text-base text-white text-center " >
+            <View className='mt-20' style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }} >
                 <Text className="text-white text-base text-center ">{nombreEmpresa && nombreEmpresa}</Text>
             </View>
 
-            <View className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-80 mt-5 h-14 mx-2.5 text-base text-white text-center "  >
+            <View className='mt-5' style={{ width: "100%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}  >
                 <Text className="text-white text-base text-center">{emailUsuario}</Text>
             </View>
 

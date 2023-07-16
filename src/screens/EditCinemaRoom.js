@@ -57,10 +57,10 @@ export default function EditCinemaRoom({ navigation, route }) {
         style={{
           color: "white",
           fontSize: 16,
-          backgroundColor: "#FF3131",
+          backgroundColor: "#333",
           width: 250,
           height: 50,
-          marginTop: 28,
+          marginTop: 60,
           borderRadius: 10,
           textAlign: "center",
         }}
@@ -75,10 +75,10 @@ export default function EditCinemaRoom({ navigation, route }) {
         style={{
           color: "white",
           fontSize: 16,
-          backgroundColor: "#FF3131",
+          backgroundColor: "#333",
           width: 250,
           height: 50,
-          marginTop: 10,
+          marginTop: 15,
           borderRadius: 10,
           textAlign: "center",
         }}
@@ -93,10 +93,10 @@ export default function EditCinemaRoom({ navigation, route }) {
         style={{
           color: "white",
           fontSize: 16,
-          backgroundColor: "#FF3131",
+          backgroundColor: "#333",
           width: 250,
           height: 50,
-          marginTop: 10,
+          marginTop: 15,
           borderRadius: 10,
           textAlign: "center",
         }}
@@ -105,7 +105,11 @@ export default function EditCinemaRoom({ navigation, route }) {
         keyboardType="numeric"
       />
 
-      <Button onPress={handleUpdateCinemaRoom} title="Guardar" />
+      <View className='mt-16'>
+
+      <HomeButton color='red' handler={handleUpdateCinemaRoom} title="Guardar" />
+
+      </View>
 
     </ScrollView>
   );

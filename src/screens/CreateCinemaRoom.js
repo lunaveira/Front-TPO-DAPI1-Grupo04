@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, ScrollView } from 'react-native';
+import HomeButton from '../components/HomeButton';
 
 export default function CreateNewCinemaRoom({ navigation, route }) {
   const [fila, setFila] = useState("");
@@ -39,26 +40,29 @@ export default function CreateNewCinemaRoom({ navigation, route }) {
   };
 
   return (
-    <View>
+    <ScrollView contentContainerStyle={{ alignItems: 'center' }} style={{ backgroundColor: 'rgb(17 24 39)', flex: 1 }}>
       <TextInput
         value={fila}
         onChangeText={setFila}
-        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        className='mt-28 text-center'
+        style={{width: "80%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Cantidad de filas" placeholderTextColor="white"
       />
       <TextInput
         value={columna}
         onChangeText={setColumna}
-        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        className='mt-5 text-center'
+        style={{ width: "80%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Cantidad de columnas" placeholderTextColor="white"
       />
       <TextInput
         value={numero_sala}
         onChangeText={setNumeroSala}
-        className="border-white bg-slate-700 border-2 rounded-lg p-2 mb-4 w-96 mt-5 h-13 mx-2.5 text-base text-white text-center"
+        className='mt-5 text-center'
+        style={{ width: "80%", backgroundColor: "#333", borderRadius: 10, padding: 10, marginBottom: 10, color: "#fff" }}
         placeholder="Número de sala" placeholderTextColor="white"
       />
-      <Button onPress={handleCreateCinemaRoom} title="Crear sala" />
-    </View>
+      <HomeButton handler={handleCreateCinemaRoom} title="Crear sala" color='red' />
+    </ScrollView>
   );
 }
