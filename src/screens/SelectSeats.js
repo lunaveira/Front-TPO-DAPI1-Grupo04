@@ -3,18 +3,18 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'rea
 import HomeButton from '../components/HomeButton';
 
 const SelectSeats = ({ route, navigation }) => {
-  const { mail, id_funcion, sucursal, cantidad, dia,id_sala } = route.params;
+  const { mail, id_funcion, sucursal, cantidad, dia, id_sala } = route.params;
   const [numRows, setNumRows] = useState(0);
   const [numColumns, setNumColumns] = useState(0);
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [userId, setUserId] = useState(null); 
-
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     fetchUserId();
     fetchFilaColumna();
   }, []);
+
   const fetchUserId = async () => {
     try {
       const response = await fetch(`https://backendmobile-production.up.railway.app/api/user/${mail}/getuserbymail`);
@@ -57,29 +57,51 @@ const SelectSeats = ({ route, navigation }) => {
     setSeats(initialSeats);
   };
 
-  const handleSeatPress = (row, column) => {
+  const handleSeatPress = async (row, column) => {
     const seatNumber = row * numColumns + column + 1;
-  const seatIndex = selectedSeats.indexOf(seatNumber);
 
-  if (seatIndex !== -1) {
-    // Si el asiento ya está seleccionado, lo eliminamos de los asientos seleccionados
-    const updatedSeats = [...selectedSeats];
-    updatedSeats.splice(seatIndex, 1);
-    setSelectedSeats(updatedSeats);
-  } else {
-    // Si el asiento no está seleccionado y aún se pueden seleccionar más asientos
-    if (selectedSeats.length < cantidad) {
-      const updatedSeats = [...selectedSeats, seatNumber];
-      setSelectedSeats(updatedSeats);
+    try {
+      const response = await fetch(
+        `https://backendmobile-production.up.railway.app/api/reservas/checkifseatreserved/${id_funcion}/${seatNumber}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const isSeatReserved = data.reserved;
+
+        if (isSeatReserved) {
+          // El asiento está reservado, mostrar una alerta o mensaje de que no está disponible
+          Alert.alert('Asiento no disponible', 'El asiento seleccionado ya está reservado');
+        } else {
+          // El asiento no está reservado, continuar con la lógica de selección de asientos
+          const seatIndex = selectedSeats.indexOf(seatNumber);
+
+          if (seatIndex !== -1) {
+            // Si el asiento ya está seleccionado, lo eliminamos de los asientos seleccionados
+            const updatedSeats = [...selectedSeats];
+            updatedSeats.splice(seatIndex, 1);
+            setSelectedSeats(updatedSeats);
+          } else {
+            // Si el asiento no está seleccionado y aún se pueden seleccionar más asientos
+            if (selectedSeats.length < cantidad) {
+              const updatedSeats = [...selectedSeats, seatNumber];
+              setSelectedSeats(updatedSeats);
+            }
+          }
+        }
+      } else {
+        console.error('Error al verificar si el asiento está reservado:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
     }
-  }
   };
 
   const renderSeats = () => {
     return seats.map((seatRow, rowIndex) => (
       <View key={rowIndex} style={styles.seatRow}>
         {seatRow.map((isSeatSelected, columnIndex) => {
-          const seatNumber = rowIndex * numColumns + columnIndex +1;
+          const seatNumber = rowIndex * numColumns + columnIndex + 1;
           return (
             <TouchableOpacity
               key={columnIndex}
@@ -97,7 +119,6 @@ const SelectSeats = ({ route, navigation }) => {
         })}
       </View>
     ));
-
   };
 
   const handleConfirm = async () => {
@@ -135,16 +156,14 @@ const SelectSeats = ({ route, navigation }) => {
     }
   };
 
-  
-
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
-    <View style={styles.container}>
-      <Text style={styles.title} className='text-white text-xl text-center mb-5'>Selecciona tus asientos</Text>
-      <View style={styles.seatingPlan}>{renderSeats()}</View>
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.title} className='text-white text-xl text-center mb-5'>Selecciona tus asientos</Text>
+        <View style={styles.seatingPlan}>{renderSeats()}</View>
+      </View>
 
-    <HomeButton title='Confirmar' handler={handleConfirm} color='#FF3131'> </HomeButton>
+      <HomeButton title='Confirmar' handler={handleConfirm} color='#FF3131'> </HomeButton>
     </ScrollView>
   );
 };
@@ -189,8 +208,7 @@ const styles = StyleSheet.create({
   highlightedSeat: {
     backgroundColor: 'green',
   },
-  
 });
 
-
 export default SelectSeats;
+
