@@ -78,13 +78,17 @@ export default function EditFunction({ navigation, route }) {
             contentContainerStyle={{ alignItems: "center" }}
             style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
         >
+
+            <View className='mt-10'>
+            {imagen && <Image source={{ uri: `data:image/jpeg;base64,${imagen}` }} style={{ width: 100, height: 100 }} />}
+            </View>
             <TextInput
                 value={dia}
                 onChangeText={setDia}
                 style={{
                     color: "white",
                     fontSize: 16,
-                    backgroundColor: "#FF3131",
+                    backgroundColor: "#333",
                     width: 250,
                     height: 50,
                     marginTop: 28,
@@ -101,7 +105,7 @@ export default function EditFunction({ navigation, route }) {
                 style={{
                     color: "white",
                     fontSize: 16,
-                    backgroundColor: "#FF3131",
+                    backgroundColor: "#333",
                     width: 250,
                     height: 50,
                     marginTop: 10,
@@ -118,7 +122,7 @@ export default function EditFunction({ navigation, route }) {
                 style={{
                     color: "white",
                     fontSize: 16,
-                    backgroundColor: "#FF3131",
+                    backgroundColor: "#333",
                     width: 250,
                     height: 50,
                     marginTop: 10,
@@ -135,7 +139,7 @@ export default function EditFunction({ navigation, route }) {
                 style={{
                     color: "white",
                     fontSize: 16,
-                    backgroundColor: "#FF3131",
+                    backgroundColor: "#333",
                     width: 250,
                     height: 50,
                     marginTop: 10,
@@ -152,7 +156,7 @@ export default function EditFunction({ navigation, route }) {
                 style={{
                     color: "white",
                     fontSize: 16,
-                    backgroundColor: "#FF3131",
+                    backgroundColor: "#333",
                     width: 250,
                     height: 50,
                     marginTop: 10,
@@ -163,11 +167,9 @@ export default function EditFunction({ navigation, route }) {
                 placeholderTextColor="white"
             />
 
-            {imagen && <Image source={{ uri: `data:image/jpeg;base64,${imagen}` }} style={{ width: 100, height: 100 }} />}
+            <HomeButton color='#333' title="Cargar Imagen" handler={cargarImagen} />
 
-            <Button title="Cargar Imagen" onPress={cargarImagen} />
-
-            <Button onPress={handleUpdateFunction} title="Guardar" />
+            <HomeButton color='red' handler={handleUpdateFunction} title="Guardar" />
         </ScrollView>
     );
 }

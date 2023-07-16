@@ -15,9 +15,9 @@ export default function CinemaRooms({ route }) {
   const { id_sucursal } = route.params;
   const navigation = useNavigation();
   console.log('id_sucursal:', id_sucursal);
-  
-  const handlePress = (numero_sala,id_sucursal) => {
-    navigation.navigate("Cinema Room Detail", { numero_sala:numero_sala, id_sucursal:route.params.id_sucursal });
+
+  const handlePress = (numero_sala, id_sucursal) => {
+    navigation.navigate("Cinema Room Detail", { numero_sala: numero_sala, id_sucursal: route.params.id_sucursal });
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function CinemaRooms({ route }) {
   const fetchSucursal = async () => {
     try {
       const response = await fetch(`https://backendmobile-production.up.railway.app/${id_sucursal}/sucursal`);
-  
+
       if (response.ok) {
         const sucursal = await response.json();
         console.log('Datos de la sucursal:', sucursal); // Verificar los datos de la sucursal en la consola
@@ -55,13 +55,14 @@ export default function CinemaRooms({ route }) {
       console.error('Error al conectarse con el servidor:', error);
     }
   };
-  
+
 
   return (
     <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ color: 'white', fontSize: 16 }}>Estás en la sucursal {nombreSucursal}</Text>
-  
-      <HomeButton color='red' title="Crear sala" handler={() => navigation.navigate('Create Cinema Room', { id_sucursal: id_sucursal })} />
+
+      <View className='mt-10'>
+        <HomeButton color='red' title="Crear sala" handler={() => navigation.navigate('Create Cinema Room', { id_sucursal: id_sucursal })} />
+      </View>
       <Text className="text-center text-lg text-white mt-5 mb-5">Tus salas</Text>
       <ListCinemaRoom cinemaRooms={cinemaRooms} handler={handlePress} />
     </ScrollView>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, ScrollView, Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import HomeButton from "../components/HomeButton";
 
@@ -67,6 +67,8 @@ export default function CinemaRoomDetail() {
 
       if (response.status === 200) {
         console.log("Sala eliminada");
+        Alert.alert('Sala eliminada', 'La sala fue eliminada con exito')
+        
         navigation.replace("Cinema Rooms", { id_sucursal: id_sucursal });
       } else if (response.status === 400) {
         const errorMessage = await response.text();
@@ -86,28 +88,33 @@ export default function CinemaRoomDetail() {
       contentContainerStyle={{ alignItems: "center" }}
       style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}
     >
-      <View className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5">
-        <Text className="text-white text-center text-xl mt-4">
-          Total de asientos: {totalAsientos}
-        </Text>
-      </View>
 
-      <View className="mb-5 mt-5">
+      <View className="mb-5 mt-14">
         <Text className="text-white text-center text-xl mt-4">
           Número de sala: {numero_sala}
         </Text>
       </View>
 
-      <View className="mb-5 mt-5">
-        <HomeButton color="#FF3131" title="Editar sala" handler={handlerEdit} />
+      <View className="items-center bg-red-400 w-80 h-20 rounded-lg mt-5 mx-2">
+        <Text className="text-white text-center text-xl mt-4">
+          Total de asientos: {totalAsientos}
+        </Text>
       </View>
 
-      <View className="mb-5 mt-5">
-        <HomeButton
-          color="#FF3131"
-          title="Eliminar sala"
-          handler={handleDeleteCinemaRoom}
-        />
+      <View className='flex-row'>
+
+        <View className="mb-5 mt-5 mr-2">
+          <HomeButton color="#FF3131" title="Editar sala" handler={handlerEdit} />
+        </View>
+
+        <View className="mb-5 mt-5">
+          <HomeButton
+            color="#FF3131"
+            title="Eliminar sala"
+            handler={handleDeleteCinemaRoom}
+          />
+        </View>
+
       </View>
 
       <View className="mb-5 mt-5">
