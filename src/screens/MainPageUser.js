@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function MainPageUser({ route }) {
   const [Busqueda, setBusqueda] = useState('');
   const [funciones, setFunciones] = useState([]);
+  const [funcionesFiltradas, setFuncionesFiltradas] = useState([]);
   const navigation = useNavigation();
   const title = route.params;
   const { user_email } = route.params;
@@ -21,6 +22,7 @@ export default function MainPageUser({ route }) {
       if (response.ok) {
         const data = await response.json();
         setFunciones(data);
+        setFuncionesFiltradas(data);
       } else {
         console.error('Error al obtener las funciones:', response.status);
       }
@@ -29,34 +31,29 @@ export default function MainPageUser({ route }) {
     }
   };
   
+  useEffect(() => {
+    filterFunciones();
+  }, [Busqueda]);
+
+  const filterFunciones = () => {
+    if (Busqueda.trim() === '') {
+      setFuncionesFiltradas(funciones);
+    } else {
+      const filteredFunciones = funciones.filter((funcion) =>
+        funcion.pelicula.toLowerCase().includes(Busqueda.toLowerCase())
+      );
+      setFuncionesFiltradas(filteredFunciones);
+    }
+  };
+
   const renderFuncionItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
       <View style={styles.funcionContainer}>
         <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="stretch" />
         <Text style={styles.funcionText}>{item.pelicula}</Text>
-
       </View>
     </TouchableOpacity>
   ); 
-
-
-  //este es el renderFuncionItem que filtra pero solo retorna listas en blanco, pse a recibir el titulo desde filter movies ACA ESTA EL ERROR PORQUE SE PUEDE VER EN EL CONSOLE LOG
-  //QUE EL DATO DEL FILTRO LLEGA BIEN
-  /*const renderFuncionItem = ({ item }) => {
-    if (item.title === title || title === '' || title === null ) {
-      return (
-        <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
-          <View style={styles.funcionContainer}>
-            <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="contain" />
-            <Text style={styles.funcionText}>{item.pelicula}</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
-    return null;
-  };*/
- 
-  
   
   return (
     <View style={styles.container}>
@@ -71,7 +68,7 @@ export default function MainPageUser({ route }) {
         />
       </View>
       <FlatList
-        data={funciones}
+        data={funcionesFiltradas}
         numColumns={2}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderFuncionItem}
@@ -109,25 +106,21 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     alignItems: 'center',
-    paddingHorizontal: 10, // Agregamos margen horizontal a los lados de las imágenes
+    paddingHorizontal: 10,
   },
   funcionContainer: {
     alignItems: 'center',
-   
   },
   funcionImage: {
     height: 150,
     width: 130,
     marginRight: 5,
-    
   },
   funcionText: {
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
   }
-  
-
 });
 
 

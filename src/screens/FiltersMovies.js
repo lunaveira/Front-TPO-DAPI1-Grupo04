@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View,  StyleSheet, Button } from 'react-native';
+import { ScrollView, View, StyleSheet, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,60 +9,36 @@ export default function FiltersMovies() {
   const [genre, setGenre] = useState("Género");
   const [rating, setRating] = useState("Calificacion");
   const navigation = useNavigation();
-  const [funciones, setFunciones] = useState([]);
+  const [sucursales, setSucursales] = useState([]);
 
   useEffect(() => {
-    fetchFunciones();
+    fetchSucursales();
   }, []);
 
-  const fetchFunciones = async () => {
+  const fetchSucursales = async () => {
     try {
-      const response = await fetch('https://backendmobile-production.up.railway.app/api/functions');
+      const response = await fetch('https://backendmobile-production.up.railway.app/api/branches');
       if (response.ok) {
         const data = await response.json();
-        setFunciones(data);
+        setSucursales(data);
       } else {
-        console.error('Error al obtener las funciones:', response.status);
+        console.error('Error al obtener las sucursales:', response.status);
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
     }
   };
-  
-
-  // Extraer atributo "pelicula" sin repetir
-  const peliculasUnicas = Array.from(new Set(funciones.map(item => item.pelicula)));
-
-  // Imprimir el resultado
-  console.log(peliculasUnicas);
-
-
-//necesitamos que nos traiga todas las sucursales posibles
-//todas las peliculas que hay
-//todas las calificaciones que tienen
-//todos los generos que hay
-// y eso ponerlo en los pickers
 
   return (
-    <ScrollView  className="px-5 bg-gray-900 h-screen" contentContainerStyle={styles.container}>
+    <ScrollView className="px-5 bg-gray-900 h-screen" contentContainerStyle={styles.container}>
       <Picker
         style={styles.picker}
         selectedValue={branch}
         onValueChange={(itemValue, itemIndex) => setBranch(itemValue)}
       >
         <Picker.Item label="Sucursal" value="Sucursal" />
-        <Picker.Item label="Sucursal 1" value="Sucursal 1" />
-        <Picker.Item label="Sucursal 2" value="Sucursal 2" />
-      </Picker>
-
-      <Picker
-        style={styles.picker}
-        selectedValue={title}
-        onValueChange={(itemValue, itemIndex) => setTitle(itemValue)}
-      >
-        <Picker.Item label={title} value={title} />
-        {peliculasUnicas.map((pelicula, index) => (
-          <Picker.Item key={index} label={pelicula} value={pelicula} />
+        {sucursales.map((sucursal, index) => (
+          <Picker.Item key={index} label={sucursal.nombre} value={sucursal.id} />
         ))}
       </Picker>
 
@@ -92,9 +68,8 @@ export default function FiltersMovies() {
           backgroundColor: 'red',
           borderRadius: 10
         }}
-        onPress={() => navigation.navigate('Main User', {title})} 
+        onPress={() => navigation.navigate('Main User', { branch, title, genre, rating })} 
       />
-
 
     </ScrollView>
   );
@@ -116,4 +91,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
 

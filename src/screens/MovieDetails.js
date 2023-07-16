@@ -62,7 +62,7 @@ export default function MovieDetails({ navigation, route }) {
 
           <View className='flex-col ' style={{alignItems:'flex-end', marginTop: -180, marginLeft: 100}}>
             <View style={{ width: 80, height: 80, borderRadius: 45, backgroundColor: "white", marginBottom: 10}}> 
-            <Text className='text-sm text-black text-center mt-4'>{movieDetails?.genero}</Text>
+            <Text className='text-sm text-black text-center mt-4'>Género: {movieDetails?.genero}</Text>
             </View>
             <View style={{width: 80, height: 80, borderRadius: 45, backgroundColor: "white" }}> 
             <Text className='text-black text-sm text-center mt-4'>Duracion 120'</Text>
