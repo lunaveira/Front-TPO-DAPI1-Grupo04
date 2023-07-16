@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const SelectSeats = () => {
+const SelectSeats = ({ route }) => {
+  const { mail, id_funcion, sucursal, cantidad, dia } = route.params;
+  console.log("mail:",mail,"id_funcion:",id_funcion,"nombre sucursal:",sucursal,"Cantidad de asientos",cantidad,"dia:",dia);
+
+
   const numRows = 5; // Número de filas
   const numColumns = 6; // Número de columnas
 

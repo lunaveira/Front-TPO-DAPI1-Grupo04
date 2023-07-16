@@ -40,7 +40,16 @@ export default function MovieDetails({ navigation,route }) {
     }
   };
 
-console.log("sucursales:",sucursales)
+console.log("sucursales:",sucursales);
+const handleNext = () => {
+    navigation.navigate('Select Seats', {
+      mail,
+      id_funcion,
+      sucursal: branch,
+      cantidad: amount,
+      dia: day,
+    });
+  };
     return (
 
         <ScrollView contentContainerStyle={{ alignItems: "center" }} style={{ backgroundColor: "rgb(17 24 39)", flex: 1 }}>
@@ -83,10 +92,11 @@ console.log("sucursales:",sucursales)
 
 
                         >
-                            <Picker.Item label="Seleccionar sucursal" />
-                            <Picker.Item label="Cinemark Palermo" value="Cinemark Palermo" />
-                            <Picker.Item label="Hoyts Caballito" value="Hoyts Caballito" />
-                        </Picker>
+                            <Picker.Item label="Seleccionar sucursal" value="Sucursal" />
+              {sucursales.map((sucursal, index) => (
+                <Picker.Item key={index} label={sucursal.nombre} value={sucursal.nombre} />
+              ))}
+            </Picker>
 
                         <Picker
                             style={{ height: 40, width: '90%', backgroundColor: 'gray', marginBottom: 10, marginTop: 10, color: 'white', borderRadius: 10 }}
@@ -108,12 +118,11 @@ console.log("sucursales:",sucursales)
                             onValueChange={(itemValue, itemIndex) => setDay(itemValue)}
 
                         >
-                            <Picker.Item label="Seleccionar dia" />
-                            <Picker.Item label="Vie-14 de julio - 18:00hs" value="Vie-14 de julio - 18:00hs" />
-                            <Picker.Item label="Sab-15 de julio - 14:00hs" value="Sab-15 de julio - 14:00hs" />
-                            <Picker.Item label="Sab-15 de julio - 17:00hs" value="Sab-15 de julio - 17:00hs" />
-
-                        </Picker>
+                             <Picker.Item label="Seleccionar día" value="Dia" />
+              {sucursales.map((sucursal, index) => (
+                <Picker.Item key={index} label={sucursal.dia} value={sucursal.dia} />
+              ))}
+            </Picker>
 
 
 
@@ -126,7 +135,7 @@ console.log("sucursales:",sucursales)
 
             <View className='mt-5'>
 
-                <HomeButton color='#FF3131' title='Siguiente' handler={() => navigation.navigate({ name: 'Select Seats' })} ></HomeButton>
+                <HomeButton color='#FF3131' title='Siguiente' handler={handleNext} ></HomeButton>
 
             </View>
 
