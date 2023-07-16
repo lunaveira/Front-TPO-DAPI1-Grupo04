@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
+import HomeButton from '../components/HomeButton';
 
 export default function FiltersMovies() {
   const [branch, setBranch] = useState("Sucursal");
@@ -62,13 +63,14 @@ export default function FiltersMovies() {
         <Picker.Item label="Fantasía" value="Fantasía" />
       </Picker>
 
-      <Button
+      <HomeButton
         title="Aplicar"
+        color='red'
         buttonStyle={{
           backgroundColor: 'red',
           borderRadius: 10
         }}
-        onPress={() => navigation.navigate('Main User', { branch, title, genre, rating })} 
+        handler={() => navigation.navigate('Main User', { branch, title, genre, rating })} 
       />
 
     </ScrollView>
