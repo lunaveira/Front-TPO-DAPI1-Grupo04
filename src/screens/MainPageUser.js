@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import HomeButton from '../components/HomeButton';
 
 export default function MainPageUser({ route }) {
   const [Busqueda, setBusqueda] = useState('');
   const [funciones, setFunciones] = useState([]);
   const [funcionesFiltradas, setFuncionesFiltradas] = useState([]);
+  const [userId, setUserId] = useState(null);
   const navigation = useNavigation();
   const title = route.params;
   const { user_email } = route.params;
   console.log(user_email);
   console.log(title)
- 
+
   useEffect(() => {
     fetchFunciones();
+    fetchUserId();
   }, []);
+
+  const fetchUserId = async () => {
+    try {
+      const response = await fetch(`https://backendmobile-production.up.railway.app/api/user/${user_email}/getuserbymail`);
+      if (response.ok) {
+        const data = await response.json();
+        const userId = data[0].id; // Obtener el ID del usuario desde la respuesta
+        setUserId(userId);
+      } else {
+        console.error('Error al obtener el ID del usuario:', response.status);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  };
 
   const fetchFunciones = async () => {
     try {
@@ -30,7 +48,7 @@ export default function MainPageUser({ route }) {
       console.error('Error en la solicitud:', error);
     }
   };
-  
+
   useEffect(() => {
     filterFunciones();
   }, [Busqueda]);
@@ -47,14 +65,14 @@ export default function MainPageUser({ route }) {
   };
 
   const renderFuncionItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('Movie Details',{mail:user_email, id_funcion:item.id } )}>
+    <TouchableOpacity onPress={() => navigation.navigate('Movie Details', { mail: user_email, id_funcion: item.id })}>
       <View style={styles.funcionContainer}>
         <Image style={styles.funcionImage} source={{ uri: `data:image/jpeg;base64,${item.imagen}` }} resizeMode="stretch" />
         <Text style={styles.funcionText}>{item.pelicula}</Text>
       </View>
     </TouchableOpacity>
-  ); 
-  
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.headingContainer}>
@@ -66,7 +84,17 @@ export default function MainPageUser({ route }) {
           placeholder="Buscar..."
           placeholderTextColor="white"
         />
+
+        <View className=' h-16 justify-center items-center'>
+          <HomeButton title='Mis reservas' color='red' handler={() => navigation.navigate('Reservations', { userId })}></HomeButton>
+        </View>
+
+
+
       </View>
+
+
+
       <FlatList
         data={funcionesFiltradas}
         numColumns={2}
@@ -74,6 +102,7 @@ export default function MainPageUser({ route }) {
         renderItem={renderFuncionItem}
         contentContainerStyle={styles.flatListContent}
       />
+
     </View>
   );
 }
@@ -121,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   }
+
 });
 
 
