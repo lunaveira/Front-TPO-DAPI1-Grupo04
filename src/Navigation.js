@@ -29,6 +29,7 @@ import MovieDetails from './screens/MovieDetails';
 import BuyTickets from './screens/BuyTickets';
 import SelectSeats from './screens/SelectSeats';
 import Comments from './screens/Comments';
+import Reservations from './screens/Reservations';
 
 
 
@@ -156,6 +157,11 @@ function MyTabs() {
                 headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
                 headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
             }} name='Comments' component={Comments} />
+
+            <Stack.Screen options={{
+                headerTintColor: '#fff', headerRight: () => <UserProfileLogo />, headerStyle: { backgroundColor: '#111827' },
+                headerTitle: () => <MovieLogo />, headerTitleAlign: 'center'
+            }} name='Reservations' component={Reservations} />
 
         </Stack.Navigator>
     );

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import HomeButton from '../components/HomeButton';
 
-const SelectSeats = ({ route }) => {
+const SelectSeats = ({ route, navigation }) => {
   const { mail, id_funcion, sucursal, cantidad, dia,id_sala } = route.params;
   const [numRows, setNumRows] = useState(0);
   const [numColumns, setNumColumns] = useState(0);
@@ -89,6 +90,8 @@ const SelectSeats = ({ route }) => {
       <Text style={styles.title} className='text-white text-xl text-center mb-5'>Selecciona tus asientos</Text>
       <View style={styles.seatingPlan}>{renderSeats()}</View>
     </View>
+
+    <HomeButton title='Confirmar' handler={() => navigation.navigate({ name: 'Reservations' })} color='#FF3131'> </HomeButton>
     </ScrollView>
   );
 };
