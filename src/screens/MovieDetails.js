@@ -10,7 +10,6 @@ export default function MovieDetails({ navigation, route }) {
 
   useEffect(() => {
     fetchMovieDetails();
-    fetchAverageRating();
   }, []);
 
   const fetchMovieDetails = async () => {
@@ -21,7 +20,7 @@ export default function MovieDetails({ navigation, route }) {
         setMovieDetails(data);
 
         fetchPeliculaId();
-        
+        fetchAverageRating();
       } else {
         console.error('Error al obtener los detalles de la película:', response.status);
       }
@@ -53,7 +52,7 @@ export default function MovieDetails({ navigation, route }) {
       const response = await fetch(`https://backendmobile-production.up.railway.app/peliculas/${peliculaId}/comentarios/promediocalificacion`);
       if (response.ok) {
         const data = await response.json();
-        const averageRating = data[0].averagerating; // Asegúrate de que el campo en el JSON sea 'averagerating'
+        const averageRating = data[0].averagerating;
         setAverageRating(averageRating);
       } else {
         console.error('Error al obtener el promedio de calificación:', response.status);
