@@ -93,7 +93,7 @@ export default function Home({ navigation }) {
 
       <Text className='text-3xl text-center pt-10 text-white'>¿Tenés una sala de cine?</Text>
 
-      <HomeButton color='#FF3131' title='Iniciar sesión' handler={() => navigation.navigate({ name: 'Login' })} />
+      <HomeButton color='#FF3131' title='Iniciar sesión' handler={() => navigation.navigate({ name: 'Page 2' })} />
 
 
       <TouchableOpacity className='mb-20' onPress={() => navigation.navigate({ name: 'Register' })}>

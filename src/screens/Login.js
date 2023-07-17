@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState('')
 
  
-  const storeData = async (value) => {
+    const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('@token', value);
     } catch (e) {
@@ -21,9 +21,9 @@ export default function Login({ navigation }) {
     }
   };
 
+ 
 
-
-  async function handleLogin() {
+   async function handleLogin() {
     try {
       console.log(email);
       console.log(password);
@@ -59,7 +59,7 @@ export default function Login({ navigation }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  } 
 
   return (
 
